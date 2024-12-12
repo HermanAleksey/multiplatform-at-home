@@ -6,38 +6,6 @@ This is a Kotlin Multiplatform project template with [Decompose](https://github.
 > Due to the  [current state](https://github.com/arkivanov/Decompose/issues/74) of iOS support this template uses experimental versions of Decompose.
 > If you have any issues, please report them on GitHub.
 
-## About this Project
-
-You can use this template to start developing your own
-[Decompose](https://github.com/arkivanov/Decompose#readme) application targeting desktop,
-Android, and iOS, either by using Compose as shared UI across all platforms, or by using
-platform-specific UI like SwiftUI and Android XML.
-
-The instructions below provide you additional information on how to work with this template and add
-features like navigation, state preservation and more.
-
-The result will be a [Kotlin Multiplatform](https://kotlinlang.org/docs/multiplatform.html) project
-that uses the Decompose framework for common logic with the UI framework(s) of your choice and the
-features you need.
-
-This project was inspired by the [sample project of Decompose](https://github.com/arkivanov/Decompose/tree/master/sample)
-and the [Compose Multiplatform Template](https://github.com/JetBrains/compose-multiplatform-template).
-
-## Getting Started
-
-In order to work with this template you need the following tools:
-* [Android Studio](https://developer.android.com/studio)
-* (Optional) The [Kotlin Multiplatform Mobile plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform-mobile)
-
-Additionally, if you plan to write and run iOS-specific code on simulated or real devices, you need
-the following:
-
-* A machine running a recent version of macOS
-* [Xcode](https://apps.apple.com/us/app/xcode/id497799835)
-
-Tools like [KDoctor](https://github.com/Kotlin/kdoctor) can assist you during the installation
-process.
-
 ## Project Structure
 
 The project consists of multiple modules:
@@ -71,17 +39,6 @@ It makes use of the shared code from the modules `shared` and `compose-ui`.
 This is an Xcode project that builds an iOS mobile application with Compose UI.
 
 It makes use of the shared code from the modules `shared` and `compose-ui`.
-
-### `app-ios-swift`
-
-This is an Xcode project that builds an iOS mobile application with SwiftUI.
-
-This module uses only the `shared` module and SwiftUI for its UI (instead of Compose).
-
-> **Note**
-> In practice you normally have either `app-ios-compose` or `app-ios-swift`.
-> 
-> Therefore, do not hesitate to merge them or delete one of the two. 
 
 ## Running the project
 

@@ -20,10 +20,7 @@ import com.justparokq.homeftp.shared.login.presentation.PreviewLoginComponent
 import com.justparokq.homeftp.theme.AppTheme
 
 @Composable
-internal fun LoginContent(
-    component: LoginComponent,
-    modifier: Modifier = Modifier,
-) {
+internal fun LoginContent(component: LoginComponent) {
     val state by component.state.subscribeAsState()
     Column(
         modifier = Modifier.fillMaxSize(),

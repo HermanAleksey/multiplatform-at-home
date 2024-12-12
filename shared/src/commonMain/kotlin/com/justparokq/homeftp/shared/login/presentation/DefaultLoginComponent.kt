@@ -42,7 +42,6 @@ internal class DefaultLoginComponent(
                             // show error
                             println("onLoginButtonClick: error $response")
                         }
-
                         is Result.Loading -> {
                             _state.update {
                                 it.copy(
@@ -50,7 +49,6 @@ internal class DefaultLoginComponent(
                                 )
                             }
                         }
-
                         is Result.Success -> {
                             // navigate to next screen
                             navigateToMainPage()

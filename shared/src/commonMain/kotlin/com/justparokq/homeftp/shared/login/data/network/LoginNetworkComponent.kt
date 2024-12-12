@@ -35,7 +35,7 @@ internal class LoginNetworkComponent {
     ): Flow<Result<LoginResponse>> {
         return flow {
             emit(Result.Loading(true))
-            // todo remove
+            // todo remove; delay for real server emulation purposes
             delay(1000)
             try {
                 val result = httpClient.request("http://10.0.2.2:8080/login") {
