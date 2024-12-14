@@ -43,7 +43,8 @@ android {
 
 dependencies {
     implementation(project(":shared"))
-    implementation(project(":compose-ui"))
+    implementation(project(":compose-ui:feature:root"))
+    implementation(project(":compose-ui:core:theme"))
     implementation(libs.androidx.activity.compose)
     implementation(compose.foundation)
 }
