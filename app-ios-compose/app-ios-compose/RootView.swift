@@ -6,7 +6,7 @@ struct RootView: UIViewControllerRepresentable {
     
     func makeUIViewController(context: Context) -> UIViewController {
         let controller = RootViewControllerKt.rootViewController(root: root)
-        controller.overrideUserInterfaceStyle = .light
+//         controller.overrideUserInterfaceStyle = .light
         return controller
     }
 
