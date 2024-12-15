@@ -29,19 +29,11 @@ kotlin {
         ?.forEach {
             // This `shared` framework is exported for app-ios-compose
             it.binaries.framework {
-                baseName = "compose.feature.root" // Used in app-ios-compose
+                baseName = "root" // Used in app-ios-compose
 
                 export(project(":shared"))
                 export(libs.decompose.decompose)
                 export(libs.essenty.lifecycle)
-
-                // core
-                export(project(":compose-ui:core:utils"))
-                export(project(":compose-ui:core:theme"))
-                // features
-                export(project(":compose-ui:feature:authentication"))
-                export(project(":compose-ui:feature:main"))
-                export(project(":compose-ui:feature:ftp"))
             }
         }
 
