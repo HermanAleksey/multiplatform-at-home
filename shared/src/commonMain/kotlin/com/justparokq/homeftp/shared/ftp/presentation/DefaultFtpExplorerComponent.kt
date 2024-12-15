@@ -12,6 +12,7 @@ import com.justparokq.homeftp.shared.ftp.data.network.FtpCommunicationHttpClient
 import com.justparokq.homeftp.shared.ftp.data.network.FtpCommunicationHttpClientImpl
 import com.justparokq.homeftp.shared.ftp.model.FileSystemObject
 import com.justparokq.homeftp.shared.ftp.model.FtpExplorerScreenModel
+import io.github.vinceglb.filekit.core.PlatformFile
 import kotlinx.coroutines.launch
 
 class DefaultFtpExplorerComponent(
@@ -77,5 +78,16 @@ class DefaultFtpExplorerComponent(
 
     override fun onToggleHierarchyView() {
         TODO("Not yet implemented")
+    }
+
+    override fun onFloatingButtonClicked() {
+        TODO("Not yet implemented")
+    }
+
+    override fun onFilesPicked(files: List<PlatformFile>) {
+        files.forEach { file ->
+            file.name
+        }
+//        TODO("Not yet implemented")
     }
 }

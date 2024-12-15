@@ -3,6 +3,7 @@ package com.justparokq.homeftp.shared.ftp.presentation
 import com.arkivanov.decompose.value.Value
 import com.justparokq.homeftp.shared.ftp.model.FileSystemObject
 import com.justparokq.homeftp.shared.ftp.model.FtpExplorerScreenModel
+import io.github.vinceglb.filekit.core.PlatformFile
 
 interface FtpExplorerComponent {
 
@@ -31,4 +32,15 @@ interface FtpExplorerComponent {
      * This setting should persist between directories?
      * */
     fun onSortingApplyClicked() {}
+
+    /**
+     * Floating button meant to open file picker
+     * Selected file(s) are uploaded to server to the current folder
+     * */ // todo remove? not needed
+    fun onFloatingButtonClicked()
+
+    /**
+     * Invoke when user selected one of few files from gallery
+     * */
+    fun onFilesPicked(files: List<PlatformFile>)
 }

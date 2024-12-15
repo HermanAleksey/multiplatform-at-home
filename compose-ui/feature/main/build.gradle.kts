@@ -29,7 +29,7 @@ kotlin {
         ?.forEach {
             // This `shared` framework is exported for app-ios-compose
             it.binaries.framework {
-                baseName = "shared" // Used in app-ios-compose
+                baseName = "compose.feature.main" // Used in app-ios-compose
 
                 export(project(":shared"))
                 export(libs.decompose.decompose)

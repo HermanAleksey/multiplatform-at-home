@@ -47,4 +47,8 @@ dependencies {
     implementation(project(":compose-ui:core:theme"))
     implementation(libs.androidx.activity.compose)
     implementation(compose.foundation)
+
+    // file picker
+    implementation(libs.filekit.core)
+    implementation(libs.filekit.compose)
 }

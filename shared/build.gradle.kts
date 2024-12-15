@@ -48,6 +48,9 @@ kotlin {
                 implementation(libs.ktor.client.content.negotiation)
                 implementation(libs.ktor.serialization.kotlinx.json)
 
+                // filePicker
+                implementation(libs.filekit.core)
+
                 androidMain.dependencies {
                     implementation(libs.ktor.client.android)
                 }

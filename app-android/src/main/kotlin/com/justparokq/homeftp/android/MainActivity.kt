@@ -7,13 +7,14 @@ import com.arkivanov.decompose.defaultComponentContext
 import com.justparokq.homeftp.shared.root.DefaultRootComponent
 import com.justparokq.homeftp.root.RootContent
 import com.justparokq.homeftp.theme.AndroidAppTheme
+import io.github.vinceglb.filekit.core.FileKit
 
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         val root = DefaultRootComponent(componentContext = defaultComponentContext())
+        FileKit.init(this)
 
         setContent {
             AndroidAppTheme {

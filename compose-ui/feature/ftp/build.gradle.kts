@@ -29,7 +29,7 @@ kotlin {
         ?.forEach {
             // This `shared` framework is exported for app-ios-compose
             it.binaries.framework {
-                baseName = "shared" // Used in app-ios-compose
+                baseName = "compose.feature.ftp" // Used in app-ios-compose
 
                 export(project(":shared"))
                 export(libs.decompose.decompose)
@@ -55,6 +55,11 @@ kotlin {
                 // core
                 implementation(project(":compose-ui:core:utils"))
                 implementation(project(":compose-ui:core:theme"))
+
+                // file picker
+                // note: If using JVM target and Linux distribution, you need to add an extra module https://github.com/vinceglb/FileKit
+                implementation(libs.filekit.core)
+                implementation(libs.filekit.compose)
             }
         }
     }
