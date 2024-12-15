@@ -13,6 +13,7 @@ import com.arkivanov.decompose.extensions.compose.stack.animation.fade
 import com.arkivanov.decompose.extensions.compose.stack.animation.plus
 import com.arkivanov.decompose.extensions.compose.stack.animation.scale
 import com.arkivanov.decompose.extensions.compose.stack.animation.stackAnimation
+import com.justparokq.homeftp.FtpContent
 import com.justparokq.homeftp.LoginContent
 import com.justparokq.homeftp.shared.root.RootComponent
 import com.justparokq.homeftp.shared.root.RootComponent.Child
@@ -30,7 +31,8 @@ fun RootContent(
         ) {
             when (val instance = it.instance) {
                 is Child.Login -> LoginContent(component = instance.component)
-                is Child.Main -> MainContent(/*component = instance.component*/)
+                is Child.Main -> MainContent(component = instance.component)
+                is Child.Ftp -> FtpContent(component = instance.component)
             }
         }
     }

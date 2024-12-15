@@ -58,6 +58,7 @@ kotlin {
                 // features
                 implementation(project(":compose-ui:feature:authentication"))
                 implementation(project(":compose-ui:feature:main"))
+                implementation(project(":compose-ui:feature:ftp"))
             }
         }
     }

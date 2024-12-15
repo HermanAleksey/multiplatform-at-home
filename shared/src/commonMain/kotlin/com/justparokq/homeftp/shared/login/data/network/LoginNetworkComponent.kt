@@ -37,6 +37,10 @@ internal class LoginNetworkComponent {
             emit(Result.Loading(true))
             // todo remove; delay for real server emulation purposes
             delay(1000)
+            if (true /*isDebug*/) {
+                emit(Result.Success(LoginResponse("tokeee")))
+                return@flow
+            }
             try {
                 val result = httpClient.request("http://10.0.2.2:8080/login") {
                     method = HttpMethod.Post
