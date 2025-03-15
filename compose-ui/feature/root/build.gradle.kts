@@ -53,8 +53,8 @@ kotlin {
                 implementation(libs.decompose.extensionsComposeJetbrains)
 
                 // core
-                implementation(project(":compose-ui:core:utils"))
-                implementation(project(":compose-ui:core:theme"))
+                api(project(":compose-ui:core:utils"))
+                api(project(":compose-ui:core:theme"))
                 // features
                 implementation(project(":compose-ui:feature:authentication"))
                 implementation(project(":compose-ui:feature:main"))
