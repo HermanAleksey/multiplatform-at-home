@@ -8,8 +8,8 @@ import com.justparokq.ftp.utils.FileSystemCommunicator
 import com.justparokq.ftp.utils.PathConstants.PHOTO_TYPE_PNG
 import com.justparokq.ftp.utils.PathProcessor
 import com.justparokq.ftp.utils.PhotoProcessor
-import com.justparokq.homeftp.models.login.LoginRequest
-import com.justparokq.homeftp.models.login.LoginResponse
+import com.justparokq.homeftp.shared.login.LoginRequest
+import com.justparokq.homeftp.shared.login.LoginResponse
 import com.justparokq.login.data.LoginRequestMapper
 import com.justparokq.login.data.UserRepositoryImpl
 import io.ktor.http.HttpStatusCode
@@ -109,7 +109,7 @@ private fun Routing.addUnauthorizedRoutes(
     userRepository: UserRepositoryImpl,
     loginRequestMapper: LoginRequestMapper,
 ) {
-    post("/login") {
+    post("/com/justparokq/homeftp/shared/login") {
         val user = call.receive<LoginRequest>()
 
         val userModel = loginRequestMapper.map(user)

@@ -1,7 +1,7 @@
 package com.justparokq.ftp.mapper
 
 import com.justparokq.ftp.utils.PathProcessor
-import com.justparokq.homeftp.models.ftp.FileResponse
+import com.justparokq.homeftp.shared.ftp.FileResponse
 import java.io.File
 
 internal class FileResponseMapper(

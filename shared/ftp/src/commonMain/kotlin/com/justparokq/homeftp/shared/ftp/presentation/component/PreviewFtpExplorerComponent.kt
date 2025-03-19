@@ -1,0 +1,22 @@
+package com.justparokq.homeftp.shared.ftp.presentation.component
+
+import com.arkivanov.decompose.value.Value
+import com.justparokq.homeftp.shared.ftp.model.FileSystemObject
+import com.justparokq.homeftp.shared.ftp.model.FtpExplorerScreenModel
+import io.github.vinceglb.filekit.core.PlatformFile
+
+object PreviewFtpExplorerComponent : FtpExplorerComponent {
+    override val state: Value<FtpExplorerScreenModel>
+        get() = TODO("Not yet implemented")
+
+    override fun onDirectoryClicked(dirPath: List<String>) {}
+
+    override fun onFileClicked(file: FileSystemObject.File) {}
+
+    override fun onToggleHierarchyView() {}
+
+    override fun onFloatingButtonClicked() {}
+
+    override fun onFilesPicked(files: List<PlatformFile>) {
+    }
+}

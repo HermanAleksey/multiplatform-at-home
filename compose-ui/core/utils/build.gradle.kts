@@ -40,8 +40,6 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(":shared"))
-
                 // Compose Libraries
                 implementation(compose.ui)
                 implementation(compose.foundation)

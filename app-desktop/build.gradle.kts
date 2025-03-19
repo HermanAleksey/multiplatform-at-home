@@ -16,9 +16,8 @@ kotlin {
     sourceSets {
         val jvmMain by getting {
             dependencies {
-                implementation(project(":shared"))
                 implementation(project(":compose-ui:core:theme"))
-                implementation(project(":compose-ui:feature:root"))
+                implementation(project(":shared:root"))
 
                 implementation(compose.desktop.currentOs)
                 implementation(libs.decompose.extensionsComposeJetbrains)

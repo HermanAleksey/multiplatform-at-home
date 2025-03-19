@@ -42,7 +42,8 @@ android {
 }
 
 dependencies {
-    implementation(project(":compose-ui:feature:root"))
+    implementation(project(":shared:root"))
+    implementation(project(":compose-ui:core:theme"))
     // not needed since `root` uses api type dependencies
 //    implementation(project(":shared"))
 //    implementation(project(":compose-ui:core:theme"))

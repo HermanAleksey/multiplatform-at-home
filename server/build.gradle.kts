@@ -12,7 +12,10 @@ application {
 }
 
 dependencies {
-    implementation(project(":models"))
+    implementation(project(":models:ftp"))
+    implementation(project(":models:login"))
+    implementation(project(":models:common"))
+
     implementation(libs.logback)
 
     implementation(libs.ktor.server.core)
