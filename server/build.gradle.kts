@@ -12,9 +12,9 @@ application {
 }
 
 dependencies {
-    implementation(project(":models:ftp"))
-    implementation(project(":models:login"))
-    implementation(project(":models:common"))
+    implementation(project(Modules.Model.Ftp))
+    implementation(project(Modules.Model.Login))
+    implementation(project(Modules.Model.Common))
 
     implementation(libs.logback)
 
@@ -25,7 +25,6 @@ dependencies {
     implementation(libs.ktor.server.content.negotiation)
 
     implementation(libs.ktor.ktor.server.auth)
-
     implementation(libs.ktor.client.content.negotiation)
     implementation(libs.ktor.serialization.kotlinx.json)
 

@@ -1,14 +1,5 @@
 @file:Suppress("UnstableApiUsage")
 
-include(":models:common")
-
-
-include(":models:login")
-
-
-include(":models:ftp")
-
-
 pluginManagement {
     repositories {
         google()
@@ -38,10 +29,11 @@ include(":shared:root")
 include(":shared:utils")
 include(":shared:feature")
 
-include(":server")
-//include(":compose-ui")
-include(":compose-ui:core:theme")
-include(":compose-ui:core:utils")
+include(":compose-ui:theme")
+include(":compose-ui:utils")
+include(":compose-ui:common-components")
 
 include(":app-android")
 include(":app-desktop")
+
+include(":server")

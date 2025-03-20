@@ -50,15 +50,15 @@ kotlin {
                 api(libs.decompose.decompose)
                 implementation(libs.decompose.extensionsComposeJetbrains)
 
-                // utils
-                implementation(project(":compose-ui:core:utils"))
+                implementation(project(Modules.Compose.Utils))
+                implementation(project(Modules.Compose.Theme))
             }
         }
     }
 }
 
 android {
-    namespace = "com.justparokq.homeftp.compose.core.theme"
+    namespace = "com.justparokq.homeftp.compose.common-components"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {

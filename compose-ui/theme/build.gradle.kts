@@ -3,7 +3,6 @@
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.jetbrains.compose)
     alias(libs.plugins.kotlin.compose)
 }
@@ -24,14 +23,15 @@ kotlin {
     listOf(
         iosX64(),
         iosArm64(),
-        iosSimulatorArm64(),
+        iosSimulatorArm64()
     )
         .takeIf { "XCODE_VERSION_MAJOR" in System.getenv().keys } // Export the framework only for Xcode builds
         ?.forEach {
-            // This `shared` framework is exported for app-ios-swift
+            // This `shared` framework is exported for app-ios-compose
             it.binaries.framework {
-                baseName = "shared" // Used in app-ios-swift
+                baseName = "shared" // Used in app-ios-compose
 
+                export(project(":shared"))
                 export(libs.decompose.decompose)
                 export(libs.essenty.lifecycle)
             }
@@ -40,9 +40,6 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(libs.decompose.decompose)
-                api(libs.essenty.lifecycle)
-
                 // Compose Libraries
                 implementation(compose.ui)
                 implementation(compose.foundation)
@@ -53,37 +50,15 @@ kotlin {
                 api(libs.decompose.decompose)
                 implementation(libs.decompose.extensionsComposeJetbrains)
 
-                implementation(project(Modules.Model.Common))
-                implementation(project(Modules.Shared.Feature))
-                implementation(project(Modules.Shared.Login))
-                implementation(project(Modules.Shared.Main))
-                implementation(project(Modules.Shared.Ftp))
-
-                implementation(libs.kotlinx.coroutines.core)
-                implementation(libs.ktor.http)
-                implementation(libs.ktor.client.core)
-                implementation(libs.ktor.client.content.negotiation)
-                implementation(libs.ktor.serialization.kotlinx.json)
-
-                // filePicker
-                implementation(libs.filekit.core)
-
-                androidMain.dependencies {
-                    implementation(libs.ktor.client.android)
-                }
-                iosMain.dependencies {
-                    implementation(libs.ktor.client.darwin)
-                }
-                jvmMain.dependencies {
-                    implementation(libs.ktor.client.okhttp)
-                }
+                // utils
+                implementation(project(Modules.Compose.Utils))
             }
         }
     }
 }
 
 android {
-    namespace = "com.justparokq.homefpt.shared.root"
+    namespace = "com.justparokq.homeftp.compose.theme"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {

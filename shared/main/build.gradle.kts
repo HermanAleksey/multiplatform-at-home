@@ -43,9 +43,9 @@ kotlin {
                 api(libs.decompose.decompose)
                 api(libs.essenty.lifecycle)
                 
-                implementation(project(":models:common"))
-                implementation(project(":shared:utils"))
-                implementation(project(":shared:feature"))
+                implementation(project(Modules.Model.Common))
+                implementation(project(Modules.Shared.Utils))
+                implementation(project(Modules.Shared.Feature))
 
                 // Compose Libraries
                 implementation(compose.ui)

@@ -55,7 +55,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.justparokq.homeftp.compose.core.utils"
+    namespace = "com.justparokq.homeftp.compose.utils"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {

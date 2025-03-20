@@ -41,7 +41,7 @@ kotlin {
                 api(libs.decompose.decompose)
                 api(libs.essenty.lifecycle)
 
-                implementation(project(":models:common"))
+                implementation(project(Modules.Model.Common))
 
                 implementation(libs.kotlinx.coroutines.core)
                 implementation(libs.ktor.http)

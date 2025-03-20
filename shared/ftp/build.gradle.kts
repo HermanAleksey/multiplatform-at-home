@@ -42,12 +42,12 @@ kotlin {
             dependencies {
                 api(libs.decompose.decompose)
                 api(libs.essenty.lifecycle)
-                
-                implementation(project(":models:common"))
-                implementation(project(":models:ftp"))
-                implementation(project(":shared:utils"))
-                implementation(project(":compose-ui:core:utils"))
-                implementation(project(":compose-ui:core:theme"))
+
+                implementation(project(Modules.Model.Common))
+                implementation(project(Modules.Model.Ftp))
+                implementation(project(Modules.Shared.Utils))
+                implementation(project(Modules.Compose.Utils))
+                implementation(project(Modules.Compose.Theme))
 
                 // Compose Libraries
                 implementation(compose.ui)

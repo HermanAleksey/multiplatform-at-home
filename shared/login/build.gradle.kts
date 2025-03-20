@@ -44,11 +44,11 @@ kotlin {
                 api(libs.decompose.decompose)
                 api(libs.essenty.lifecycle)
 
-                implementation(project(":models:login"))
-                implementation(project(":models:common"))
-                implementation(project(":shared:utils"))
-                implementation(project(":compose-ui:core:utils"))
-                implementation(project(":compose-ui:core:theme"))
+                implementation(project(Modules.Model.Login))
+                implementation(project(Modules.Model.Common))
+                implementation(project(Modules.Compose.Utils))
+                implementation(project(Modules.Compose.Theme))
+                implementation(project(Modules.Shared.Utils))
 
                 // Compose Libraries
                 implementation(compose.ui)
