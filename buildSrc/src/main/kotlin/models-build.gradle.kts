@@ -1,13 +1,7 @@
-import org.gradle.api.JavaVersion
-import org.gradle.kotlin.dsl.dependencies
-
 plugins {
     id("org.jetbrains.kotlin.multiplatform")
     id("com.android.library")
     id("org.jetbrains.kotlin.plugin.serialization")
-//    alias(libs.plugins.kotlin.multiplatform)
-//    alias(libs.plugins.android.library)
-//    alias(libs.plugins.kotlin.serialization)
 }
 
 kotlin {
@@ -24,15 +18,15 @@ kotlin {
     }
 
     listOf(
-        iosX64(),
-        iosArm64(),
-        iosSimulatorArm64(),
+        iosX64(), // Для симуляторов x86_64
+        iosArm64(), // Для устройств ARM64 (iPhone, iPad)
+        iosSimulatorArm64(), // Для симуляторов ARM64 (M1/M2)
     )
         .takeIf { "XCODE_VERSION_MAJOR" in System.getenv().keys } // Export the framework only for Xcode builds
         ?.forEach {
             // This `shared` framework is exported for app-ios-swift
             it.binaries.framework {
-                baseName = "models" // Used in app-ios-swift
+                baseName = "models"
             }
         }
 
@@ -44,16 +38,10 @@ kotlin {
 
             }
         }
-        val commonTest by getting {
-            dependencies {
-
-            }
-        }
     }
 }
 
 android {
-    namespace = "com.justparokq.homeftp.models.common"
     compileSdk = 34//libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {

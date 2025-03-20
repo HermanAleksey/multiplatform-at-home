@@ -1,11 +1,6 @@
-import org.gradle.api.JavaVersion
-import org.gradle.kotlin.dsl.dependencies
-import org.gradle.kotlin.dsl.project
-
 plugins {
     id("org.jetbrains.kotlin.multiplatform")
     id("org.jetbrains.kotlin.plugin.compose")
-//    id("com.android.application")
     id("com.android.library")
     id("org.jetbrains.compose")
     id("org.jetbrains.kotlin.plugin.serialization")
@@ -36,7 +31,7 @@ kotlin {
                 baseName = "shared" // Used in app-ios-swift
 
 //                export(libs.decompose.decompose)
-                export("com.arkivanov.decompose:decompose:3.1.0")
+//                export("com.arkivanov.decompose:decompose:3.1.0")
 //                export(libs.essenty.lifecycle)
 //                export("com.arkivanov.essenty:lifecycler:2.1.0")
             }
@@ -45,8 +40,10 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api("com.arkivanov.decompose:decompose:3.1.0")
+//                api("com.arkivanov.decompose:decompose:3.1.0")
 //                api("com.arkivanov.essenty:lifecycler:2.1.0")
+//                api(libs.decompose.decompose)
+//                api(libs.essenty.lifecycle)
 
                 implementation(project(Modules.Model.Common))
 
@@ -54,14 +51,26 @@ kotlin {
                 val ktorHttp = "1.1.5"
                 implementation("io.ktor:ktor-http:$ktorHttp")
                 implementation("io.ktor:ktor-client-core:$ktorHttp")
-                implementation("io.ktor:ktor-client-content-negotiation:$ktorHttp")
-                implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorHttp")
+                val ktorVersion = "2.3.7"
+                implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
+                implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
 
                 // Compose Libraries
                 implementation(compose.ui)
                 implementation(compose.foundation)
                 implementation(compose.material3)
                 implementation(compose.materialIconsExtended)
+
+                val ktorClientDarwin = "2.3.11"
+                androidMain.dependencies {
+                    implementation("io.ktor:ktor-client-android:$ktorClientDarwin")
+                }
+                iosMain.dependencies {
+                    implementation("io.ktor:ktor-client-darwin:$ktorClientDarwin")
+                }
+                jvmMain.dependencies {
+                    implementation("io.ktor:ktor-client-okhttp:$ktorClientDarwin")
+                }
             }
         }
     }

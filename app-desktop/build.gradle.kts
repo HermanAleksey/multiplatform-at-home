@@ -4,15 +4,14 @@ import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
 
 plugins {
-//    alias(libs.plugins.kotlin.multiplatform)
-//    alias(libs.plugins.kotlin.compose)
-//    alias(libs.plugins.jetbrains.compose)
     id("desktop-build")
 }
 
 
 kotlin {
     jvm {
+        // deprecated, but doesn't compile without it
+        @Suppress("DEPRECATION")
         withJava()
     }
 
@@ -23,7 +22,6 @@ kotlin {
                 implementation(project(Modules.Shared.Root))
 
                 implementation(compose.desktop.currentOs)
-                val decompose = "3.1.0"
                 implementation(libs.decompose.extensionsComposeJetbrains)
             }
         }
