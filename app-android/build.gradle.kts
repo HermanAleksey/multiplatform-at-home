@@ -1,11 +1,15 @@
 @file:Suppress("DSL_SCOPE_VIOLATION")
 
 plugins {
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.jetbrains.compose)
+    id("shared-build")
+//    alias(libs.plugins.kotlin.android)
+//    alias(libs.plugins.kotlin.compose)
+//    alias(libs.plugins.android.application)
+//    alias(libs.plugins.jetbrains.compose)
 }
+
+//apply(from = "../buildSrc/shared-build.gradle.kts")
+//apply(plugin = "org.jetbrains.kotlin.multiplatform")
 
 android {
     namespace = "com.justparokq.homeftp.android"
@@ -36,9 +40,9 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
 
-    kotlinOptions {
-        jvmTarget = libs.versions.jvmTarget.get()
-    }
+//    kotlinOptions {
+//        jvmTarget = libs.versions.jvmTarget.get()
+//    }
 }
 
 dependencies {
