@@ -1,5 +1,13 @@
+import org.gradle.api.JavaVersion
+import org.gradle.kotlin.dsl.dependencies
+
 plugins {
-    id("models-build")
+    id("org.jetbrains.kotlin.multiplatform")
+    id("com.android.library")
+    id("org.jetbrains.kotlin.plugin.serialization")
+//    alias(libs.plugins.kotlin.multiplatform)
+//    alias(libs.plugins.android.library)
+//    alias(libs.plugins.kotlin.serialization)
 }
 
 kotlin {
@@ -10,7 +18,7 @@ kotlin {
     androidTarget {
         compilations.all {
             kotlinOptions {
-                jvmTarget = libs.versions.jvmTarget.get()
+                jvmTarget = JavaVersion.VERSION_11.toString()
             }
         }
     }
@@ -25,16 +33,15 @@ kotlin {
             // This `shared` framework is exported for app-ios-swift
             it.binaries.framework {
                 baseName = "models" // Used in app-ios-swift
-
-                export(libs.decompose.decompose)
-                export(libs.essenty.lifecycle)
             }
         }
 
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(libs.ktor.serialization.kotlinx.json)
+                val ktorVersion = "2.3.7"
+                implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
+
             }
         }
         val commonTest by getting {
@@ -46,11 +53,11 @@ kotlin {
 }
 
 android {
-    namespace = "com.justparokq.homeftp.models.login"
-    compileSdk = libs.versions.android.compileSdk.get().toInt()
+    namespace = "com.justparokq.homeftp.models.common"
+    compileSdk = 34//libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
-        minSdk = libs.versions.android.minSdk.get().toInt()
+        minSdk = 24//libs.versions.android.minSdk.get().toInt()
     }
 
     compileOptions {

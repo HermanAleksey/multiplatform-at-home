@@ -1,11 +1,12 @@
 @file:Suppress("DSL_SCOPE_VIOLATION")
 
 plugins {
-    alias(libs.plugins.kotlin.multiplatform)
-    alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.jetbrains.compose)
-    alias(libs.plugins.kotlin.compose)
+    id("shared-build")
+//    alias(libs.plugins.kotlin.multiplatform)
+//    alias(libs.plugins.android.library)
+//    alias(libs.plugins.kotlin.serialization)
+//    alias(libs.plugins.jetbrains.compose)
+//    alias(libs.plugins.kotlin.compose)
 }
 
 kotlin {
@@ -49,11 +50,11 @@ kotlin {
                 implementation(project(Modules.Compose.Utils))
                 implementation(project(Modules.Compose.Theme))
 
-                // Compose Libraries
-                implementation(compose.ui)
-                implementation(compose.foundation)
-                implementation(compose.material3)
-                implementation(compose.materialIconsExtended)
+//                // Compose Libraries
+//                implementation(compose.ui)
+//                implementation(compose.foundation)
+//                implementation(compose.material3)
+//                implementation(compose.materialIconsExtended)
 
                 // Decompose Libraries
                 api(libs.decompose.decompose)

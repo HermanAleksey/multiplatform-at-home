@@ -6,8 +6,8 @@ import androidx.compose.ui.window.rememberWindowState
 import com.arkivanov.decompose.DefaultComponentContext
 import com.arkivanov.decompose.extensions.compose.lifecycle.LifecycleController
 import com.arkivanov.essenty.lifecycle.LifecycleRegistry
-import com.justparokq.homeftp.root.RootContent
-import com.justparokq.homeftp.shared.root.DefaultRootComponent
+import com.justparokq.homeftp.shared.root.presentation.RootContent
+import com.justparokq.homeftp.shared.root.presentation.component.DefaultRootComponent
 import com.justparokq.homeftp.theme.AppTheme
 
 fun main() {

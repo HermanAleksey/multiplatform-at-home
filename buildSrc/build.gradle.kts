@@ -25,15 +25,14 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib:2.1.0")
     implementation("org.jetbrains.kotlin:kotlin-reflect:2.1.0")
 
-//    implementation("org.jetbrains.kotlin.android:org.jetbrains.kotlin.android.gradle.plugin:2.1.20-RC3")
+    // serialization
+    implementation("org.jetbrains.kotlin.plugin.serialization:org.jetbrains.kotlin.plugin.serialization.gradle.plugin:2.1.20")
 
+//    //compose runtine not needed there
+//    implementation("androidx.compose.runtime:runtime:1.6.0")
 
-//    implementation("org.jetbrains.kotlin:kotlin-compose-compiler-plugin:1.5.11")
-//    implementation("org.jetbrains.kotlin:compose-compiler-gradle-plugin:1.5.11")
-//    implementation(libs.plugin.kotlin)
-//    implementation(libs.plugin.compose)
-//    implementation(libs.plugin.serialization)
-//    implementation(Dependencies.SqlDelight.gradlePlugin)
+    // after all modules edited
+//    implementation(libs.essenty.lifecycle)
 }
 
 kotlin {

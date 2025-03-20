@@ -1,9 +1,10 @@
 @file:Suppress("DSL_SCOPE_VIOLATION")
 
 plugins {
-    alias(libs.plugins.kotlin.multiplatform)
-    alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.serialization)
+    id("shared-build")
+//    alias(libs.plugins.kotlin.multiplatform)
+//    alias(libs.plugins.android.library)
+//    alias(libs.plugins.kotlin.serialization)
 }
 
 kotlin {

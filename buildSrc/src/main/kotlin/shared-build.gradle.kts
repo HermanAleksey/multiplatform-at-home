@@ -5,8 +5,10 @@ import org.gradle.kotlin.dsl.project
 plugins {
     id("org.jetbrains.kotlin.multiplatform")
     id("org.jetbrains.kotlin.plugin.compose")
-    id("com.android.application")
+//    id("com.android.application")
+    id("com.android.library")
     id("org.jetbrains.compose")
+    id("org.jetbrains.kotlin.plugin.serialization")
 }
 
 kotlin {
@@ -17,7 +19,7 @@ kotlin {
     androidTarget {
         compilations.all {
             kotlinOptions {
-                jvmTarget = "11"//libs.versions.jvmTarget.get()
+                jvmTarget = JavaVersion.VERSION_11.toString()
             }
         }
     }
@@ -36,7 +38,7 @@ kotlin {
 //                export(libs.decompose.decompose)
                 export("com.arkivanov.decompose:decompose:3.1.0")
 //                export(libs.essenty.lifecycle)
-                export("com.arkivanov.essenty:lifecycler:2.1.0")
+//                export("com.arkivanov.essenty:lifecycler:2.1.0")
             }
         }
 
@@ -44,7 +46,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api("com.arkivanov.decompose:decompose:3.1.0")
-                api("com.arkivanov.essenty:lifecycler:2.1.0")
+//                api("com.arkivanov.essenty:lifecycler:2.1.0")
 
                 implementation(project(Modules.Model.Common))
 
@@ -54,6 +56,12 @@ kotlin {
                 implementation("io.ktor:ktor-client-core:$ktorHttp")
                 implementation("io.ktor:ktor-client-content-negotiation:$ktorHttp")
                 implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorHttp")
+
+                // Compose Libraries
+                implementation(compose.ui)
+                implementation(compose.foundation)
+                implementation(compose.material3)
+                implementation(compose.materialIconsExtended)
             }
         }
     }
@@ -61,10 +69,10 @@ kotlin {
 
 android {
     namespace = "com.justparokq.homefpt.shared.feature"
-    compileSdk = 34//libs.versions.android.compileSdk.get().toInt()
+    compileSdk = 34
 
     defaultConfig {
-        minSdk = 24//libs.versions.android.minSdk.get().toInt()
+        minSdk = 24
     }
 
     compileOptions {
