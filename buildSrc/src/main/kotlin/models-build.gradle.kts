@@ -26,7 +26,7 @@ kotlin {
         ?.forEach {
             // This `shared` framework is exported for app-ios-swift
             it.binaries.framework {
-                baseName = "models"
+                baseName = "shared"
             }
         }
 

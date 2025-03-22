@@ -8,15 +8,10 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(libs.decompose.decompose)
-                api(libs.essenty.lifecycle)
-                
                 implementation(project(Modules.Model.Common))
                 implementation(project(Modules.Shared.Utils))
                 implementation(project(Modules.Shared.Feature))
 
-                // Decompose Libraries
-                api(libs.decompose.decompose)
                 implementation(libs.decompose.extensionsComposeJetbrains)
 
                 androidMain.dependencies {

@@ -11,9 +11,6 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(libs.decompose.decompose)
-                api(libs.essenty.lifecycle)
-
                 implementation(project(Modules.Model.Common))
             }
         }

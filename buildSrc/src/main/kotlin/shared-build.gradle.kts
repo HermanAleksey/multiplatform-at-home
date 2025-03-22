@@ -30,20 +30,17 @@ kotlin {
             it.binaries.framework {
                 baseName = "shared" // Used in app-ios-swift
 
-//                export(libs.decompose.decompose)
-//                export("com.arkivanov.decompose:decompose:3.1.0")
-//                export(libs.essenty.lifecycle)
-//                export("com.arkivanov.essenty:lifecycler:2.1.0")
+                export(Version.Decompose.Decompose)
+                export(Version.Decompose.EssentyLifecycle)
             }
         }
 
     sourceSets {
         val commonMain by getting {
             dependencies {
-//                api("com.arkivanov.decompose:decompose:3.1.0")
-//                api("com.arkivanov.essenty:lifecycler:2.1.0")
-//                api(libs.decompose.decompose)
-//                api(libs.essenty.lifecycle)
+                api(Version.Decompose.Decompose)
+                api(Version.Decompose.EssentyLifecycle)
+                implementation(Version.Decompose.DecomposeExtension)
 
                 implementation(project(Modules.Model.Common))
 

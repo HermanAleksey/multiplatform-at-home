@@ -9,7 +9,6 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.multiplatform")
     id("org.jetbrains.kotlin.plugin.compose")
-//    id("com.android.application")
     id("org.jetbrains.compose")
 }
 
@@ -49,20 +48,12 @@ kotlin {
                 implementation(compose.foundation)
                 implementation(compose.material3)
                 implementation(compose.materialIconsExtended)
-
-                // Decompose Libraries
-//                api(libs.decompose.decompose)
-//                implementation(libs.decompose.extensionsComposeJetbrains)
-
-//                implementation(project(Modules.Compose.Utils))
-//                implementation(project(Modules.Compose.Theme))
             }
         }
     }
 }
 
 android {
-//    namespace = "com.justparokq.homefpt.compose.common-components"
     compileSdk = 34
 
     defaultConfig {

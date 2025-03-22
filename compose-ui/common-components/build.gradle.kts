@@ -16,5 +16,5 @@ kotlin {
 }
 
 android {
-    namespace = "com.justparokq.homeftp.compose.common-components"
+    namespace = "com.justparokq.homeftp.compose.components"
 }

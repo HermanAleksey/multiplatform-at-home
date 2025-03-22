@@ -8,14 +8,6 @@ pluginManagement {
     }
 }
 
-//dependencyResolutionManagement {
-//    versionCatalogs {
-//        create("libs") {
-//            from(files("../gradle/libs.versions.toml"))
-//        }
-//    }
-//}
-
 dependencyResolutionManagement {
     repositories {
         google()
@@ -29,7 +21,6 @@ include(":models:ftp")
 include(":models:login")
 include(":models:common")
 
-include(":shared")
 include(":shared:ftp")
 include(":shared:login")
 include(":shared:main")

@@ -12,10 +12,10 @@ repositories {
 }
 
 dependencies {
-    implementation("com.android.tools.build:gradle:8.1.4")
+    implementation("com.android.tools.build:gradle:8.7.3")
 
-    implementation("org.jetbrains.compose:compose-gradle-plugin:1.6.11")
-    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:2.1.0")
+    implementation("org.jetbrains.compose:compose-gradle-plugin:1.7.3")
+    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:2.1.10")
 
     implementation("org.jetbrains.kotlin.plugin.compose:org.jetbrains.kotlin.plugin.compose.gradle.plugin:2.1.10")
     implementation("org.jetbrains.kotlin.android:org.jetbrains.kotlin.android.gradle.plugin:2.1.10")
@@ -27,6 +27,9 @@ dependencies {
 
     // serialization
     implementation("org.jetbrains.kotlin.plugin.serialization:org.jetbrains.kotlin.plugin.serialization.gradle.plugin:2.1.20")
+
+//    //decoimpose?
+//    implementation("com.arkivanov.essenty:lifecycler:2.1.0")
 
 //    //compose runtine not needed there
 //    implementation("androidx.compose.runtime:runtime:1.6.0")
