@@ -42,10 +42,10 @@ kotlin {
 }
 
 android {
-    compileSdk = 34//libs.versions.android.compileSdk.get().toInt()
+    compileSdk = 34
 
     defaultConfig {
-        minSdk = 24//libs.versions.android.minSdk.get().toInt()
+        minSdk = 24
     }
 
     compileOptions {

@@ -1,9 +1,9 @@
 plugins {
     id("org.jetbrains.kotlin.multiplatform")
-    id("org.jetbrains.kotlin.plugin.compose")
     id("com.android.library")
-    id("org.jetbrains.compose")
     id("org.jetbrains.kotlin.plugin.serialization")
+    id("org.jetbrains.kotlin.plugin.compose")
+    id("org.jetbrains.compose")
 }
 
 kotlin {
@@ -74,7 +74,6 @@ kotlin {
 }
 
 android {
-    namespace = "com.justparokq.homefpt.shared.feature"
     compileSdk = 34
 
     defaultConfig {
