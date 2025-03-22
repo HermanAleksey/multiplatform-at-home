@@ -27,21 +27,8 @@ dependencies {
 
     // serialization
     implementation("org.jetbrains.kotlin.plugin.serialization:org.jetbrains.kotlin.plugin.serialization.gradle.plugin:2.1.20")
-
-//    //decoimpose?
-//    implementation("com.arkivanov.essenty:lifecycler:2.1.0")
-
-//    //compose runtine not needed there
-//    implementation("androidx.compose.runtime:runtime:1.6.0")
-
-    // after all modules edited
-//    implementation(libs.essenty.lifecycle)
 }
 
 kotlin {
     sourceSets.getByName("main").kotlin.srcDir("buildSrc/src/main/kotlin")
-}
-
-dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.20")
 }

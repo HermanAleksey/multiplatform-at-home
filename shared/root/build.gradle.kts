@@ -1,5 +1,3 @@
-@file:Suppress("DSL_SCOPE_VIOLATION")
-
 plugins {
     id("shared-build")
 }
@@ -13,16 +11,6 @@ kotlin {
                 implementation(project(Modules.Shared.Login))
                 implementation(project(Modules.Shared.Main))
                 implementation(project(Modules.Shared.Ftp))
-
-                androidMain.dependencies {
-                    implementation(libs.ktor.client.android)
-                }
-                iosMain.dependencies {
-                    implementation(libs.ktor.client.darwin)
-                }
-                jvmMain.dependencies {
-                    implementation(libs.ktor.client.okhttp)
-                }
             }
         }
     }

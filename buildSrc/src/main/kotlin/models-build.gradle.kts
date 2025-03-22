@@ -12,7 +12,7 @@ kotlin {
     androidTarget {
         compilations.all {
             kotlinOptions {
-                jvmTarget = JavaVersion.VERSION_11.toString()
+                jvmTarget = Version.Java.Version.toString()
             }
         }
     }
@@ -33,23 +33,21 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                val ktorVersion = "2.3.7"
-                implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
-
+                implementation(Version.Ktor.SerializationKotlinX)
             }
         }
     }
 }
 
 android {
-    compileSdk = 34
+    compileSdk = Version.Android.CompileSdk
 
     defaultConfig {
-        minSdk = 24
+        minSdk = Version.Android.MinSdk
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = Version.Java.Version
+        targetCompatibility = Version.Java.Version
     }
 }

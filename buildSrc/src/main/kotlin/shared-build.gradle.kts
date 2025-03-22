@@ -14,7 +14,7 @@ kotlin {
     androidTarget {
         compilations.all {
             kotlinOptions {
-                jvmTarget = JavaVersion.VERSION_11.toString()
+                jvmTarget = Version.Java.Version.toString()
             }
         }
     }
@@ -28,7 +28,7 @@ kotlin {
         ?.forEach {
             // This `shared` framework is exported for app-ios-swift
             it.binaries.framework {
-                baseName = "shared" // Used in app-ios-swift
+                baseName = "shared"
 
                 export(Version.Decompose.Decompose)
                 export(Version.Decompose.EssentyLifecycle)
@@ -42,31 +42,29 @@ kotlin {
                 api(Version.Decompose.EssentyLifecycle)
                 implementation(Version.Decompose.DecomposeExtension)
 
-                implementation(project(Modules.Model.Common))
-
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
-                val ktorHttp = "1.1.5"
-                implementation("io.ktor:ktor-http:$ktorHttp")
-                implementation("io.ktor:ktor-client-core:$ktorHttp")
-                val ktorVersion = "2.3.7"
-                implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
-                implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
-
                 // Compose Libraries
                 implementation(compose.ui)
                 implementation(compose.foundation)
                 implementation(compose.material3)
                 implementation(compose.materialIconsExtended)
 
-                val ktorClientDarwin = "2.3.11"
+                // coroutines
+                implementation(Version.Coroutines.Core)
+                implementation(Version.Ktor.Http)
+                implementation(Version.Ktor.ClientCore)
+                implementation(Version.Ktor.ClientContentNegotiation)
+                implementation(Version.Ktor.SerializationKotlinX)
+
+                implementation(project(Modules.Model.Common))
+
                 androidMain.dependencies {
-                    implementation("io.ktor:ktor-client-android:$ktorClientDarwin")
+                    implementation(Version.Ktor.ClientAndroid)
                 }
                 iosMain.dependencies {
-                    implementation("io.ktor:ktor-client-darwin:$ktorClientDarwin")
+                    implementation(Version.Ktor.ClientDarwin)
                 }
                 jvmMain.dependencies {
-                    implementation("io.ktor:ktor-client-okhttp:$ktorClientDarwin")
+                    implementation(Version.Ktor.ClientOkHttp)
                 }
             }
         }
@@ -74,14 +72,14 @@ kotlin {
 }
 
 android {
-    compileSdk = 34
+    compileSdk = Version.Android.CompileSdk
 
     defaultConfig {
-        minSdk = 24
+        minSdk = Version.Android.MinSdk
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = Version.Java.Version
+        targetCompatibility = Version.Java.Version
     }
 }

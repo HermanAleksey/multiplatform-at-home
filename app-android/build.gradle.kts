@@ -44,9 +44,7 @@ android {
 dependencies {
     implementation(project(Modules.Shared.Root))
     implementation(project(Modules.Compose.Theme))
-    // not needed since `root` uses api type dependencies
-//    implementation(project(":shared"))
-//    implementation(project(":compose-ui:core:theme"))
+
     implementation(libs.androidx.activity.compose)
     implementation(compose.foundation)
 

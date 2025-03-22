@@ -1,9 +1,5 @@
 @file:Suppress("DSL_SCOPE_VIOLATION")
 
-import org.gradle.api.JavaVersion
-import org.gradle.kotlin.dsl.dependencies
-import org.gradle.kotlin.dsl.project
-
 
 plugins {
     id("com.android.library")
@@ -20,7 +16,7 @@ kotlin {
     androidTarget {
         compilations.all {
             kotlinOptions {
-                jvmTarget = JavaVersion.VERSION_11.toString()
+                jvmTarget = Version.Java.Version.toString()
             }
         }
     }
@@ -35,8 +31,6 @@ kotlin {
             // This `shared` framework is exported for app-ios-compose
             it.binaries.framework {
                 baseName = "shared" // Used in app-ios-compose
-
-                export(project(":shared"))
             }
         }
 
@@ -54,14 +48,14 @@ kotlin {
 }
 
 android {
-    compileSdk = 34
+    compileSdk = Version.Android.CompileSdk
 
     defaultConfig {
-        minSdk = 24
+        minSdk = Version.Android.MinSdk
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = Version.Java.Version
+        targetCompatibility = Version.Java.Version
     }
 }
