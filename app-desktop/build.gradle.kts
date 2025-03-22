@@ -4,7 +4,10 @@ import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
 
 plugins {
-    id("desktop-build")
+//    id("desktop-build")
+    id("org.jetbrains.kotlin.multiplatform")
+    id("org.jetbrains.kotlin.plugin.compose")
+    id("org.jetbrains.compose")
 }
 
 

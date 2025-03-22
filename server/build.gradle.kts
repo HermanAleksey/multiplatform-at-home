@@ -1,8 +1,7 @@
 plugins {
-//    alias(libs.plugins.kotlin.jwm)
-//    alias(libs.plugins.ktor)
-//    application
-    id("server-build")
+    id("org.jetbrains.kotlin.jvm")
+    id("io.ktor.plugin")
+    application
 }
 
 group = "com.justparokq"
