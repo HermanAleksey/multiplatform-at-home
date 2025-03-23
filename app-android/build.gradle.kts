@@ -1,5 +1,3 @@
-@file:Suppress("DSL_SCOPE_VIOLATION")
-
 plugins {
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.plugin.compose")
@@ -9,14 +7,14 @@ plugins {
 
 android {
     namespace = "com.justparokq.homeftp.android"
-    compileSdk = libs.versions.android.compileSdk.get().toInt()
+    compileSdk = Dependencies.Android.CompileSdk
 
     defaultConfig {
         applicationId = "com.justparokq.homeftp.android"
-        minSdk = libs.versions.android.minSdk.get().toInt()
-        targetSdk = libs.versions.android.targetSdk.get().toInt()
-        versionCode = 1
-        versionName = "1.0"
+        minSdk = Dependencies.Android.MinSdk
+        targetSdk = Dependencies.Android.TargetSdk
+        versionCode = Dependencies.Android.VersionCode
+        versionName = Dependencies.Android.VersionName
     }
 
     packaging {
@@ -32,12 +30,12 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = Dependencies.Java.Version
+        targetCompatibility = Dependencies.Java.Version
     }
 
     kotlinOptions {
-        jvmTarget = libs.versions.jvmTarget.get()
+        jvmTarget = Dependencies.Java.Version.toString()
     }
 }
 
@@ -49,6 +47,6 @@ dependencies {
     implementation(compose.foundation)
 
     // file picker
-    implementation(libs.filekit.core)
-    implementation(libs.filekit.compose)
+    implementation(Dependencies.FilePicker.Core)
+    implementation(Dependencies.FilePicker.Compose)
 }

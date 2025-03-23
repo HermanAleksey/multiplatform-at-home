@@ -14,7 +14,7 @@ kotlin {
     androidTarget {
         compilations.all {
             kotlinOptions {
-                jvmTarget = Version.Java.Version.toString()
+                jvmTarget = Dependencies.Java.Version.toString()
             }
         }
     }
@@ -30,17 +30,17 @@ kotlin {
             it.binaries.framework {
                 baseName = "shared"
 
-                export(Version.Decompose.Decompose)
-                export(Version.Decompose.EssentyLifecycle)
+                export(Dependencies.Decompose.Decompose)
+                export(Dependencies.Decompose.EssentyLifecycle)
             }
         }
 
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(Version.Decompose.Decompose)
-                api(Version.Decompose.EssentyLifecycle)
-                implementation(Version.Decompose.DecomposeExtension)
+                api(Dependencies.Decompose.Decompose)
+                api(Dependencies.Decompose.EssentyLifecycle)
+                implementation(Dependencies.Decompose.DecomposeExtension)
 
                 // Compose Libraries
                 implementation(compose.ui)
@@ -49,22 +49,22 @@ kotlin {
                 implementation(compose.materialIconsExtended)
 
                 // coroutines
-                implementation(Version.Coroutines.Core)
-                implementation(Version.Ktor.Http)
-                implementation(Version.Ktor.ClientCore)
-                implementation(Version.Ktor.ClientContentNegotiation)
-                implementation(Version.Ktor.SerializationKotlinX)
+                implementation(Dependencies.Coroutines.Core)
+                implementation(Dependencies.Ktor.Http)
+                implementation(Dependencies.Ktor.ClientCore)
+                implementation(Dependencies.Ktor.ClientContentNegotiation)
+                implementation(Dependencies.Ktor.SerializationKotlinX)
 
                 implementation(project(Modules.Model.Common))
 
                 androidMain.dependencies {
-                    implementation(Version.Ktor.ClientAndroid)
+                    implementation(Dependencies.Ktor.ClientAndroid)
                 }
                 iosMain.dependencies {
-                    implementation(Version.Ktor.ClientDarwin)
+                    implementation(Dependencies.Ktor.ClientDarwin)
                 }
                 jvmMain.dependencies {
-                    implementation(Version.Ktor.ClientOkHttp)
+                    implementation(Dependencies.Ktor.ClientOkHttp)
                 }
             }
         }
@@ -72,14 +72,14 @@ kotlin {
 }
 
 android {
-    compileSdk = Version.Android.CompileSdk
+    compileSdk = Dependencies.Android.CompileSdk
 
     defaultConfig {
-        minSdk = Version.Android.MinSdk
+        minSdk = Dependencies.Android.MinSdk
     }
 
     compileOptions {
-        sourceCompatibility = Version.Java.Version
-        targetCompatibility = Version.Java.Version
+        sourceCompatibility = Dependencies.Java.Version
+        targetCompatibility = Dependencies.Java.Version
     }
 }

@@ -13,7 +13,7 @@ kotlin {
                 implementation(project(Modules.Compose.Theme))
 
                 // filePicker
-                implementation(Version.FilePicker.Core)
+                implementation(Dependencies.FilePicker.Core)
             }
         }
     }

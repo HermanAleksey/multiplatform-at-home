@@ -16,7 +16,7 @@ kotlin {
     androidTarget {
         compilations.all {
             kotlinOptions {
-                jvmTarget = Version.Java.Version.toString()
+                jvmTarget = Dependencies.Java.Version.toString()
             }
         }
     }
@@ -48,14 +48,14 @@ kotlin {
 }
 
 android {
-    compileSdk = Version.Android.CompileSdk
+    compileSdk = Dependencies.Android.CompileSdk
 
     defaultConfig {
-        minSdk = Version.Android.MinSdk
+        minSdk = Dependencies.Android.MinSdk
     }
 
     compileOptions {
-        sourceCompatibility = Version.Java.Version
-        targetCompatibility = Version.Java.Version
+        sourceCompatibility = Dependencies.Java.Version
+        targetCompatibility = Dependencies.Java.Version
     }
 }

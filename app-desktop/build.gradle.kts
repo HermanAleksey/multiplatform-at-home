@@ -1,15 +1,11 @@
-@file:Suppress("DSL_SCOPE_VIOLATION")
-
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
 
 plugins {
-//    id("desktop-build")
     id("org.jetbrains.kotlin.multiplatform")
     id("org.jetbrains.kotlin.plugin.compose")
     id("org.jetbrains.compose")
 }
-
 
 kotlin {
     jvm {
@@ -25,7 +21,7 @@ kotlin {
                 implementation(project(Modules.Shared.Root))
 
                 implementation(compose.desktop.currentOs)
-                implementation(libs.decompose.extensionsComposeJetbrains)
+                implementation(Dependencies.Decompose.DecomposeExtension)
             }
         }
     }
@@ -38,7 +34,7 @@ compose.desktop {
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = "KotlinMultiplatformComposeDesktopApplication"
-            packageVersion = "1.0.0"//libs.versions.project.get()
+            packageVersion = "1.0.0"
         }
     }
 }
