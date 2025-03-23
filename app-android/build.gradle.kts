@@ -43,7 +43,7 @@ dependencies {
     implementation(project(Modules.Shared.Root))
     implementation(project(Modules.Compose.Theme))
 
-    implementation(libs.androidx.activity.compose)
+    implementation(Dependencies.AndroidX.ActivityCompose)
     implementation(compose.foundation)
 
     // file picker

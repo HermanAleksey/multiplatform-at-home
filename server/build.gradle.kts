@@ -16,18 +16,15 @@ dependencies {
     implementation(project(Modules.Model.Login))
     implementation(project(Modules.Model.Common))
 
-    implementation(libs.logback)
+    implementation(Dependencies.Logback.LogbackClassic)
 
-    implementation(libs.ktor.server.core)
-    implementation(libs.ktor.server.netty)
-    implementation(libs.ktor.server.auth)
-    implementation(libs.ktor.server.auth.jwt)
-    implementation(libs.ktor.server.content.negotiation)
+    implementation(Dependencies.Ktor.ServerCore)
+    implementation(Dependencies.Ktor.ServerNettyJwm)
+    implementation(Dependencies.Ktor.ServerAuth)
+    implementation(Dependencies.Ktor.ServerAuthJwt)
+    implementation(Dependencies.Ktor.ServerContentNegotiation)
+    implementation(Dependencies.Ktor.SerializationKotlinX)
 
-    implementation(libs.ktor.ktor.server.auth)
-    implementation(libs.ktor.client.content.negotiation)
-    implementation(libs.ktor.serialization.kotlinx.json)
-
-    testImplementation(libs.ktor.server.tests)
-    testImplementation(libs.kotlin.test.junit)
+    testImplementation(Dependencies.Ktor.Tests)
+    testImplementation(Dependencies.Kotlin.JUnit)
 }

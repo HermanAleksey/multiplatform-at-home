@@ -1,6 +1,6 @@
 plugins {
     `kotlin-dsl`
-    kotlin("jvm") version Dependencies.Kotlin.Version
+    kotlin("jvm") version "2.1.0"
 }
 
 repositories {
@@ -12,19 +12,16 @@ repositories {
 }
 
 dependencies {
-    implementation(Dependencies.Gradle.BuildTools)
+    implementation(libs.gradle)
+    implementation(libs.compose.gradle.plugin)
 
-    implementation(Dependencies.Compose.GradlePlugin)
-
-    implementation(Dependencies.Kotlin.GradlePlugin)
-    implementation(Dependencies.Kotlin.AndroidGradlePlugin)
-    implementation(Dependencies.Kotlin.ComposeGradlePlugin)
-    implementation(Dependencies.Kotlin.SerializationGradlePlugin)
-    implementation(Dependencies.Kotlin.Stdlib)
-    implementation(Dependencies.Kotlin.Reflect)
-
-    implementation(Dependencies.Ktor.GradlePlugin)
-
+    implementation(libs.kotlin.reflect)
+    implementation(libs.kotlin.stdlib)
+    implementation(libs.kotlin.gradle.plugin)
+    implementation(libs.org.jetbrains.kotlin.plugin.serialization.gradle.plugin)
+    implementation(libs.org.jetbrains.kotlin.plugin.compose.gradle.plugin)
+    implementation(libs.org.jetbrains.kotlin.android.gradle.plugin)
+    implementation(libs.io.ktor.plugin.gradle.plugin)
 }
 
 kotlin {

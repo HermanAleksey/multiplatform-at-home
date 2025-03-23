@@ -12,6 +12,13 @@ object Dependencies {
         val VersionName = "1.0.0"
     }
 
+    object AndroidX {
+
+        private const val activityComposeVersion = "1.9.0"
+
+        val ActivityCompose = "androidx.activity:activity-compose:$activityComposeVersion"
+    }
+
     object Java {
 
         val Version = JavaVersion.VERSION_11
@@ -19,33 +26,9 @@ object Dependencies {
 
     object Kotlin {
 
-        val Version = "2.1.0"
-        private const val gradlePluginVersion = "2.1.10"
+        private const val version = "2.0.0"
 
-        val Reflect = "org.jetbrains.kotlin:kotlin-reflect:$Version"
-        val Stdlib = "org.jetbrains.kotlin:kotlin-stdlib:$Version"
-
-        val GradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$gradlePluginVersion"
-        val SerializationGradlePlugin =
-            "org.jetbrains.kotlin.plugin.serialization:org.jetbrains.kotlin.plugin.serialization.gradle.plugin:$gradlePluginVersion"
-        val ComposeGradlePlugin =
-            "org.jetbrains.kotlin.plugin.compose:org.jetbrains.kotlin.plugin.compose.gradle.plugin:$gradlePluginVersion"
-        val AndroidGradlePlugin =
-            "org.jetbrains.kotlin.android:org.jetbrains.kotlin.android.gradle.plugin:$gradlePluginVersion"
-    }
-
-    object Gradle {
-
-        private const val gradleVersion = "8.7.3"
-
-        val BuildTools = "com.android.tools.build:gradle:$gradleVersion"
-    }
-
-    object Compose {
-
-        private const val gradlePluginVersion = "1.7.3"
-
-        val GradlePlugin = "org.jetbrains.compose:compose-gradle-plugin:$gradlePluginVersion"
+        val JUnit = "org.jetbrains.kotlin:kotlin-test-junit:$version"
     }
 
     object Decompose {
@@ -70,19 +53,23 @@ object Dependencies {
         private const val httpVersion = "1.1.5"
         private const val version = "2.3.7"
         private const val clientVersion = "2.3.11"
-        private const val gradlePluginVersion = "3.1.1"
 
         val Http = "io.ktor:ktor-http:$httpVersion"
         val ClientCore = "io.ktor:ktor-client-core:$httpVersion"
+        val ServerCore = "io.ktor:ktor-server-core-jvm:$httpVersion"
+        val ServerNettyJwm = "io.ktor:ktor-server-netty-jvm:$httpVersion"
 
         val ClientContentNegotiation = "io.ktor:ktor-client-content-negotiation:$version"
+        val ServerContentNegotiation = "io.ktor:ktor-server-content-negotiation:$version"
         val SerializationKotlinX = "io.ktor:ktor-serialization-kotlinx-json:$version"
 
         val ClientAndroid = "io.ktor:ktor-client-android:$clientVersion"
         val ClientDarwin = "io.ktor:ktor-client-darwin:$clientVersion"
         val ClientOkHttp = "io.ktor:ktor-client-okhttp:$clientVersion"
+        val Tests = "io.ktor:ktor-server-tests-jvm:$clientVersion"
 
-        val GradlePlugin = "io.ktor.plugin:io.ktor.plugin.gradle.plugin:$gradlePluginVersion"
+        val ServerAuth = "io.ktor:ktor-server-auth:$version"
+        val ServerAuthJwt = "io.ktor:ktor-server-auth-jwt:$version"
     }
 
     object FilePicker {
@@ -95,5 +82,12 @@ object Dependencies {
         val Dialogs = "io.github.vinceglb:filekit-dialogs:$filekitComposeVersion"
         val DialogsCompose = "io.github.vinceglb:filekit-dialogs-compose:$filekitComposeVersion"
         val Coil = "io.github.vinceglb:filekit-coil:$filekitComposeVersion"
+    }
+
+    object Logback {
+
+        private const val version = "1.5.6"
+
+        val LogbackClassic = "ch.qos.logback:logback-classic:$version"
     }
 }
