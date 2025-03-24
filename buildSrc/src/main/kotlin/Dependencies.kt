@@ -51,7 +51,7 @@ object Dependencies {
     object Ktor {
 
         private const val httpVersion = "1.1.5"
-        private const val version = "2.3.7"
+        private const val version = "2.3.11"
         private const val clientVersion = "2.3.11"
 
         val Http = "io.ktor:ktor-http:$httpVersion"
