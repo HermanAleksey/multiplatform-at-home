@@ -6,6 +6,7 @@ import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.popTo
 import com.arkivanov.decompose.router.stack.push
+import com.arkivanov.decompose.router.stack.replaceCurrent
 import com.arkivanov.decompose.value.Value
 import com.justparokq.homeftp.shared.feature.FeatureNavigator
 import com.justparokq.homeftp.shared.feature.ProjectFeature
@@ -44,7 +45,7 @@ class DefaultRootComponent(
     private fun loginComponent(componentContext: ComponentContext): LoginComponent =
         DefaultLoginComponent(
             componentContext = componentContext,
-            navigateToMainPage = { navigation.push(Config.Main) },
+            navigateToMainPage = { navigation.replaceCurrent(Config.Main) },
 //            loginNetworkComponent = loginNetworkComponent
         )
 
