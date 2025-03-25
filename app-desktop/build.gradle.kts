@@ -1,10 +1,17 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
+import org.jetbrains.compose.reload.ComposeHotRun
+import org.jetbrains.kotlin.compose.compiler.gradle.ComposeFeatureFlag
 
 
 plugins {
     id("org.jetbrains.kotlin.multiplatform")
     id("org.jetbrains.kotlin.plugin.compose")
     id("org.jetbrains.compose")
+    id("org.jetbrains.compose.hot-reload")
+}
+
+composeCompiler {
+    featureFlags.add(ComposeFeatureFlag.OptimizeNonSkippingGroups)
 }
 
 kotlin {
@@ -37,4 +44,9 @@ compose.desktop {
             packageVersion = "1.0.0"
         }
     }
+}
+
+// launch desktop HotReload app
+tasks.register<ComposeHotRun>("runHot") {
+    mainClass.set("com.justparokq.homeftp.desktop.HotReloadMainKt")
 }

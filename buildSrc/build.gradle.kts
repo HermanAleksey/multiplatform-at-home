@@ -1,6 +1,6 @@
 plugins {
     `kotlin-dsl`
-    kotlin("jvm") version "2.1.0"
+    kotlin("jvm") version "2.1.20"
 }
 
 repositories {
@@ -22,6 +22,8 @@ dependencies {
     implementation(libs.org.jetbrains.kotlin.plugin.compose.gradle.plugin)
     implementation(libs.org.jetbrains.kotlin.android.gradle.plugin)
     implementation(libs.io.ktor.plugin.gradle.plugin)
+
+    implementation("org.jetbrains.compose.hot-reload:gradle-plugin:1.0.0-alpha03")
 }
 
 kotlin {
