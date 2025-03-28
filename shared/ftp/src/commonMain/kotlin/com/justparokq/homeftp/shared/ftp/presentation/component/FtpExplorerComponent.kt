@@ -15,16 +15,11 @@ interface FtpExplorerComponent {
     fun onDirectoryClicked(dirPath: List<String>)
 
     /**
-     * Open file
+     * Open fsObject
      * If file is Directory - navigates to it
      * If file is File - opens it (photo or video or smt else)
      * */
-    fun onFileClicked(file: FileSystemObject.File)
-
-    /**
-     * Closes hierarchyView if it was open and otherwise
-     * */
-    fun onToggleHierarchyView()
+    fun onFileSystemObjectClicked(fsObject: FileSystemObject)
 
     /**
      * Not for MVP
@@ -36,11 +31,13 @@ interface FtpExplorerComponent {
     /**
      * Floating button meant to open file picker
      * Selected file(s) are uploaded to server to the current folder
-     * */ // todo remove? not needed
+     * */
     fun onFloatingButtonClicked()
 
     /**
      * Invoke when user selected one of few files from gallery
      * */
     fun onFilesPicked(files: List<PlatformFile>)
+
+    fun onNavigateBackClicked()
 }

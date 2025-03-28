@@ -5,7 +5,11 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -15,7 +19,7 @@ import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
 import com.justparokq.homeftp.shared.ftp.presentation.component.FtpExplorerComponent
 import com.justparokq.homeftp.shared.ftp.presentation.component.PreviewFtpExplorerComponent
-import com.justparokq.homeftp.shared.ftp.presentation.composables.FileSystemHierarchy
+import com.justparokq.homeftp.shared.ftp.presentation.composables.FtpScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -43,25 +47,28 @@ fun FtpContent(
             )
         },
         floatingActionButton = {
-//            FloatingActionButton(onClick = {
-//                launcher.launch()
-//            }) {
-//                Icon(
-//                    imageVector = Icons.Filled.Add,
-//                    contentDescription = "Select file to upload"
-//                )
-//            }
+            FloatingActionButton(onClick = {/*todo*/ }) {
+                Icon(
+                    imageVector = Icons.Filled.Add,
+                    contentDescription = "Select file to upload"
+                )
+            }
         }
     ) { paddings ->
         Column(
             modifier = Modifier.padding(paddings)
                 .background(MaterialTheme.colorScheme.background)
         ) {
-            FileSystemHierarchy(
-                fileHierarchy = state.value.fileTree,
-                onFileClicked = {},
-                modifier = Modifier.fillMaxSize()
+            FtpScreen(
+                path = state.value.currentPath,
+                fsObjects = state.value.fsObjects,
+                onPathPartClicked = { component.onDirectoryClicked(it) },
+                onFSObjectClicked = { component.onFileSystemObjectClicked(it) },
+                onNavigateBackClicked = { component.onNavigateBackClicked() }
             )
+        }
+        if (state.value.isLoading) {
+            Text("Loading...")
         }
     }
 }

@@ -10,13 +10,8 @@ object PreviewFtpExplorerComponent : FtpExplorerComponent {
         get() = TODO("Not yet implemented")
 
     override fun onDirectoryClicked(dirPath: List<String>) {}
-
-    override fun onFileClicked(file: FileSystemObject.File) {}
-
-    override fun onToggleHierarchyView() {}
-
+    override fun onFileSystemObjectClicked(fsObject: FileSystemObject) {}
     override fun onFloatingButtonClicked() {}
-
-    override fun onFilesPicked(files: List<PlatformFile>) {
-    }
+    override fun onFilesPicked(files: List<PlatformFile>) {}
+    override fun onNavigateBackClicked() {}
 }

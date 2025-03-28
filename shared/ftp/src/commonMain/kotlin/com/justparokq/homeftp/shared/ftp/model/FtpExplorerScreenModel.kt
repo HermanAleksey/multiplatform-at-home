@@ -1,9 +1,12 @@
 package com.justparokq.homeftp.shared.ftp.model
 
-// todo rename feature screen
 data class FtpExplorerScreenModel(
-    val currentPath: String = "",
-    val fileTree: FileSystemObject.Directory = FileSystemObject.Directory("", null),
+    val currentPath: List<String> = emptyList(),
+    val fsObjects: List<FileSystemObject> = emptyList(),
     val isLoading: Boolean = true,
-    val showHierarchyView: Boolean = false,
-)
+) {
+
+    fun getCurrentPathAsString(): String {
+        return currentPath.joinToString("/")
+    }
+}

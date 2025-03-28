@@ -51,22 +51,25 @@ object Dependencies {
     object Ktor {
 
         private const val httpVersion = "1.1.5"
-        private const val version = "2.3.11"
-        private const val clientVersion = "2.3.11"
+        private const val version = "3.0.0"
 
         val Http = "io.ktor:ktor-http:$httpVersion"
-        val ClientCore = "io.ktor:ktor-client-core:$httpVersion"
-        val ServerCore = "io.ktor:ktor-server-core-jvm:$httpVersion"
-        val ServerNettyJwm = "io.ktor:ktor-server-netty-jvm:$httpVersion"
+
+        val ClienCio = "io.ktor:ktor-client-cio:$version"
+        val ClientCore = "io.ktor:ktor-client-core:$version"
+        val ServerCore = "io.ktor:ktor-server-core-jvm:$version"
+        val ServerNettyJwm = "io.ktor:ktor-server-netty-jvm:$version"
 
         val ClientContentNegotiation = "io.ktor:ktor-client-content-negotiation:$version"
         val ServerContentNegotiation = "io.ktor:ktor-server-content-negotiation:$version"
         val SerializationKotlinX = "io.ktor:ktor-serialization-kotlinx-json:$version"
 
-        val ClientAndroid = "io.ktor:ktor-client-android:$clientVersion"
-        val ClientDarwin = "io.ktor:ktor-client-darwin:$clientVersion"
-        val ClientOkHttp = "io.ktor:ktor-client-okhttp:$clientVersion"
-        val Tests = "io.ktor:ktor-server-tests-jvm:$clientVersion"
+        val ClientAndroid = "io.ktor:ktor-client-android:$version"
+        val ClientDarwin = "io.ktor:ktor-client-darwin:$version"
+        val ClientOkHttp = "io.ktor:ktor-client-okhttp:$version"
+
+        val ktorServerTestJvm = "2.3.13"
+        val Tests = "io.ktor:ktor-server-tests-jvm:$ktorServerTestJvm"
 
         val ServerAuth = "io.ktor:ktor-server-auth:$version"
         val ServerAuthJwt = "io.ktor:ktor-server-auth-jwt:$version"

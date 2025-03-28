@@ -2,6 +2,7 @@ package com.justparokq.homeftp.shared.ftp.data.network
 
 import com.justparokq.homeftp.shared.common.Result
 import com.justparokq.homeftp.shared.ftp.FileResponse
+import com.justparokq.homeftp.shared.utils.localhostUrl
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
@@ -13,17 +14,9 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.http.URLBuilder
 import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.serialization.json.Json
-
-
-val file = FileResponse(
-    uri = "src/lesha/hello",
-    name = "text.txt",
-    isDirectory = false,
-)
 
 interface FtpCommunicationHttpClient {
 
@@ -46,13 +39,12 @@ internal class FtpCommunicationHttpClientImpl : FtpCommunicationHttpClient {
     override fun getDirectoryContent(
         directoryUri: String,
     ): Flow<Result<List<FileResponse>>> {
+        println("TAGG Request: $directoryUri")
         return flow {
             emit(Result.Loading(true))
-            // todo remove
-            delay(1000)
             try {
                 val url = URLBuilder(
-                    host = "0.0.0.0",
+                    host = localhostUrl,
                     port = 8080,
                     pathSegments = listOf("directory"),
                 ).build()

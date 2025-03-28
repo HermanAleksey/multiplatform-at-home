@@ -12,6 +12,9 @@ kotlin {
                 implementation(project(Modules.Compose.Utils))
                 implementation(project(Modules.Compose.Theme))
 
+                val coilVersion = "2.3.8"
+                implementation("com.github.skydoves:landscapist-coil3:$coilVersion")
+
                 // filePicker
                 implementation(Dependencies.FilePicker.Core)
             }

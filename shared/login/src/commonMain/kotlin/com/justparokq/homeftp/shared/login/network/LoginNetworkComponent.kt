@@ -3,6 +3,7 @@ package com.justparokq.homeftp.shared.login.network
 import com.justparokq.homeftp.shared.common.Result
 import com.justparokq.homeftp.shared.login.LoginRequest
 import com.justparokq.homeftp.shared.login.LoginResponse
+import com.justparokq.homeftp.shared.utils.localhostUrl
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
@@ -42,7 +43,7 @@ class LoginNetworkComponent {
                 return@flow
             }
             try {
-                val result = httpClient.request("http://10.0.2.2:8080/login") {
+                val result = httpClient.request("http://$localhostUrl:8080/login") {
                     method = HttpMethod.Post
                     contentType(ContentType.Application.Json)
                     setBody(loginRequest)

@@ -5,9 +5,9 @@ import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
 import com.justparokq.ftp.mapper.FileResponseMapper
 import com.justparokq.ftp.utils.FileSystemCommunicator
-import com.justparokq.ftp.utils.PathConstants.PHOTO_TYPE_PNG
 import com.justparokq.ftp.utils.PathProcessor
 import com.justparokq.ftp.utils.PhotoProcessor
+import com.justparokq.homeftp.shared.ftp.isImage
 import com.justparokq.homeftp.shared.login.LoginRequest
 import com.justparokq.homeftp.shared.login.LoginResponse
 import com.justparokq.login.data.LoginRequestMapper
@@ -15,7 +15,6 @@ import com.justparokq.login.data.UserRepositoryImpl
 import io.ktor.http.HttpStatusCode
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.Application
-import io.ktor.server.application.call
 import io.ktor.server.application.install
 import io.ktor.server.auth.Authentication
 import io.ktor.server.auth.authenticate
@@ -149,7 +148,7 @@ private fun Routing.addUnauthorizedRoutes(
             else -> {
                 val file = communicator.getFile(path)
 
-                if (file == null || file.extension != PHOTO_TYPE_PNG) {
+                if (file == null || !isImage(file.extension)) {
                     call.respond(
                         HttpStatusCode.NotFound,
                         "File not found or file extension is not supported"

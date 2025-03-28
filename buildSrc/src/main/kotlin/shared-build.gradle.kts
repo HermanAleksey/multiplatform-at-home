@@ -53,6 +53,7 @@ kotlin {
 
                 // ktor
                 implementation(Dependencies.Ktor.Http)
+                implementation(Dependencies.Ktor.ClienCio)
                 implementation(Dependencies.Ktor.ClientCore)
                 implementation(Dependencies.Ktor.ClientContentNegotiation)
                 implementation(Dependencies.Ktor.SerializationKotlinX)

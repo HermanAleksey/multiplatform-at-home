@@ -51,14 +51,12 @@ class DefaultFtpExplorerComponent(
 
                         is Result.Success -> {
                             val domainObjects = result.result.map {
-                                fileSystemObjectMapper.map(it)
+                                fileSystemObjectMapper.toFileSystemObject(it)
                             }
                             _state.update {
                                 it.copy(
                                     isLoading = false,
-                                    fileTree = it.fileTree.copy(
-                                        content = domainObjects
-                                    )
+                                    fsObjects = domainObjects
                                 )
                             }
                         }
@@ -69,15 +67,33 @@ class DefaultFtpExplorerComponent(
     }
 
     override fun onDirectoryClicked(dirPath: List<String>) {
-        TODO("Not yet implemented")
+        _state.update {
+            it.copy(
+                currentPath = dirPath
+            )
+        }
+        load(state.value.getCurrentPathAsString())
     }
 
-    override fun onFileClicked(file: FileSystemObject.File) {
-        TODO("Not yet implemented")
-    }
+    override fun onFileSystemObjectClicked(fsObject: FileSystemObject) {
+        when (fsObject) {
+            is FileSystemObject.Directory -> {
+                val newPath = _state.value.currentPath + fsObject.name
+                onDirectoryClicked(newPath)
+            }
 
-    override fun onToggleHierarchyView() {
-        TODO("Not yet implemented")
+            is FileSystemObject.File.Image -> {
+                // todo open full screen photo
+            }
+
+            FileSystemObject.File.Unknown -> {
+                // todo show toast
+            }
+
+            is FileSystemObject.File.Video -> {
+                // todo open full screen video
+            }
+        }
     }
 
     override fun onFloatingButtonClicked() {
@@ -89,5 +105,13 @@ class DefaultFtpExplorerComponent(
             file.name
         }
 //        TODO("Not yet implemented")
+    }
+
+    override fun onNavigateBackClicked() {
+        val newPath = _state.value.currentPath
+            .takeIf { it.isNotEmpty() }
+            ?.dropLast(1)
+            ?: _state.value.currentPath
+        onDirectoryClicked(newPath)
     }
 }

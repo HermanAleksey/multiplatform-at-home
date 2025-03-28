@@ -26,12 +26,13 @@ import com.justparokq.homeftp.theme.AppTheme
 @Composable
 fun CurrentPathLine(
     path: List<String>,
-    navigateToPath: (list: List<String>) -> Unit,
+    onPathPartClicked: (list: List<String>) -> Unit,
+    onNavigateBackClicked: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Row(modifier, verticalAlignment = Alignment.CenterVertically) {
         BackButton(
-            onBackClicked = {},
+            onBackClicked = { onNavigateBackClicked() },
             Modifier.padding(horizontal = 16.dp)
         )
         LazyRow(
@@ -42,8 +43,8 @@ fun CurrentPathLine(
         ) {
             path.forEachIndexed { index, str ->
                 item {
-                    PathElement(str + "/") {
-                        navigateToPath(path.subList(0, index))
+                    PathElement("$str/") {
+                        onPathPartClicked(path.subList(0, index + 1))
                     }
                 }
             }
@@ -92,6 +93,6 @@ fun PathElement(text: String, onItemClicked: (String) -> Unit) {
 private fun DirectoriesPreview() {
     AppTheme {
         val path = listOf("LOL", "hi", "nagget", "yo_gay", "root", "documents", "images")
-        CurrentPathLine(path, {})
+        CurrentPathLine(path, {}, {})
     }
 }
