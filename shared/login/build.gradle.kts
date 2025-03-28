@@ -8,8 +8,7 @@ kotlin {
             dependencies {
                 implementation(project(Modules.Model.Login))
                 implementation(project(Modules.Model.Common))
-                implementation(project(Modules.Compose.Utils))
-                implementation(project(Modules.Compose.Theme))
+                implementation(project(Modules.Shared.Core.UiKit))
                 implementation(project(Modules.Shared.Utils))
             }
         }

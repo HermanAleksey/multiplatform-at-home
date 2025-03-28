@@ -9,8 +9,7 @@ kotlin {
                 implementation(project(Modules.Model.Common))
                 implementation(project(Modules.Model.Ftp))
                 implementation(project(Modules.Shared.Utils))
-                implementation(project(Modules.Compose.Utils))
-                implementation(project(Modules.Compose.Theme))
+                implementation(project(Modules.Shared.Core.UiKit))
 
                 val coilVersion = "2.3.8"
                 implementation("com.github.skydoves:landscapist-coil3:$coilVersion")

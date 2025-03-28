@@ -7,14 +7,12 @@ object Modules {
         const val Login = ":models:login"
     }
 
-    object Compose {
-
-        const val Theme = ":compose-ui:theme"
-        const val Utils = ":compose-ui:utils"
-        const val Common = ":compose-ui:common-components"
-    }
-
     object Shared {
+
+        object Core {
+
+            const val UiKit = ":shared:core:ui_kit"
+        }
 
         const val Root = ":shared:root"
         const val Feature = ":shared:feature"

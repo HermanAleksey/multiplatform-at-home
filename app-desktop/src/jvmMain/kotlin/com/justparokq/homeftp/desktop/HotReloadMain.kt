@@ -5,9 +5,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.WindowState
 import androidx.compose.ui.window.singleWindowApplication
-import com.arkivanov.decompose.DefaultComponentContext
-import com.justparokq.homeftp.shared.root.presentation.RootContent
-import com.justparokq.homeftp.shared.root.presentation.component.DefaultRootComponent
 import com.justparokq.homeftp.theme.AppTheme
 import org.jetbrains.compose.reload.DevelopmentEntryPoint
 

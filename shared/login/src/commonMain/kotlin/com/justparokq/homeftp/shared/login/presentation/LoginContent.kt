@@ -1,6 +1,6 @@
 package com.justparokq.homeftp.shared.login.presentation
 
-import androidx.compose.desktop.ui.tooling.preview.Preview
+import com.justparokq.homeftp.tooling.Preview
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.defaultMinSize

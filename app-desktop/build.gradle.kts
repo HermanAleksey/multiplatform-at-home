@@ -24,7 +24,7 @@ kotlin {
     sourceSets {
         val jvmMain by getting {
             dependencies {
-                implementation(project(Modules.Compose.Theme))
+                implementation(project(Modules.Shared.Core.UiKit))
                 implementation(project(Modules.Shared.Root))
 
                 implementation(compose.desktop.currentOs)

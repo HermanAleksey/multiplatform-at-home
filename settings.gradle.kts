@@ -31,10 +31,7 @@ include(":shared:main")
 include(":shared:root")
 include(":shared:utils")
 include(":shared:feature")
-
-include(":compose-ui:theme")
-include(":compose-ui:utils")
-include(":compose-ui:common-components")
+include(":shared:core:ui_kit")
 
 include(":app-android")
 include(":app-desktop")

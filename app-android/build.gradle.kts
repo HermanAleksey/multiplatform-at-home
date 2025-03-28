@@ -41,7 +41,7 @@ android {
 
 dependencies {
     implementation(project(Modules.Shared.Root))
-    implementation(project(Modules.Compose.Theme))
+    implementation(project(Modules.Shared.Core.UiKit))
 
     implementation(Dependencies.AndroidX.ActivityCompose)
     implementation(compose.foundation)

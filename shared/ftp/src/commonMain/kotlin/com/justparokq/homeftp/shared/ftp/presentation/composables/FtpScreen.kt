@@ -1,6 +1,6 @@
 package com.justparokq.homeftp.shared.ftp.presentation.composables
 
-import androidx.compose.desktop.ui.tooling.preview.Preview
+import com.justparokq.homeftp.tooling.Preview
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement

@@ -1,6 +1,6 @@
 package com.justparokq.homeftp.shared.ftp.presentation
 
-import androidx.compose.desktop.ui.tooling.preview.Preview
+import com.justparokq.homeftp.tooling.Preview
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
