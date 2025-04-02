@@ -6,16 +6,16 @@ import com.justparokq.homeftp.shared.main.domain.FeatureToggleRepository
 class FeatureToggleRepositoryImpl : FeatureToggleRepository {
 
     override fun getAll(): List<FeatureToggle> {
-        // todo add database connection
+        // todo add database
         return listOf(
             FeatureToggle(
                 name = "ftp",
                 isEnabled = true
-            )
+            ),
+            FeatureToggle(
+                name = "settings",
+                isEnabled = true
+            ),
         )
-    }
-
-    override fun set(featureToggle: FeatureToggle) {
-        TODO("Not yet implemented")
     }
 }

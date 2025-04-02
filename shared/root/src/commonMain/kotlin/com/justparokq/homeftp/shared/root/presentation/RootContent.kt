@@ -13,6 +13,7 @@ import com.arkivanov.decompose.extensions.compose.stack.animation.fade
 import com.arkivanov.decompose.extensions.compose.stack.animation.plus
 import com.arkivanov.decompose.extensions.compose.stack.animation.scale
 import com.arkivanov.decompose.extensions.compose.stack.animation.stackAnimation
+import com.justparokq.homeftp.shared.features.settings.presentation.SettingsContent
 import com.justparokq.homeftp.shared.ftp.presentation.FtpContent
 import com.justparokq.homeftp.shared.login.presentation.LoginContent
 import com.justparokq.homeftp.shared.root.presentation.component.RootComponent
@@ -32,6 +33,7 @@ fun RootContent(
                 is RootComponent.Child.Login -> LoginContent(component = instance.component)
                 is RootComponent.Child.Main -> MainContent(component = instance.component)
                 is RootComponent.Child.Ftp -> FtpContent(component = instance.component)
+                is RootComponent.Child.Settings -> SettingsContent(component = instance.component)
             }
         }
     }

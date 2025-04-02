@@ -34,6 +34,7 @@ class DefaultMainComponent(
     override fun onInitialize() {
         coroutineScope.launch(Dispatchers.IO) {
             val features = featureToggleRepository.getAll()
+                .filter { it.isEnabled }
                 .map { featureParamsModelMapper.map(it) }
             _state.update {
                 it.copy(
