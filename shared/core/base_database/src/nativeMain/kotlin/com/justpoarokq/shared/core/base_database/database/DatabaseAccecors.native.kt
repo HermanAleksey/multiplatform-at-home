@@ -8,7 +8,7 @@ import platform.Foundation.NSFileManager
 import platform.Foundation.NSUserDomainMask
 
 actual fun getSettingsDatabaseBuilder(context: Any?): RoomDatabase.Builder<SettingDatabase> {
-    val dbFilePath = documentDirectory() + "/my_room.db"
+    val dbFilePath = documentDirectory() + "/setting.db"
     return Room.databaseBuilder<SettingDatabase>(
         name = dbFilePath,
     )
