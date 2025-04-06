@@ -63,7 +63,7 @@ class SettingsRepositoryImpl(
                     category,
                     ignoreCase = true
                 )
-            } ?: error("Unknown category"),
+            } ?: error("Unknown category: $category"),
             // todo null = false, fix wit custom mapping
             value = Value.Boolean(value.toBoolean())
         )

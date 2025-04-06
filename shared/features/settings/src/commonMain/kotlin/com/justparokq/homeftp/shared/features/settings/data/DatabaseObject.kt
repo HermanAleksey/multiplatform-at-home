@@ -2,14 +2,14 @@ package com.justparokq.homeftp.shared.features.settings.data
 
 import com.justpoarokq.shared.core.base_database.database.SettingDatabase
 import com.justpoarokq.shared.core.base_database.database.getSettingsDatabaseBuilder
-import com.justpoarokq.shared.core.base_database.database.getySettingsDatabase
+import com.justpoarokq.shared.core.base_database.database.getSettingsDatabase
 
 object DatabaseObject {
 
     private var db: SettingDatabase? = null
 
     fun init(context: Any?) {
-        if (db == null) db = getySettingsDatabase(getSettingsDatabaseBuilder(context))
+        if (db == null) db = getSettingsDatabase(getSettingsDatabaseBuilder(context))
     }
 
     fun settings(): SettingDatabase = db ?: error("Init first")
