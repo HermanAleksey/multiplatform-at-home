@@ -13,4 +13,7 @@ object PreviewSettingsComponent : SettingsComponent {
 
     override fun onResetClicked() {
     }
+
+    override fun onDatabaseInitialized() {
+    }
 }

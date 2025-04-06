@@ -12,5 +12,5 @@ kotlin {
 }
 
 android {
-    namespace = "com.justparokq.homeftp.compose.ui_kit"
+    namespace = "com.justparokq.homeftp.shared.core.ui_kit"
 }

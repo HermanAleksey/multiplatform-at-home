@@ -8,13 +8,14 @@ import com.arkivanov.decompose.extensions.compose.lifecycle.LifecycleController
 import com.arkivanov.essenty.lifecycle.LifecycleRegistry
 import com.justparokq.homeftp.shared.root.presentation.RootContent
 import com.justparokq.homeftp.shared.root.presentation.component.DefaultRootComponent
+import com.justparokq.homeftp.shared.utils.ContextFactory
 import com.justparokq.homeftp.theme.AppTheme
 
 fun main() {
 
     val lifecycle = LifecycleRegistry()
 
-    val root = runOnUiThread {
+    val rootComponent = runOnUiThread {
         DefaultRootComponent(
             componentContext = DefaultComponentContext(lifecycle = lifecycle),
         )
@@ -32,7 +33,7 @@ fun main() {
             resizable = false,
         ) {
             AppTheme {
-                RootContent(root)
+                RootContent(component = rootComponent, contextFactory = ContextFactory())
             }
         }
     }

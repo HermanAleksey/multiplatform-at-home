@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import com.arkivanov.decompose.defaultComponentContext
 import com.justparokq.homeftp.shared.root.presentation.RootContent
 import com.justparokq.homeftp.shared.root.presentation.component.DefaultRootComponent
+import com.justparokq.homeftp.shared.utils.ContextFactory
 import com.justparokq.homeftp.theme.AndroidAppTheme
 import io.github.vinceglb.filekit.core.FileKit
 
@@ -18,7 +19,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             AndroidAppTheme {
-                RootContent(component = root)
+                RootContent(component = root, contextFactory = ContextFactory(this))
             }
         }
     }

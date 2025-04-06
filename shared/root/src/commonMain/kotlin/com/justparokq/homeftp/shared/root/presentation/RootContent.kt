@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.extensions.compose.stack.Children
 import com.arkivanov.decompose.extensions.compose.stack.animation.fade
@@ -17,23 +18,30 @@ import com.justparokq.homeftp.shared.features.settings.presentation.SettingsCont
 import com.justparokq.homeftp.shared.ftp.presentation.FtpContent
 import com.justparokq.homeftp.shared.login.presentation.LoginContent
 import com.justparokq.homeftp.shared.root.presentation.component.RootComponent
+import com.justparokq.homeftp.shared.utils.ContextFactory
+import com.justparokq.homeftp.shared.utils.ContextFactoryComposition
 
 @Composable
 fun RootContent(
+    contextFactory: ContextFactory,
     component: RootComponent,
     modifier: Modifier = Modifier,
 ) {
-    Surface(modifier = modifier.fillMaxSize().windowInsetsPadding(WindowInsets.systemBars)) {
-        Children(
-            stack = component.stack,
-            modifier = Modifier.fillMaxSize(),
-            animation = stackAnimation(fade() + scale())
-        ) {
-            when (val instance = it.instance) {
-                is RootComponent.Child.Login -> LoginContent(component = instance.component)
-                is RootComponent.Child.Main -> MainContent(component = instance.component)
-                is RootComponent.Child.Ftp -> FtpContent(component = instance.component)
-                is RootComponent.Child.Settings -> SettingsContent(component = instance.component)
+    CompositionLocalProvider(
+        ContextFactoryComposition provides contextFactory
+    ) {
+        Surface(modifier = modifier.fillMaxSize().windowInsetsPadding(WindowInsets.systemBars)) {
+            Children(
+                stack = component.stack,
+                modifier = Modifier.fillMaxSize(),
+                animation = stackAnimation(fade() + scale())
+            ) {
+                when (val instance = it.instance) {
+                    is RootComponent.Child.Login -> LoginContent(component = instance.component)
+                    is RootComponent.Child.Main -> MainContent(component = instance.component)
+                    is RootComponent.Child.Ftp -> FtpContent(component = instance.component)
+                    is RootComponent.Child.Settings -> SettingsContent(component = instance.component)
+                }
             }
         }
     }

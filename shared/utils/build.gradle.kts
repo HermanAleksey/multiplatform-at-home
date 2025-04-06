@@ -7,6 +7,10 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(project(Modules.Model.Common))
+
+                androidMain.dependencies {
+                    implementation(Dependencies.AndroidX.ActivityCompose)
+                }
             }
         }
         val commonTest by getting {

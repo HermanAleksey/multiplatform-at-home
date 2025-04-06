@@ -93,4 +93,25 @@ object Dependencies {
 
         val LogbackClassic = "ch.qos.logback:logback-classic:$version"
     }
+
+    object Room {
+
+        const val version = "2.7.0-rc03"
+
+        val Compiler = "androidx.room:room-compiler:$version"
+        val Runtime = "androidx.room:room-runtime:$version"
+        val GradlePlugin = "androidx.room:$version"
+    }
+
+    object Sqlite {
+
+        const val version = "2.5.0-rc03"
+
+        val Bundled = "androidx.sqlite:sqlite-bundled:$version"
+    }
+
+    object Ksp {
+
+        const val version = "2.1.20-1.0.32"
+    }
 }

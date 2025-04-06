@@ -11,4 +11,6 @@ interface SettingsComponent {
     fun onSettingChanged(settingModel: SettingModel)
 
     fun onResetClicked()
+
+    fun onDatabaseInitialized()
 }

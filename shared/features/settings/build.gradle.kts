@@ -10,6 +10,9 @@ kotlin {
                 implementation(project(Modules.Model.Ftp))
                 implementation(project(Modules.Shared.Utils))
                 implementation(project(Modules.Shared.Core.UiKit))
+                implementation(project(Modules.Shared.Core.BaseDatabase))
+
+                implementation(Dependencies.Room.Runtime)
             }
         }
     }

@@ -26,6 +26,7 @@ kotlin {
             dependencies {
                 implementation(project(Modules.Shared.Core.UiKit))
                 implementation(project(Modules.Shared.Root))
+                implementation(project(Modules.Shared.Utils))
 
                 implementation(compose.desktop.currentOs)
                 implementation(Dependencies.Decompose.DecomposeExtension)

@@ -32,6 +32,7 @@ include(":shared:root")
 include(":shared:utils")
 include(":shared:feature")
 include(":shared:core:ui_kit")
+include(":shared:core:base_database")
 include(":shared:features:settings")
 
 include(":app-android")

@@ -12,6 +12,7 @@ object Modules {
         object Core {
 
             const val UiKit = ":shared:core:ui_kit"
+            const val BaseDatabase = ":shared:core:base_database"
         }
 
         object Features {

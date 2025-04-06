@@ -9,17 +9,24 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
+import com.justparokq.homeftp.shared.features.settings.data.DatabaseObject
 import com.justparokq.homeftp.shared.features.settings.domain.SettingModel
-import com.justparokq.homeftp.shared.features.settings.presentation.model.SettingsScreenModel
 import com.justparokq.homeftp.shared.features.settings.presentation.component.SettingsComponent
-
+import com.justparokq.homeftp.shared.features.settings.presentation.model.SettingsScreenModel
+import com.justparokq.homeftp.shared.utils.ContextFactoryComposition
 
 @Composable
 fun SettingsContent(component: SettingsComponent) {
+    val context = ContextFactoryComposition.current.getContext()
+    LaunchedEffect(Unit) {
+        DatabaseObject.init(context)
+        component.onDatabaseInitialized()
+    }
     val state = component.state.subscribeAsState()
     SettingsContentScreen(
         settingModel = state.value,
