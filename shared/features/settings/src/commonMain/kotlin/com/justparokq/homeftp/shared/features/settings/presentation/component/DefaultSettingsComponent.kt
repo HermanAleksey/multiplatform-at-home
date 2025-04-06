@@ -52,8 +52,8 @@ class DefaultSettingsComponent(
                         featureSettings = settingsMap[SettingModel.Category.Features] ?: emptyList()
                     )
                 }
-                .collect {
-                    _state.update { it }
+                .collect { newModel ->
+                    _state.update { newModel }
                 }
         }
     }

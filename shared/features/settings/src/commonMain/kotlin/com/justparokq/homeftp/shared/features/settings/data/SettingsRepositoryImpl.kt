@@ -1,6 +1,7 @@
 package com.justparokq.homeftp.shared.features.settings.data
 
 import com.justparokq.homeftp.shared.features.settings.domain.SettingModel
+import com.justparokq.homeftp.shared.features.settings.domain.SettingModel.Value
 import com.justparokq.homeftp.shared.features.settings.domain.SettingsRepository
 import com.justpoarokq.shared.core.base_database.dao.SettingDao
 import com.justpoarokq.shared.core.base_database.entity.SettingEntity
@@ -26,7 +27,7 @@ class SettingsRepositoryImpl(
         return null
     }
 
-    override suspend fun updateSetting(name: String, newValue: SettingModel.Value): Result<Unit> {
+    override suspend fun updateSetting(name: String, newValue: Value): Result<Unit> {
         mutex.withLock {
             val updatedSetting = dao.getSettingByName(name)?.copy(value = newValue.toString())
                 ?: return Result.failure(Exception("Couldn't find setting with this name"))
@@ -57,10 +58,14 @@ class SettingsRepositoryImpl(
         return SettingModel(
             name = name,
             description = description,
-            category = SettingModel.Category.fromString(category)
-                ?: error("Unknown category"),
-            value = SettingModel.Value.fromString(value)
-                ?: error("Unknown value"),
+            category = SettingModel.Category.entries.find {
+                it.name.equals(
+                    category,
+                    ignoreCase = true
+                )
+            } ?: error("Unknown category"),
+            // todo null = false, fix wit custom mapping
+            value = Value.Boolean(value.toBoolean())
         )
     }
 }
