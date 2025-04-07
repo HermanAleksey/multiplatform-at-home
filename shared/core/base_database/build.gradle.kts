@@ -2,6 +2,7 @@ plugins {
     id("compose-multiplatform-build")
     id("androidx.room") version Dependencies.Room.version
     id("com.google.devtools.ksp") version Dependencies.Ksp.version
+    // for desktop database
     kotlin("kapt")
 }
 

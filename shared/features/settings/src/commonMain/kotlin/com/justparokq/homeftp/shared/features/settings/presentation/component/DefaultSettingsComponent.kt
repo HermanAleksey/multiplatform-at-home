@@ -5,15 +5,16 @@ import com.arkivanov.decompose.value.MutableValue
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.decompose.value.update
 import com.justparokq.homeftp.shared.features.settings.data.DatabaseObject
-import com.justparokq.homeftp.shared.features.settings.domain.SettingModel
-import com.justparokq.homeftp.shared.features.settings.domain.SettingsRepository
 import com.justparokq.homeftp.shared.features.settings.presentation.model.SettingsScreenModel
 import com.justparokq.homeftp.shared.utils.componentCoroutineScope
+import com.justpoarokq.shared.core.base_database.model.SettingModel
+import com.justpoarokq.shared.core.base_database.repository.DatabaseServiceLocator
+import com.justpoarokq.shared.core.base_database.repository.SettingsRepository
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 class DefaultSettingsComponent(
-    private val settingsRepositoryProvider: SettingsRepository.Provider = SettingsRepository.Provider,
+    private val serviceLocator: DatabaseServiceLocator = DatabaseServiceLocator,
     componentContext: ComponentContext,
 ) : SettingsComponent, ComponentContext by componentContext {
 
@@ -25,7 +26,7 @@ class DefaultSettingsComponent(
 
     override fun onSettingChanged(settingModel: SettingModel) {
         coroutineScope.launch {
-            settingsRepository?.updateSetting(settingModel.name, settingModel.value)
+            settingsRepository?.updateSetting(settingModel.name, settingModel)
         }
     }
 
@@ -37,7 +38,7 @@ class DefaultSettingsComponent(
 
     override fun onDatabaseInitialized() {
         val db = DatabaseObject.settings()
-        settingsRepository = settingsRepositoryProvider.provide(db)
+        settingsRepository = serviceLocator.provide(db)
         loadData()
     }
 
@@ -49,7 +50,7 @@ class DefaultSettingsComponent(
                     val settingsMap = settingsList.groupBy { it.category }
                     SettingsScreenModel(
                         networkSettings = settingsMap[SettingModel.Category.Network] ?: emptyList(),
-                        featureSettings = settingsMap[SettingModel.Category.Features] ?: emptyList()
+                        featureSettings = settingsMap[SettingModel.Category.Feature] ?: emptyList()
                     )
                 }
                 .collect { newModel ->

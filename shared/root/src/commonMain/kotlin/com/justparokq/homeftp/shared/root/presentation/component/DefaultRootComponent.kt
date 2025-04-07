@@ -48,7 +48,7 @@ class DefaultRootComponent(
     private fun loginComponent(componentContext: ComponentContext): LoginComponent =
         DefaultLoginComponent(
             componentContext = componentContext,
-            navigateToMainPage = { navigation.replaceCurrent(Config.Main) },
+                navigateToMainPage = { navigation.replaceCurrent(Config.Main) },
 //            loginNetworkComponent = loginNetworkComponent
         )
 

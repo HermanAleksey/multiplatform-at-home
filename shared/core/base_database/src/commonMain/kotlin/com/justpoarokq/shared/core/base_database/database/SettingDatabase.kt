@@ -4,15 +4,20 @@ import androidx.room.ConstructedBy
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.RoomDatabaseConstructor
-import com.justpoarokq.shared.core.base_database.dao.SettingDao
-import com.justpoarokq.shared.core.base_database.entity.SettingEntity
+import androidx.room.TypeConverters
+import com.justpoarokq.shared.core.base_database.converter.CategoryTypeConverter
+import com.justpoarokq.shared.core.base_database.dao.BooleanSettingDao
+import com.justpoarokq.shared.core.base_database.dao.StringSettingDao
+import com.justpoarokq.shared.core.base_database.entity.BooleanSettingEntity
+import com.justpoarokq.shared.core.base_database.entity.StringSettingEntity
 
-@Database(entities = [SettingEntity::class], version = 1)
-// @TypeConverters(UserConverter::class) -> Include for complex data class
+@Database(entities = [BooleanSettingEntity::class, StringSettingEntity::class], version = 1)
+@TypeConverters(CategoryTypeConverter::class)
 @ConstructedBy(AppDatabaseConstructor::class)
 abstract class SettingDatabase : RoomDatabase() {
 
-    abstract fun settingDao(): SettingDao
+    abstract fun booleanSettingDao(): BooleanSettingDao
+    abstract fun stringSettingDao(): StringSettingDao
 }
 
 // The Room compiler generates the `actual` implementations.

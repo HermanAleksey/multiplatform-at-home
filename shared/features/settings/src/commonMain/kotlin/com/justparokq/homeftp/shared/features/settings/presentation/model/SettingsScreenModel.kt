@@ -1,6 +1,6 @@
 package com.justparokq.homeftp.shared.features.settings.presentation.model
 
-import com.justparokq.homeftp.shared.features.settings.domain.SettingModel
+import com.justpoarokq.shared.core.base_database.model.SettingModel
 
 data class SettingsScreenModel(
     val networkSettings: List<SettingModel> = emptyList(),

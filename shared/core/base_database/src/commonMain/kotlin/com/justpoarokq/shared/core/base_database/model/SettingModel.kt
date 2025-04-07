@@ -1,4 +1,4 @@
-package com.justparokq.homeftp.shared.features.settings.domain
+package com.justpoarokq.shared.core.base_database.model
 
 data class SettingModel(
     val name: String,
@@ -9,13 +9,17 @@ data class SettingModel(
 
     enum class Category {
 
-        Network, Features;
+        Network, Feature;
     }
 
     sealed interface Value {
 
         data class Boolean(
             val value: kotlin.Boolean
+        ) : Value
+
+        data class String(
+            val value: kotlin.String
         ) : Value
     }
 }

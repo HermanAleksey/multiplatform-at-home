@@ -15,10 +15,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
 import com.justparokq.homeftp.shared.features.settings.data.DatabaseObject
-import com.justparokq.homeftp.shared.features.settings.domain.SettingModel
 import com.justparokq.homeftp.shared.features.settings.presentation.component.SettingsComponent
 import com.justparokq.homeftp.shared.features.settings.presentation.model.SettingsScreenModel
 import com.justparokq.homeftp.shared.utils.ContextFactoryComposition
+import com.justpoarokq.shared.core.base_database.model.SettingModel
 
 @Composable
 fun SettingsContent(component: SettingsComponent) {

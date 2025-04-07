@@ -4,6 +4,7 @@ import com.justpoarokq.shared.core.base_database.database.SettingDatabase
 import com.justpoarokq.shared.core.base_database.database.getSettingsDatabaseBuilder
 import com.justpoarokq.shared.core.base_database.database.getSettingsDatabase
 
+// im am DI...
 object DatabaseObject {
 
     private var db: SettingDatabase? = null
