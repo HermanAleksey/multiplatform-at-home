@@ -5,7 +5,8 @@ import androidx.room.RoomDatabase
 import java.io.File
 
 actual fun getSettingsDatabaseBuilder(context: Any?): RoomDatabase.Builder<SettingDatabase> {
-    val dbFile = File(System.getProperty("java.io.tmpdir"), "setting.db")
+    // todo how to reinstall app? Had to use setting_new after changing
+    val dbFile = File(System.getProperty("java.io.tmpdir"), "setting_new.db")
     return Room.databaseBuilder<SettingDatabase>(
         name = dbFile.absolutePath,
     )
