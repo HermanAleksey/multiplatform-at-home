@@ -30,7 +30,7 @@ fun SettingsContent(component: SettingsComponent) {
     val state = component.state.subscribeAsState()
     SettingsContentScreen(
         settingModel = state.value,
-        onSettingChanged = { component.onSettingChanged(it) }
+        onSettingChanged = { component.onSettingToggle(it) }
     )
 }
 
@@ -58,7 +58,7 @@ private fun SettingsContentScreen(
         }
 
         Text(
-            text = "This is where you'll receive notifications",
+            text = "Bla bla bla description! Feature toggles below",
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
             modifier = Modifier.padding(bottom = 16.dp)

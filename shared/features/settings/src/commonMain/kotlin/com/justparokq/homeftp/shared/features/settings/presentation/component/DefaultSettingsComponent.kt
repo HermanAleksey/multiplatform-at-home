@@ -24,7 +24,7 @@ class DefaultSettingsComponent(
     private val _state = MutableValue(SettingsScreenModel(emptyList()))
     override val state: Value<SettingsScreenModel> = _state
 
-    override fun onSettingChanged(settingModel: SettingModel) {
+    override fun onSettingToggle(settingModel: SettingModel) {
         coroutineScope.launch {
             settingsRepository?.updateSetting(settingModel.name, settingModel)
         }

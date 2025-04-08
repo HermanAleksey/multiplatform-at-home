@@ -8,7 +8,7 @@ interface SettingsComponent {
 
     val state: Value<SettingsScreenModel>
 
-    fun onSettingChanged(settingModel: SettingModel)
+    fun onSettingToggle(settingModel: SettingModel, )
 
     fun onResetClicked()
 

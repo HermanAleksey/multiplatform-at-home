@@ -8,7 +8,7 @@ object PreviewSettingsComponent : SettingsComponent {
     override val state: Value<SettingsScreenModel>
         get() = TODO("Not yet implemented")
 
-    override fun onSettingChanged(settingModel: SettingModel) {
+    override fun onSettingToggle(settingModel: SettingModel) {
     }
 
     override fun onResetClicked() {

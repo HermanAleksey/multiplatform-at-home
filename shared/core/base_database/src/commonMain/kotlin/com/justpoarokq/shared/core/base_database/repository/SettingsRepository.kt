@@ -66,6 +66,7 @@ internal class SettingsRepositoryImpl(
                 strDao.insert(mappedValue)
             }
         }
+        msf.emit(getCombinedData())
     }
 
     override suspend fun observeSettings(): Flow<List<SettingModel>> = mutex.withLock {
