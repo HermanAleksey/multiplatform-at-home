@@ -6,13 +6,12 @@ import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.popTo
 import com.arkivanov.decompose.value.Value
-import com.justparokq.homeftp.shared.navigation.feature.FeatureNavigator
 import com.justparokq.homeftp.shared.features.settings.presentation.component.DefaultSettingsComponent
 import com.justparokq.homeftp.shared.features.settings.presentation.component.SettingsComponent
-import com.justparokq.homeftp.shared.ftp.presentation.component.DefaultFtpExplorerComponent
-import com.justparokq.homeftp.shared.ftp.presentation.component.FtpExplorerComponent
+import com.justparokq.homeftp.shared.ftp.api.FtpExplorerComponent
 import com.justparokq.homeftp.shared.login.api.LoginComponent
 import com.justparokq.homeftp.shared.main.api.MainComponent
+import com.justparokq.homeftp.shared.navigation.feature.FeatureNavigator
 import com.justparokq.homeftp.shared.root.presentation.component.RootComponent.Child
 import com.justparokq.homeftp.shared.root.presentation.koinApp
 import com.justparokq.homeftp.shared.root.presentation.navigation.Config
@@ -62,9 +61,13 @@ class DefaultRootComponent(
     }
 
     private fun ftpComponent(componentContext: ComponentContext): FtpExplorerComponent {
-        return DefaultFtpExplorerComponent(
-            componentContext = componentContext,
-        )
+        val comp: FtpExplorerComponent by inject {
+            parametersOf(
+                componentContext,
+                featureNavigator
+            )
+        }
+        return comp
     }
 
     private fun settingsComponent(componentContext: ComponentContext): SettingsComponent {

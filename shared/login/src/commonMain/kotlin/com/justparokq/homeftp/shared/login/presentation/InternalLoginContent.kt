@@ -35,11 +35,11 @@ internal fun InternalLoginContent(component: LoginComponent) {
         Spacer(modifier = Modifier.fillMaxHeight(0.1f))
         LoginCard(
             usernameTextValue = activeState.usernameTextField,
-            updateUsername = { component.processAction(OnUsernameFieldUpdated(it)) },
+            updateUsername = { component.processIntent(OnUsernameFieldUpdated(it)) },
             passwordTextValue = activeState.passwordTextField,
-            updatePassword = { component.processAction(OnPasswordFieldUpdated(it)) },
+            updatePassword = { component.processIntent(OnPasswordFieldUpdated(it)) },
             isLoading = activeState.isLoading,
-            onLoginButtonClicked = { component.processAction(OnLoginButtonClick) },
+            onLoginButtonClicked = { component.processIntent(OnLoginButtonClick) },
             modifier = Modifier
                 .fillMaxWidth(0.8f)
                 .shadow(20.dp)

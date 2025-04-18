@@ -15,7 +15,7 @@ import com.arkivanov.decompose.extensions.compose.stack.animation.plus
 import com.arkivanov.decompose.extensions.compose.stack.animation.scale
 import com.arkivanov.decompose.extensions.compose.stack.animation.stackAnimation
 import com.justparokq.homeftp.shared.features.settings.presentation.SettingsContent
-import com.justparokq.homeftp.shared.ftp.presentation.FtpContent
+import com.justparokq.homeftp.shared.ftp.api.FtpContent
 import com.justparokq.homeftp.shared.login.api.LoginContent
 import com.justparokq.homeftp.shared.root.presentation.component.RootComponent
 import com.justparokq.homeftp.shared.utils.ContextFactory

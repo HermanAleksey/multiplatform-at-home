@@ -12,7 +12,7 @@ internal object PreviewMainComponent : MainComponent {
     override val state: Value<MainComponentState>
         get() = MutableValue(Default())
 
-    override fun processAction(intent: MainComponentIntent) {
+    override fun processIntent(intent: MainComponentIntent) {
 //        TODO("Not yet implemented")
     }
 }

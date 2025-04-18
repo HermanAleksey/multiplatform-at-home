@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.dp
 import com.justparokq.homeftp.theme.AppTheme
 
 @Composable
-fun CurrentPathLine(
+internal fun CurrentPathLine(
     path: List<String>,
     onPathPartClicked: (list: List<String>) -> Unit,
     onNavigateBackClicked: () -> Unit,
@@ -53,7 +53,7 @@ fun CurrentPathLine(
 }
 
 @Composable
-fun BackButton(onBackClicked: () -> Unit, modifier: Modifier = Modifier) {
+internal fun BackButton(onBackClicked: () -> Unit, modifier: Modifier = Modifier) {
     IconButton(
         onClick = { onBackClicked() },
         modifier = modifier.size(24.dp)
@@ -67,7 +67,7 @@ fun BackButton(onBackClicked: () -> Unit, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun PathElement(text: String, onItemClicked: (String) -> Unit) {
+internal fun PathElement(text: String, onItemClicked: (String) -> Unit) {
     Box(
         modifier = Modifier
             .border(

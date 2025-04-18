@@ -29,7 +29,7 @@ internal class DefaultLoginComponent(
     private val _state = MutableValue(Active())
     override val state: Value<LoginComponentState> = _state
 
-    override fun processAction(intent: LoginComponentIntent) {
+    override fun processIntent(intent: LoginComponentIntent) {
         when (intent) {
             OnLoginButtonClick -> onLoginButtonClick()
             is OnPasswordFieldUpdated -> onPasswordFieldUpdated(intent.newValue)

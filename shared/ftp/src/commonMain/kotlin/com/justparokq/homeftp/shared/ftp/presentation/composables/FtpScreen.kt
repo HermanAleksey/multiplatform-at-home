@@ -1,6 +1,5 @@
 package com.justparokq.homeftp.shared.ftp.presentation.composables
 
-import com.justparokq.homeftp.tooling.Preview
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -30,11 +29,14 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.justparokq.homeftp.shared.ftp.model.FileSystemObject
 import com.justparokq.homeftp.theme.AppTheme
+import com.justparokq.homeftp.tooling.Preview
 import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.coil3.CoilImage
 
+private const val FILES_IN_LINE_DEFAULT_NUMBER = 3
+
 @Composable
-fun FtpScreen(
+internal fun FtpScreen(
     path: List<String>,
     fsObjects: List<FileSystemObject>,
     onPathPartClicked: (List<String>) -> Unit,
@@ -58,10 +60,9 @@ fun FtpScreen(
     }
 }
 
-private const val FILES_IN_LINE_DEFAULT_NUMBER = 3
 
 @Composable
-fun GalleryView(
+internal fun GalleryView(
     fileSystemObjects: List<FileSystemObject>,
     onFSObjectClicked: (FileSystemObject) -> Unit,
     modifier: Modifier = Modifier,
@@ -105,7 +106,7 @@ fun GalleryView(
 }
 
 @Composable
-fun FileElement(
+internal fun FileElement(
     file: FileSystemObject,
     modifier: Modifier = Modifier,
 ) {

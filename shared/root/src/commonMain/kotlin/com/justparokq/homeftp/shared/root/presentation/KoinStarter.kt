@@ -1,5 +1,6 @@
 package com.justparokq.homeftp.shared.root.presentation
 
+import com.justparokq.homeftp.shared.ftp.api.ftpModule
 import com.justparokq.homeftp.shared.login.api.loginModule
 import com.justparokq.homeftp.shared.main.api.mainModule
 import org.koin.core.context.startKoin
@@ -18,6 +19,6 @@ val koinApp by lazy {
         // core modules
         modules()
         // feature modules
-        modules(loginModule, mainModule)
+        modules(loginModule, mainModule, ftpModule)
     }
 }

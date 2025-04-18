@@ -10,10 +10,10 @@ kotlin {
                 implementation(project(Modules.Model.Ftp))
                 implementation(project(Modules.Shared.Utils))
                 implementation(project(Modules.Shared.Core.UiKit))
+                implementation(project(Modules.Shared.Core.Navigation))
 
-                val coilVersion = "2.3.8"
-                implementation("com.github.skydoves:landscapist-coil3:$coilVersion")
-
+                implementation(Dependencies.Coil.Coil3)
+                implementation(Dependencies.Koin.Core)
                 // filePicker
                 implementation(Dependencies.FilePicker.Core)
             }

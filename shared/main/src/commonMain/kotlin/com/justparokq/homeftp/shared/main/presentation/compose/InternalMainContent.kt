@@ -35,7 +35,7 @@ internal fun InternalMainContent(
                     modifier = Modifier.fillMaxWidth()
                         .height(80.dp)
                         .background(Color.Cyan)
-                        .clickable { component.processAction(OnFeatureClicked(featureItem)) },
+                        .clickable { component.processIntent(OnFeatureClicked(featureItem)) },
                     contentAlignment = Alignment.Center,
                 ) {
                     Text(featureItem.name)

@@ -11,7 +11,7 @@ internal class PreviewLoginComponent : LoginComponent {
     override val state: Value<LoginComponentState>
         get() = MutableValue(Active())
 
-    override fun processAction(intent: LoginComponentIntent) {
+    override fun processIntent(intent: LoginComponentIntent) {
 //        TODO("Not yet implemented")
     }
 }

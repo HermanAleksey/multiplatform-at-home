@@ -115,6 +115,12 @@ object Dependencies {
         const val version = "2.1.20-1.0.32"
     }
 
+    object Coil {
+
+        private const val coilVersion = "2.3.8"
+        val Coil3 = "com.github.skydoves:landscapist-coil3:$coilVersion"
+    }
+
     object Koin {
         private const val version = "3.2.0"
 

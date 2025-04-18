@@ -17,6 +17,7 @@ sealed interface FileSystemObject {
         ) : FileSystemObject, File, Previewable {
 
             fun getFullUrl(): String {
+                // todo move url from local strings
                 return "http://$localhostUrl:8080/image?path=${remotePath}"
             }
         }
@@ -30,7 +31,7 @@ sealed interface FileSystemObject {
     }
 }
 
-interface Previewable {
+sealed interface Previewable {
 
     fun getPreviewUrl(url: String): String {
         return "$url&preview=true"

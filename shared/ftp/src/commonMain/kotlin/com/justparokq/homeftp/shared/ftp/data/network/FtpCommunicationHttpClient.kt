@@ -18,7 +18,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.serialization.json.Json
 
-interface FtpCommunicationHttpClient {
+internal interface FtpCommunicationHttpClient {
 
     fun getDirectoryContent(directoryUri: String): Flow<Result<List<FileResponse>>>
 }

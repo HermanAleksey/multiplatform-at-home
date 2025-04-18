@@ -6,7 +6,7 @@ interface BaseComponent<State : BaseComponentState, Intent : BaseComponentIntent
 
     val state: Value<State>
 
-    fun processAction(intent: Intent)
+    fun processIntent(intent: Intent)
 }
 
 interface BaseComponentState

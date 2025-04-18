@@ -1,6 +1,5 @@
 package com.justparokq.homeftp.shared.ftp.presentation
 
-import com.justparokq.homeftp.tooling.Preview
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,29 +16,23 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
-import com.justparokq.homeftp.shared.ftp.presentation.component.FtpExplorerComponent
-import com.justparokq.homeftp.shared.ftp.presentation.component.PreviewFtpExplorerComponent
+import com.justparokq.homeftp.shared.ftp.api.FtpExplorerComponent
+import com.justparokq.homeftp.shared.ftp.api.FtpExplorerScreenModel
+import com.justparokq.homeftp.shared.ftp.api.OnDirectoryClicked
+import com.justparokq.homeftp.shared.ftp.api.OnFileSystemObjectClicked
+import com.justparokq.homeftp.shared.ftp.api.OnNavigateBackClicked
 import com.justparokq.homeftp.shared.ftp.presentation.composables.FtpScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FtpContent(
+internal fun InternalFtpContent(
     component: FtpExplorerComponent,
-    modifier: Modifier = Modifier,
 ) {
-//    val launcher = rememberFilePickerLauncher(
-//        type = PickerType.ImageAndVideo,
-//        mode = PickerMode.Multiple(),
-//        title = "Pick a media",
-////        initialDirectory = "/custom/initial/path"
-//    ) { files ->
-//        files ?: return@rememberFilePickerLauncher
-//        component.onFilesPicked(files)
-//    }
+    val stateSubscription = component.state.subscribeAsState()
+    val state = stateSubscription.value as? FtpExplorerScreenModel ?: return
 
-    val state = component.state.subscribeAsState()
     Scaffold(
-        modifier = modifier
+        modifier = Modifier
             .fillMaxSize(),
         topBar = {
             TopAppBar(
@@ -47,7 +40,7 @@ fun FtpContent(
             )
         },
         floatingActionButton = {
-            FloatingActionButton(onClick = {/*todo*/ }) {
+            FloatingActionButton(onClick = { /*todo*/ }) {
                 Icon(
                     imageVector = Icons.Filled.Add,
                     contentDescription = "Select file to upload"
@@ -60,21 +53,15 @@ fun FtpContent(
                 .background(MaterialTheme.colorScheme.background)
         ) {
             FtpScreen(
-                path = state.value.currentPath,
-                fsObjects = state.value.fsObjects,
-                onPathPartClicked = { component.onDirectoryClicked(it) },
-                onFSObjectClicked = { component.onFileSystemObjectClicked(it) },
-                onNavigateBackClicked = { component.onNavigateBackClicked() }
+                path = state.currentPath,
+                fsObjects = state.fsObjects,
+                onPathPartClicked = { component.processIntent(OnDirectoryClicked(it)) },
+                onFSObjectClicked = { component.processIntent(OnFileSystemObjectClicked(it)) },
+                onNavigateBackClicked = { component.processIntent(OnNavigateBackClicked) }
             )
         }
-        if (state.value.isLoading) {
+        if (state.isLoading) {
             Text("Loading...")
         }
     }
-}
-
-@Preview
-@Composable
-fun MainPreview() {
-    FtpContent(PreviewFtpExplorerComponent)
 }

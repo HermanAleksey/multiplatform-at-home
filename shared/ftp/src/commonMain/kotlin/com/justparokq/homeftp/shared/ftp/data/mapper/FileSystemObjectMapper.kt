@@ -3,7 +3,7 @@ package com.justparokq.homeftp.shared.ftp.data.mapper
 import com.justparokq.homeftp.shared.ftp.FileResponse
 import com.justparokq.homeftp.shared.ftp.model.FileSystemObject
 
-interface FileSystemObjectMapper {
+internal interface FileSystemObjectMapper {
 
     fun toFileSystemObject(response: FileResponse): FileSystemObject
 }

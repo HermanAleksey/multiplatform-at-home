@@ -35,7 +35,7 @@ internal class DefaultMainComponent(
         onInitialize()
     }
 
-    override fun processAction(intent: MainComponentIntent) {
+    override fun processIntent(intent: MainComponentIntent) {
         when (intent) {
             Init -> onInitialize()
             is OnFeatureClicked -> onFeatureClicked(intent.feature)
