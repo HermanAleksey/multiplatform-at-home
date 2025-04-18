@@ -5,6 +5,8 @@ import com.arkivanov.decompose.value.MutableValue
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.decompose.value.update
 import com.justparokq.homeftp.shared.common.Result
+import com.justparokq.homeftp.shared.navigation.feature.FeatureNavigator
+import com.justparokq.homeftp.shared.navigation.feature.ProjectFeature
 import com.justparokq.homeftp.shared.login.LoginRequest
 import com.justparokq.homeftp.shared.login.model.LoginScreenModel
 import com.justparokq.homeftp.shared.login.network.LoginNetworkComponent
@@ -13,8 +15,8 @@ import kotlinx.coroutines.launch
 
 class DefaultLoginComponent(
     private val componentContext: ComponentContext,
-    private val loginNetworkComponent: LoginNetworkComponent = LoginNetworkComponent(),
-    private val navigateToMainPage: () -> Unit,
+    private val loginNetworkComponent: LoginNetworkComponent,
+    private val featureNavigator: FeatureNavigator,
 ) : LoginComponent, ComponentContext by componentContext {
 
     private val coroutineScope = componentCoroutineScope()
@@ -53,7 +55,7 @@ class DefaultLoginComponent(
 
                         is Result.Success -> {
                             // navigate to next screen
-                            navigateToMainPage()
+                            featureNavigator.navigate(ProjectFeature.MAIN)
                         }
                     }
                 }

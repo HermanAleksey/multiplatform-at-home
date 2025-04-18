@@ -13,6 +13,7 @@ object Modules {
 
             const val UiKit = ":shared:core:ui_kit"
             const val BaseDatabase = ":shared:core:base_database"
+            const val Navigation = ":shared:core:navigation"
         }
 
         object Features {
@@ -22,7 +23,6 @@ object Modules {
 
         // todo move to core\feature folders
         const val Root = ":shared:root"
-        const val Feature = ":shared:feature"
         const val Ftp = ":shared:ftp"
         const val Login = ":shared:login"
         const val Main = ":shared:main"

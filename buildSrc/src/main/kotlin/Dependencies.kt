@@ -114,4 +114,12 @@ object Dependencies {
 
         const val version = "2.1.20-1.0.32"
     }
+
+    object Koin {
+        private const val version = "3.2.0"
+
+        const val Core = "io.insert-koin:koin-core:${version}"
+        const val Test = "io.insert-koin:koin-test:${version}"
+        const val Android = "io.insert-koin:koin-android:${version}"
+    }
 }

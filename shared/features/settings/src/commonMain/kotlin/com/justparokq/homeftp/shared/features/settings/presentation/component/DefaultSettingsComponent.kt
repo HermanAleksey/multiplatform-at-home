@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 class DefaultSettingsComponent(
-    private val serviceLocator: DatabaseServiceLocator = DatabaseServiceLocator,
+    private val serviceLocator: DatabaseServiceLocator,
     componentContext: ComponentContext,
 ) : SettingsComponent, ComponentContext by componentContext {
 

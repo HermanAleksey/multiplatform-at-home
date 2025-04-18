@@ -8,7 +8,8 @@ kotlin {
             dependencies {
                 implementation(project(Modules.Model.Common))
                 implementation(project(Modules.Shared.Utils))
-                implementation(project(Modules.Shared.Feature))
+                implementation(project(Modules.Shared.Core.Navigation))
+                implementation(Dependencies.Koin.Core)
             }
         }
     }

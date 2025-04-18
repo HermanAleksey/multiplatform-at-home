@@ -1,5 +1,5 @@
 plugins {
-    id("compose-multiplatform-build")
+    id("shared-build")
     id("androidx.room") version Dependencies.Room.version
     id("com.google.devtools.ksp") version Dependencies.Ksp.version
     // for desktop database
@@ -13,6 +13,8 @@ kotlin {
                 implementation(Dependencies.Room.Runtime)
                 implementation(Dependencies.Sqlite.Bundled)
 
+                // di
+                implementation(Dependencies.Koin.Core)
             }
         }
     }

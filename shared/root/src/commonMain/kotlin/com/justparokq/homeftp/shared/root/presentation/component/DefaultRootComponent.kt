@@ -5,28 +5,33 @@ import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.popTo
-import com.arkivanov.decompose.router.stack.push
-import com.arkivanov.decompose.router.stack.replaceCurrent
 import com.arkivanov.decompose.value.Value
-import com.justparokq.homeftp.shared.feature.FeatureNavigator
-import com.justparokq.homeftp.shared.feature.ProjectFeature
+import com.justparokq.homeftp.shared.navigation.feature.FeatureNavigator
 import com.justparokq.homeftp.shared.features.settings.presentation.component.DefaultSettingsComponent
 import com.justparokq.homeftp.shared.features.settings.presentation.component.SettingsComponent
 import com.justparokq.homeftp.shared.ftp.presentation.component.DefaultFtpExplorerComponent
 import com.justparokq.homeftp.shared.ftp.presentation.component.FtpExplorerComponent
-import com.justparokq.homeftp.shared.login.presentation.component.DefaultLoginComponent
 import com.justparokq.homeftp.shared.login.presentation.component.LoginComponent
-import com.justparokq.homeftp.shared.main.presentation.component.DefaultMainComponent
-import com.justparokq.homeftp.shared.main.presentation.component.MainComponent
+import com.justparokq.homeftp.shared.main.api.MainComponent
 import com.justparokq.homeftp.shared.root.presentation.component.RootComponent.Child
-import kotlinx.serialization.Serializable
+import com.justparokq.homeftp.shared.root.presentation.koinApp
+import com.justparokq.homeftp.shared.root.presentation.navigation.Config
+import com.justparokq.homeftp.shared.root.presentation.navigation.FeatureNavigatorImpl
+import com.justpoarokq.shared.core.base_database.repository.DatabaseServiceLocator
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
+import org.koin.core.parameter.parametersOf
 
 class DefaultRootComponent(
     componentContext: ComponentContext,
-) : RootComponent, ComponentContext by componentContext {
+) : RootComponent, ComponentContext by componentContext, KoinComponent {
 
-    private val featureNavigator: FeatureNavigator = FeatureNavigatorImpl()
     private val navigation = StackNavigation<Config>()
+    private val featureNavigator: FeatureNavigator = FeatureNavigatorImpl(navigation)
+
+    init {
+        koinApp
+    }
 
     override val stack: Value<ChildStack<*, Child>> =
         childStack(
@@ -37,71 +42,42 @@ class DefaultRootComponent(
             childFactory = ::child,
         )
 
-    private fun child(config: Config, childComponentContext: ComponentContext): Child =
-        when (config) {
+    private fun child(config: Config, childComponentContext: ComponentContext): Child {
+        return when (config) {
             is Config.Login -> Child.Login(loginComponent(childComponentContext))
             is Config.Main -> Child.Main(mainComponent(childComponentContext))
             is Config.Ftp -> Child.Ftp(ftpComponent(childComponentContext))
             is Config.Settings -> Child.Settings(settingsComponent(childComponentContext))
         }
+    }
 
-    private fun loginComponent(componentContext: ComponentContext): LoginComponent =
-        DefaultLoginComponent(
+    private fun loginComponent(componentContext: ComponentContext): LoginComponent {
+        val comp: LoginComponent by inject { parametersOf(componentContext, featureNavigator) }
+        return comp
+    }
+
+    private fun mainComponent(componentContext: ComponentContext): MainComponent {
+        val comp: MainComponent by inject { parametersOf(componentContext, featureNavigator) }
+        return comp
+    }
+
+    private fun ftpComponent(componentContext: ComponentContext): FtpExplorerComponent {
+        return DefaultFtpExplorerComponent(
             componentContext = componentContext,
-                navigateToMainPage = { navigation.replaceCurrent(Config.Main) },
-//            loginNetworkComponent = loginNetworkComponent
         )
+    }
 
-    private fun mainComponent(componentContext: ComponentContext): MainComponent =
-        DefaultMainComponent(
-            componentContext = componentContext,
-            featureNavigator = featureNavigator,
+    private fun settingsComponent(componentContext: ComponentContext): SettingsComponent {
+//        val component = koinApp.koin.get<DefaultSettingsComponent> {
+//            parametersOf(componentContext)
+//        }
+        return DefaultSettingsComponent(
+            serviceLocator = DatabaseServiceLocator,
+            componentContext = componentContext
         )
-
-    private fun ftpComponent(componentContext: ComponentContext): FtpExplorerComponent =
-        DefaultFtpExplorerComponent(
-            componentContext = componentContext,
-//            onShowWelcome = { navigation.push(Config.Login) },
-        )
-
-    private fun settingsComponent(componentContext: ComponentContext): SettingsComponent =
-        DefaultSettingsComponent(
-            componentContext = componentContext,
-//            onShowWelcome = { navigation.push(Config.Login) },
-        )
-
-    // todo create enum of Features. Method `fun navigateTo(feature: FeatureEnum)` that we can provide
-    // into features
+    }
 
     override fun onBackClicked(toIndex: Int) {
         navigation.popTo(index = toIndex)
-    }
-
-    inner class FeatureNavigatorImpl : FeatureNavigator {
-
-        override fun navigate(feature: ProjectFeature) {
-            when (feature) {
-                ProjectFeature.LOGIN -> navigation.push(Config.Login)
-                ProjectFeature.MAIN -> navigation.push(Config.Main)
-                ProjectFeature.FTP -> navigation.push(Config.Ftp)
-                ProjectFeature.SETTINGS -> navigation.push(Config.Settings)
-            }
-        }
-    }
-
-    @Serializable
-    private sealed interface Config {
-
-        @Serializable
-        data object Login : Config
-
-        @Serializable
-        data object Main : Config
-
-        @Serializable
-        data object Ftp : Config
-
-        @Serializable
-        data object Settings : Config
     }
 }

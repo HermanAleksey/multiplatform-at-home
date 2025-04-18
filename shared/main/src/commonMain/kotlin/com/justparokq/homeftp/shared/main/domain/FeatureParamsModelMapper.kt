@@ -2,9 +2,9 @@ package com.justparokq.homeftp.shared.main.domain
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
-import com.justparokq.homeftp.shared.feature.ProjectFeature
+import com.justparokq.homeftp.shared.navigation.feature.ProjectFeature
 
-class FeatureParamsModelMapper {
+internal class FeatureParamsModelMapper {
 
     fun map(featureToggle: FeatureToggle): FeatureParamsModel {
         return when (featureToggle.name) {

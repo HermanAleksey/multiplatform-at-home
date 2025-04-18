@@ -50,4 +50,7 @@ dependencies {
     // file picker
     implementation(Dependencies.FilePicker.Core)
     implementation(Dependencies.FilePicker.Compose)
+
+    // di
+    implementation(Dependencies.Koin.Core)
 }
