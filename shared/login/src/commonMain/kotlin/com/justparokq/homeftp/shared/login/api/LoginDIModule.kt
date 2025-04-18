@@ -1,8 +1,7 @@
-package com.justparokq.homeftp.shared.login.presentation.di
+package com.justparokq.homeftp.shared.login.api
 
 import com.justparokq.homeftp.shared.login.network.LoginNetworkComponent
 import com.justparokq.homeftp.shared.login.presentation.component.DefaultLoginComponent
-import com.justparokq.homeftp.shared.login.presentation.component.LoginComponent
 import org.koin.dsl.bind
 import org.koin.dsl.module
 

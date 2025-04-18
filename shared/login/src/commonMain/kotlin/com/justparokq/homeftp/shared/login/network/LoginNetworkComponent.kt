@@ -19,7 +19,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.serialization.json.Json
 
-class LoginNetworkComponent {
+internal class LoginNetworkComponent {
 
     private val httpClient = HttpClient {
         install(ContentNegotiation) {

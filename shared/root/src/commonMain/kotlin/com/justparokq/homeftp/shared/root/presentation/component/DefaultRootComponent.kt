@@ -11,7 +11,7 @@ import com.justparokq.homeftp.shared.features.settings.presentation.component.De
 import com.justparokq.homeftp.shared.features.settings.presentation.component.SettingsComponent
 import com.justparokq.homeftp.shared.ftp.presentation.component.DefaultFtpExplorerComponent
 import com.justparokq.homeftp.shared.ftp.presentation.component.FtpExplorerComponent
-import com.justparokq.homeftp.shared.login.presentation.component.LoginComponent
+import com.justparokq.homeftp.shared.login.api.LoginComponent
 import com.justparokq.homeftp.shared.main.api.MainComponent
 import com.justparokq.homeftp.shared.root.presentation.component.RootComponent.Child
 import com.justparokq.homeftp.shared.root.presentation.koinApp

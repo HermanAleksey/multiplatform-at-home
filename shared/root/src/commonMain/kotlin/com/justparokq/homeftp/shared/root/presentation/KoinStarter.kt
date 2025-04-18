@@ -1,6 +1,6 @@
 package com.justparokq.homeftp.shared.root.presentation
 
-import com.justparokq.homeftp.shared.login.presentation.di.loginModule
+import com.justparokq.homeftp.shared.login.api.loginModule
 import com.justparokq.homeftp.shared.main.api.mainModule
 import org.koin.core.context.startKoin
 import org.koin.core.logger.Level

@@ -28,30 +28,6 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 
-interface TextInputContract {
-    val value: String
-    val onValueChanged: (newValue: String) -> Unit
-    val label: String
-    val isEnabled: Boolean
-    val isError: Boolean
-    val errorText: String?
-}
-
-class PresetTextInputContract(
-    override val value: String,
-    override val label: String,
-    override val onValueChanged: (String) -> Unit,
-    override val isEnabled: Boolean = true,
-    override val isError: Boolean = false,
-    override val errorText: String? = null,
-
-    focusRequester: FocusRequester? = null,
-    imeAction: ImeAction = ImeAction.Done,
-    keyboardType: KeyboardType = KeyboardType.Text,
-    testTag: String = "",
-    onKeyboardActions: () -> Unit,
-) : TextInputContract
-
 @Composable
 internal fun LoginInputField(
     value: String,

@@ -2,14 +2,16 @@ package com.justparokq.homeftp.shared.login.presentation.component
 
 import com.arkivanov.decompose.value.MutableValue
 import com.arkivanov.decompose.value.Value
-import com.justparokq.homeftp.shared.login.model.LoginScreenModel
+import com.justparokq.homeftp.shared.login.api.Active
+import com.justparokq.homeftp.shared.login.api.LoginComponent
+import com.justparokq.homeftp.shared.login.api.LoginComponentIntent
+import com.justparokq.homeftp.shared.login.api.LoginComponentState
 
-object PreviewLoginComponent : LoginComponent {
-    override val state: Value<LoginScreenModel> = MutableValue(LoginScreenModel())
+internal class PreviewLoginComponent : LoginComponent {
+    override val state: Value<LoginComponentState>
+        get() = MutableValue(Active())
 
-    override fun onUsernameFieldUpdated(newValue: String) = Unit
-
-    override fun onPasswordFieldUpdated(newValue: String) = Unit
-
-    override fun onLoginButtonClick() = Unit
+    override fun processAction(intent: LoginComponentIntent) {
+//        TODO("Not yet implemented")
+    }
 }

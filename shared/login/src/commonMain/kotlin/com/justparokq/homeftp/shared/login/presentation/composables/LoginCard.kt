@@ -21,7 +21,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun LoginCard(
+internal fun LoginCard(
     usernameTextValue: String,
     updateUsername: (String) -> Unit,
     passwordTextValue: String,

@@ -1,6 +1,5 @@
 package com.justparokq.homeftp.shared.login.presentation
 
-import com.justparokq.homeftp.tooling.Preview
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.defaultMinSize
@@ -14,26 +13,33 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.unit.dp
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
-import com.justparokq.homeftp.shared.login.presentation.component.LoginComponent
+import com.justparokq.homeftp.shared.login.api.Active
+import com.justparokq.homeftp.shared.login.api.LoginComponent
+import com.justparokq.homeftp.shared.login.api.OnLoginButtonClick
+import com.justparokq.homeftp.shared.login.api.OnPasswordFieldUpdated
+import com.justparokq.homeftp.shared.login.api.OnUsernameFieldUpdated
 import com.justparokq.homeftp.shared.login.presentation.component.PreviewLoginComponent
 import com.justparokq.homeftp.shared.login.presentation.composables.LoginCard
 import com.justparokq.homeftp.theme.AppTheme
+import com.justparokq.homeftp.tooling.Preview
 
 @Composable
-fun LoginContent(component: LoginComponent) {
+internal fun InternalLoginContent(component: LoginComponent) {
     val state by component.state.subscribeAsState()
+    val activeState = if (state is Active) state as Active else return
+
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Spacer(modifier = Modifier.fillMaxHeight(0.1f))
         LoginCard(
-            usernameTextValue = state.usernameTextField,
-            updateUsername = { component.onUsernameFieldUpdated(it) },
-            passwordTextValue = state.passwordTextField,
-            updatePassword = { component.onPasswordFieldUpdated(it) },
-            isLoading = state.isLoading,
-            onLoginButtonClicked = { component.onLoginButtonClick() },
+            usernameTextValue = activeState.usernameTextField,
+            updateUsername = { component.processAction(OnUsernameFieldUpdated(it)) },
+            passwordTextValue = activeState.passwordTextField,
+            updatePassword = { component.processAction(OnPasswordFieldUpdated(it)) },
+            isLoading = activeState.isLoading,
+            onLoginButtonClicked = { component.processAction(OnLoginButtonClick) },
             modifier = Modifier
                 .fillMaxWidth(0.8f)
                 .shadow(20.dp)
@@ -46,7 +52,7 @@ fun LoginContent(component: LoginComponent) {
 @Composable
 fun LoginContentPreviewLight() {
     AppTheme(darkTheme = true) {
-        LoginContent(PreviewLoginComponent)
+        InternalLoginContent(PreviewLoginComponent())
     }
 }
 
@@ -54,6 +60,6 @@ fun LoginContentPreviewLight() {
 @Composable
 fun LoginContentPreviewDark() {
     AppTheme(darkTheme = false) {
-        LoginContent(PreviewLoginComponent)
+        InternalLoginContent(PreviewLoginComponent())
     }
 }
