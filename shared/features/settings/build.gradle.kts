@@ -11,8 +11,10 @@ kotlin {
                 implementation(project(Modules.Shared.Utils))
                 implementation(project(Modules.Shared.Core.UiKit))
                 implementation(project(Modules.Shared.Core.BaseDatabase))
+                implementation(project(Modules.Shared.Core.Navigation))
 
                 implementation(Dependencies.Room.Runtime)
+                implementation(Dependencies.Koin.Core)
             }
         }
     }

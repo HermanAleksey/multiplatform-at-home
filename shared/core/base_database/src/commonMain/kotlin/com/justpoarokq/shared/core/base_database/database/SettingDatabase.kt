@@ -14,7 +14,7 @@ import com.justpoarokq.shared.core.base_database.entity.StringSettingEntity
 @Database(entities = [BooleanSettingEntity::class, StringSettingEntity::class], version = 1)
 @TypeConverters(CategoryTypeConverter::class)
 @ConstructedBy(AppDatabaseConstructor::class)
-abstract class SettingDatabase : RoomDatabase() {
+internal abstract class SettingDatabase : RoomDatabase() {
 
     abstract fun booleanSettingDao(): BooleanSettingDao
     abstract fun stringSettingDao(): StringSettingDao
@@ -22,6 +22,6 @@ abstract class SettingDatabase : RoomDatabase() {
 
 // The Room compiler generates the `actual` implementations.
 @Suppress("NO_ACTUAL_FOR_EXPECT")
-expect object AppDatabaseConstructor : RoomDatabaseConstructor<SettingDatabase> {
+internal expect object AppDatabaseConstructor : RoomDatabaseConstructor<SettingDatabase> {
     override fun initialize(): SettingDatabase
 }

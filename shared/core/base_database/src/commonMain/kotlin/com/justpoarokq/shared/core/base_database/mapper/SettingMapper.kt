@@ -3,7 +3,7 @@ package com.justpoarokq.shared.core.base_database.mapper
 import com.justpoarokq.shared.core.base_database.entity.BooleanSettingEntity
 import com.justpoarokq.shared.core.base_database.entity.SettingCategory
 import com.justpoarokq.shared.core.base_database.entity.StringSettingEntity
-import com.justpoarokq.shared.core.base_database.model.SettingModel
+import com.justpoarokq.shared.core.base_database.api.SettingModel
 
 internal class SettingMapper {
 

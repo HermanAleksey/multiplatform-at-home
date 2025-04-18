@@ -1,6 +1,6 @@
 package com.justpoarokq.shared.core.base_database.entity
 
-enum class SettingCategory {
+internal enum class SettingCategory {
 
     Feature, Network;
 

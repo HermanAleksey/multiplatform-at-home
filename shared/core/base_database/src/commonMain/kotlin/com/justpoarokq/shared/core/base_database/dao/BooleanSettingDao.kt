@@ -7,7 +7,7 @@ import androidx.room.Upsert
 import com.justpoarokq.shared.core.base_database.entity.BooleanSettingEntity
 
 @Dao
-interface BooleanSettingDao {
+internal interface BooleanSettingDao {
 
     @Upsert
     suspend fun insert(setting: BooleanSettingEntity): Long

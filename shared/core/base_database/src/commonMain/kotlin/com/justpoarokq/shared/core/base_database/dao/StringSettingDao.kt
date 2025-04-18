@@ -7,7 +7,7 @@ import androidx.room.Upsert
 import com.justpoarokq.shared.core.base_database.entity.StringSettingEntity
 
 @Dao
-interface StringSettingDao {
+internal interface StringSettingDao {
 
     @Upsert
     suspend fun insert(setting: StringSettingEntity): Long

@@ -3,9 +3,8 @@ package com.justpoarokq.shared.core.base_database.entity
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-// todo replace strings with enum :)
 @Entity
-data class BooleanSettingEntity(
+internal data class BooleanSettingEntity(
     @PrimaryKey
     val name: String,
     val description: String,

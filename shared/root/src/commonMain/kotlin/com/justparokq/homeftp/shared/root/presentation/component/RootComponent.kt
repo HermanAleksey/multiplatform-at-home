@@ -2,7 +2,7 @@ package com.justparokq.homeftp.shared.root.presentation.component
 
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.value.Value
-import com.justparokq.homeftp.shared.features.settings.presentation.component.SettingsComponent
+import com.justparokq.homeftp.shared.features.settings.api.SettingsComponent
 import com.justparokq.homeftp.shared.ftp.api.FtpExplorerComponent
 import com.justparokq.homeftp.shared.login.api.LoginComponent
 import com.justparokq.homeftp.shared.main.api.MainComponent

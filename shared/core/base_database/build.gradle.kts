@@ -15,6 +15,8 @@ kotlin {
 
                 // di
                 implementation(Dependencies.Koin.Core)
+
+                implementation(project(Modules.Shared.Utils))
             }
         }
     }

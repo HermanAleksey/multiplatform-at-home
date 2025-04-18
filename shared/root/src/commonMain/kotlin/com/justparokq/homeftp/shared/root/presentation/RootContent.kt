@@ -8,18 +8,22 @@ import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.extensions.compose.stack.Children
 import com.arkivanov.decompose.extensions.compose.stack.animation.fade
 import com.arkivanov.decompose.extensions.compose.stack.animation.plus
 import com.arkivanov.decompose.extensions.compose.stack.animation.scale
 import com.arkivanov.decompose.extensions.compose.stack.animation.stackAnimation
-import com.justparokq.homeftp.shared.features.settings.presentation.SettingsContent
+import com.justparokq.homeftp.shared.features.settings.api.SettingsContent
 import com.justparokq.homeftp.shared.ftp.api.FtpContent
 import com.justparokq.homeftp.shared.login.api.LoginContent
 import com.justparokq.homeftp.shared.root.presentation.component.RootComponent
 import com.justparokq.homeftp.shared.utils.ContextFactory
 import com.justparokq.homeftp.shared.utils.ContextFactoryComposition
+import org.koin.core.context.loadKoinModules
+import org.koin.core.qualifier.named
+import org.koin.dsl.module
 
 @Composable
 fun RootContent(
@@ -30,6 +34,14 @@ fun RootContent(
     CompositionLocalProvider(
         ContextFactoryComposition provides contextFactory
     ) {
+        LaunchedEffect(Unit) {
+            val utilityModule = module {
+                single<ContextFactory> { contextFactory }
+                factory<Any?>(named("Context")) { contextFactory.getContext() }
+                factory<Any?>(named("Application")) { contextFactory.getApplication() }
+            }
+            loadKoinModules(utilityModule)
+        }
         Surface(modifier = modifier.fillMaxSize().windowInsetsPadding(WindowInsets.systemBars)) {
             Children(
                 stack = component.stack,

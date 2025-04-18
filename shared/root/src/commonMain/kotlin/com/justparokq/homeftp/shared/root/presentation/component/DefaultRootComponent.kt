@@ -6,17 +6,15 @@ import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.popTo
 import com.arkivanov.decompose.value.Value
-import com.justparokq.homeftp.shared.features.settings.presentation.component.DefaultSettingsComponent
-import com.justparokq.homeftp.shared.features.settings.presentation.component.SettingsComponent
+import com.justparokq.homeftp.shared.features.settings.api.SettingsComponent
 import com.justparokq.homeftp.shared.ftp.api.FtpExplorerComponent
 import com.justparokq.homeftp.shared.login.api.LoginComponent
 import com.justparokq.homeftp.shared.main.api.MainComponent
 import com.justparokq.homeftp.shared.navigation.feature.FeatureNavigator
 import com.justparokq.homeftp.shared.root.presentation.component.RootComponent.Child
-import com.justparokq.homeftp.shared.root.presentation.koinApp
+import com.justparokq.homeftp.shared.root.presentation.startKoin
 import com.justparokq.homeftp.shared.root.presentation.navigation.Config
 import com.justparokq.homeftp.shared.root.presentation.navigation.FeatureNavigatorImpl
-import com.justpoarokq.shared.core.base_database.repository.DatabaseServiceLocator
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.koin.core.parameter.parametersOf
@@ -29,7 +27,7 @@ class DefaultRootComponent(
     private val featureNavigator: FeatureNavigator = FeatureNavigatorImpl(navigation)
 
     init {
-        koinApp
+        startKoin
     }
 
     override val stack: Value<ChildStack<*, Child>> =
@@ -71,13 +69,8 @@ class DefaultRootComponent(
     }
 
     private fun settingsComponent(componentContext: ComponentContext): SettingsComponent {
-//        val component = koinApp.koin.get<DefaultSettingsComponent> {
-//            parametersOf(componentContext)
-//        }
-        return DefaultSettingsComponent(
-            serviceLocator = DatabaseServiceLocator,
-            componentContext = componentContext
-        )
+        val comp: SettingsComponent by inject { parametersOf(componentContext, featureNavigator) }
+        return comp
     }
 
     override fun onBackClicked(toIndex: Int) {

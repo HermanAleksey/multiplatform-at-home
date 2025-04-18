@@ -3,7 +3,7 @@ package com.justpoarokq.shared.core.base_database.converter
 import androidx.room.TypeConverter
 import com.justpoarokq.shared.core.base_database.entity.SettingCategory
 
-class CategoryTypeConverter {
+internal class CategoryTypeConverter {
 
     @TypeConverter
     fun fromString(value: String?): SettingCategory? {

@@ -6,9 +6,9 @@ import androidx.sqlite.driver.bundled.BundledSQLiteDriver
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 
-expect fun getSettingsDatabaseBuilder(context: Any?): RoomDatabase.Builder<SettingDatabase>
+internal expect fun getSettingsDatabaseBuilder(context: Any?): RoomDatabase.Builder<SettingDatabase>
 
-fun getSettingsDatabase(
+internal fun getSettingsDatabase(
     builder: RoomDatabase.Builder<SettingDatabase>
 ): SettingDatabase {
     return builder

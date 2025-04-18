@@ -1,4 +1,4 @@
-package com.justpoarokq.shared.core.base_database.model
+package com.justpoarokq.shared.core.base_database.api
 
 data class SettingModel(
     val name: String,
