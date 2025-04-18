@@ -8,7 +8,6 @@ fun MainContent(
     component: MainComponent,
 ) {
     InternalMainContent(
-        state = component.state.subscribeAsState(),
-        intentProcessor = { intent -> component.processAction(intent) }
+        component = component,
     )
 }
