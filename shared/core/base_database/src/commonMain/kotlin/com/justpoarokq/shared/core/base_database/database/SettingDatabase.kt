@@ -21,7 +21,7 @@ internal abstract class SettingDatabase : RoomDatabase() {
 }
 
 // The Room compiler generates the `actual` implementations.
-@Suppress("NO_ACTUAL_FOR_EXPECT")
+@Suppress("NO_ACTUAL_FOR_EXPECT", "EXPECT_ACTUAL_CLASSIFIERS_ARE_IN_BETA_WARNING")
 internal expect object AppDatabaseConstructor : RoomDatabaseConstructor<SettingDatabase> {
     override fun initialize(): SettingDatabase
 }

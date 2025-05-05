@@ -53,7 +53,6 @@ internal class SettingMapper {
         return when (this) {
             SettingCategory.Network -> SettingModel.Category.Network
             SettingCategory.Feature -> SettingModel.Category.Feature
-            else -> throw IllegalArgumentException("Unknown category: $this")
         }
     }
 
