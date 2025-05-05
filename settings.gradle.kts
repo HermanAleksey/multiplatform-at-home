@@ -30,9 +30,11 @@ include(":shared:login")
 include(":shared:main")
 include(":shared:root")
 include(":shared:utils")
+
 include(":shared:core:navigation")
 include(":shared:core:ui_kit")
 include(":shared:core:base_database")
+include(":shared:core:network")
 include(":shared:features:settings")
 
 include(":app-android")

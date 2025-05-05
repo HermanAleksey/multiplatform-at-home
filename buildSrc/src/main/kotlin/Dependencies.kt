@@ -46,6 +46,7 @@ object Dependencies {
         private const val version = "1.8.1"
 
         val Core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version"
+        val Android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version"
     }
 
     object Ktor {

@@ -6,30 +6,19 @@ import com.justparokq.homeftp.shared.login.LoginResponse
 import com.justparokq.homeftp.shared.utils.localhostUrl
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
-import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.request
 import io.ktor.client.request.setBody
 import io.ktor.http.ContentType
 import io.ktor.http.HttpMethod
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.contentType
-import io.ktor.serialization.kotlinx.json.json
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.serialization.json.Json
 
-internal class LoginNetworkComponent {
-
-    private val httpClient = HttpClient {
-        install(ContentNegotiation) {
-            json(Json {
-                prettyPrint = true
-                isLenient = true
-                ignoreUnknownKeys = true
-            })
-        }
-    }
+internal class LoginNetworkComponent(
+    private val httpClient: HttpClient
+) {
 
     fun sendLoginRequest(
         loginRequest: LoginRequest,
@@ -40,6 +29,7 @@ internal class LoginNetworkComponent {
             delay(1000)
             if (true /*isDebug*/) {
                 emit(Result.Success(LoginResponse("tokeee")))
+                emit(Result.Loading(false))
                 return@flow
             }
             try {

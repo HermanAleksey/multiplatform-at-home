@@ -14,6 +14,7 @@ object Modules {
             const val UiKit = ":shared:core:ui_kit"
             const val BaseDatabase = ":shared:core:base_database"
             const val Navigation = ":shared:core:navigation"
+            const val Network = ":shared:core:network"
         }
 
         object Features {

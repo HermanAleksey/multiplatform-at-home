@@ -62,7 +62,7 @@ kotlin {
 
                 androidMain.dependencies {
                     implementation(Dependencies.Ktor.ClientAndroid)
-                    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
+                    implementation(Dependencies.Coroutines.Android)
                 }
                 iosMain.dependencies {
                     implementation(Dependencies.Ktor.ClientDarwin)
