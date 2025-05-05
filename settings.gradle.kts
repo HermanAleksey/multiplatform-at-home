@@ -25,17 +25,18 @@ include(":models:ftp")
 include(":models:login")
 include(":models:common")
 
-include(":shared:ftp")
-include(":shared:login")
-include(":shared:main")
-include(":shared:root")
-include(":shared:utils")
 
+include(":shared:core:utils")
 include(":shared:core:navigation")
 include(":shared:core:ui_kit")
 include(":shared:core:base_database")
 include(":shared:core:network")
+
 include(":shared:features:settings")
+include(":shared:features:ftp")
+include(":shared:features:main")
+include(":shared:features:root")
+include(":shared:features:login")
 
 include(":app-android")
 include(":app-desktop")

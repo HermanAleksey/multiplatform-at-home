@@ -25,8 +25,8 @@ kotlin {
         val jvmMain by getting {
             dependencies {
                 implementation(project(Modules.Shared.Core.UiKit))
-                implementation(project(Modules.Shared.Root))
-                implementation(project(Modules.Shared.Utils))
+                implementation(project(Modules.Shared.Features.Root))
+                implementation(project(Modules.Shared.Core.Utils))
 
                 implementation(compose.desktop.currentOs)
                 implementation(Dependencies.Decompose.DecomposeExtension)

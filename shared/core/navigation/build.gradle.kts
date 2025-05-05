@@ -13,5 +13,5 @@ kotlin {
 }
 
 android {
-    namespace = "com.justparokq.homefpt.shared.feature"
+    namespace = "com.justparokq.homefpt.shared.core.feature"
 }

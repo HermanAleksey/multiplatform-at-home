@@ -6,20 +6,20 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                implementation(project(Modules.Model.Login))
                 implementation(project(Modules.Model.Common))
-                implementation(project(Modules.Model.Ftp))
-                implementation(project(Modules.Shared.Core.Utils))
                 implementation(project(Modules.Shared.Core.UiKit))
-                implementation(project(Modules.Shared.Core.BaseDatabase))
                 implementation(project(Modules.Shared.Core.Navigation))
-
-                implementation(Dependencies.Room.Runtime)
+                implementation(project(Modules.Shared.Core.Network))
+                implementation(project(Modules.Shared.Core.Utils))
                 implementation(Dependencies.Koin.Core)
+
+                implementation(project(":shared:core:network"))
             }
         }
     }
 }
 
 android {
-    namespace = "com.justparokq.homefpt.shared.features.settings"
+    namespace = "com.justparokq.homefpt.shared.features.login"
 }

@@ -10,16 +10,17 @@ kotlin {
                 implementation(project(Modules.Model.Ftp))
                 implementation(project(Modules.Shared.Core.Utils))
                 implementation(project(Modules.Shared.Core.UiKit))
-                implementation(project(Modules.Shared.Core.BaseDatabase))
                 implementation(project(Modules.Shared.Core.Navigation))
 
-                implementation(Dependencies.Room.Runtime)
+                implementation(Dependencies.Coil.Coil3)
                 implementation(Dependencies.Koin.Core)
+                // filePicker
+                implementation(Dependencies.FilePicker.Core)
             }
         }
     }
 }
 
 android {
-    namespace = "com.justparokq.homefpt.shared.features.settings"
+    namespace = "com.justparokq.homefpt.shared.features.ftp"
 }
