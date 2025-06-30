@@ -6,5 +6,5 @@ internal data class FeatureParamsModel(
     val name: String,
     val feature: ProjectFeature,
     val isEnabled: Boolean,
-    val backgroundColor: Int
+    val imageUrl: String? = null
 )

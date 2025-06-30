@@ -17,7 +17,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 internal class LoginNetworkComponent(
-    private val httpClient: HttpClient
+    private val httpClient: HttpClient,
 ) {
 
     fun sendLoginRequest(

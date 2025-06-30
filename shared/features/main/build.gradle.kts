@@ -10,6 +10,13 @@ kotlin {
                 implementation(project(Modules.Shared.Core.Utils))
                 implementation(project(Modules.Shared.Core.Navigation))
                 implementation(Dependencies.Koin.Core)
+                implementation(Dependencies.Coil.Coil3)
+            }
+        }
+
+        val commonTest by getting {
+            dependencies {
+                implementation(kotlin("test"))
             }
         }
     }

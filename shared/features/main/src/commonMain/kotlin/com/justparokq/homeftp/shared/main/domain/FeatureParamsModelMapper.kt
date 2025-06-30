@@ -1,30 +1,28 @@
 package com.justparokq.homeftp.shared.main.domain
 
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
 import com.justparokq.homeftp.shared.navigation.feature.ProjectFeature
 
 internal class FeatureParamsModelMapper {
 
+    private val featureDefinitions = mapOf(
+        "ftp" to FeatureDefinition(ProjectFeature.FTP, null),
+        "settings" to FeatureDefinition(ProjectFeature.SETTINGS, null)
+        // Add more features here as needed
+    )
+
     fun map(featureToggle: FeatureToggle): FeatureParamsModel {
-        return when (featureToggle.name) {
-            "ftp" -> FeatureParamsModel(
-                name = featureToggle.name,
-                // todo fix mapper for different features :)
-                feature = ProjectFeature.FTP,
-                isEnabled = featureToggle.isEnabled,
-                backgroundColor = 1,
-            )
-
-            "settings" -> FeatureParamsModel(
-                name = featureToggle.name,
-                // todo fix mapper for different features :)
-                feature = ProjectFeature.SETTINGS,
-                isEnabled = featureToggle.isEnabled,
-                backgroundColor = Color.Green.toArgb(),
-            )
-
-            else -> error("Do normal feature toggles pls")
-        }
+        val def = featureDefinitions[featureToggle.name]
+            ?: error("Unknown feature name: '${featureToggle.name}'. Please add it to FeatureParamsModelMapper.")
+        return FeatureParamsModel(
+            name = featureToggle.name,
+            feature = def.feature,
+            isEnabled = featureToggle.isEnabled,
+            imageUrl = def.imageUrl
+        )
     }
+
+    private data class FeatureDefinition(
+        val feature: ProjectFeature,
+        val imageUrl: String?
+    )
 }
