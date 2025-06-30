@@ -7,7 +7,9 @@ internal class CategoryTypeConverter {
 
     @TypeConverter
     fun fromString(value: String?): SettingCategory? {
-        return SettingCategory.fromString(value)
+        return if (value != null) {
+            SettingCategory.fromString(value) ?: throw IllegalArgumentException("Unknown category: $value")
+        } else null
     }
 
     @TypeConverter

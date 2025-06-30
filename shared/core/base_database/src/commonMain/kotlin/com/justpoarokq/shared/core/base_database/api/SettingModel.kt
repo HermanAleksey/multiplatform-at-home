@@ -16,7 +16,10 @@ data class SettingModel(
 
         data class Boolean(
             val value: kotlin.Boolean
-        ) : Value
+        ) : Value {
+
+            fun isAvailable() = value
+        }
 
         data class String(
             val value: kotlin.String

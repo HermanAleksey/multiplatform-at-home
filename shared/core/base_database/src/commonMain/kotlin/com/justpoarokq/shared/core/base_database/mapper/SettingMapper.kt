@@ -9,7 +9,7 @@ internal class SettingMapper {
 
     fun toBooleanSettingEntity(setting: SettingModel): BooleanSettingEntity {
         val booleanValue = (setting.value as? SettingModel.Value.Boolean)?.value
-            ?: error("Couldn't map")
+            ?: throw IllegalArgumentException("Setting '${setting.name}' is not a boolean setting")
 
         return BooleanSettingEntity(
             name = setting.name,
@@ -21,7 +21,7 @@ internal class SettingMapper {
 
     fun toStringSettingEntity(setting: SettingModel): StringSettingEntity {
         val stringValue = (setting.value as? SettingModel.Value.String)?.value
-            ?: error("Couldn't map")
+            ?: throw IllegalArgumentException("Setting '${setting.name}' is not a string setting")
 
         return StringSettingEntity(
             name = setting.name,
