@@ -7,9 +7,17 @@ import com.justparokq.homeftp.shared.ftp.api.FtpExplorerComponent
 import com.justparokq.homeftp.shared.login.api.LoginComponent
 import com.justparokq.homeftp.shared.main.api.MainComponent
 
+
 interface RootComponent {
 
     val stack: Value<ChildStack<*, Child>>
+
+    /**
+     * Pops one node from the backstack.
+     *
+     * @return true if a node was popped, false if it was the last screen in the stack.
+     */
+    fun onBackClicked(): Boolean
 
     fun onBackClicked(toIndex: Int)
 

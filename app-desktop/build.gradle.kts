@@ -28,6 +28,8 @@ kotlin {
                 implementation(project(Modules.Shared.Features.Root))
                 implementation(project(Modules.Shared.Core.Utils))
 
+                implementation(Dependencies.Koin.Core)
+
                 implementation(compose.desktop.currentOs)
                 implementation(Dependencies.Decompose.DecomposeExtension)
             }

@@ -4,6 +4,7 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
+import com.arkivanov.decompose.router.stack.pop
 import com.arkivanov.decompose.router.stack.popTo
 import com.arkivanov.decompose.value.Value
 import com.justparokq.homeftp.shared.features.settings.api.SettingsComponent
@@ -71,6 +72,14 @@ class DefaultRootComponent(
     private fun settingsComponent(componentContext: ComponentContext): SettingsComponent {
         val comp: SettingsComponent by inject { parametersOf(componentContext, featureNavigator) }
         return comp
+    }
+
+    override fun onBackClicked(): Boolean {
+        var result = false
+        navigation.pop { isSuccess ->
+            result = isSuccess
+        }
+        return result
     }
 
     override fun onBackClicked(toIndex: Int) {

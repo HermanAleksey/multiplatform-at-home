@@ -1,5 +1,7 @@
 package com.justparokq.homeftp.desktop
 
+import androidx.compose.ui.input.key.key
+import androidx.compose.ui.input.key.type
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
@@ -12,6 +14,7 @@ import com.justparokq.homeftp.shared.utils.ContextFactory
 import com.justparokq.homeftp.theme.AppTheme
 import java.io.File
 
+@Suppress("unused")
 fun deleteSettingsDb() {
     val dbFile = File(System.getProperty("java.io.tmpdir"), "setting_new.db")
     println("DB path: ${dbFile.absolutePath}")
@@ -24,7 +27,7 @@ fun deleteSettingsDb() {
 }
 
 fun main() {
-//    deleteSettingsDb()
+    // deleteSettingsDb()
 
     val lifecycle = LifecycleRegistry()
 
@@ -39,14 +42,34 @@ fun main() {
 
         LifecycleController(lifecycle, windowState)
 
+        var onEscPressed: () -> Boolean = { false }
+
         Window(
             onCloseRequest = ::exitApplication,
             state = windowState,
             title = "My Application",
             resizable = false,
+            onKeyEvent = { keyEvent ->
+                if (keyEvent.type == androidx.compose.ui.input.key.KeyEventType.KeyDown &&
+                    keyEvent.key == androidx.compose.ui.input.key.Key.Escape
+                ) {
+                    onEscPressed()
+                    true
+                } else {
+                    false
+                }
+            }
         ) {
+            onEscPressed = {
+                if (!rootComponent.onBackClicked())
+                    exitApplication()
+                true
+            }
             AppTheme {
-                RootContent(component = rootComponent, contextFactory = ContextFactory())
+                RootContent(
+                    component = rootComponent,
+                    contextFactory = ContextFactory(),
+                )
             }
         }
     }
