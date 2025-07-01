@@ -45,7 +45,6 @@ internal class SettingsRepositoryImpl(
                 val mappedValue = mapper.toBooleanSettingEntity(setting)
                 boolDao.insert(mappedValue)
             }
-
             is SettingModel.Value.String -> {
                 val mappedValue = mapper.toStringSettingEntity(setting)
                 strDao.insert(mappedValue)

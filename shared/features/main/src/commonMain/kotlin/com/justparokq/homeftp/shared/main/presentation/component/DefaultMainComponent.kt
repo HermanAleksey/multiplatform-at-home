@@ -4,6 +4,7 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.value.MutableValue
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.decompose.value.update
+import com.arkivanov.essenty.lifecycle.Lifecycle.Callbacks
 import com.justparokq.homeftp.shared.main.api.Default
 import com.justparokq.homeftp.shared.main.api.Init
 import com.justparokq.homeftp.shared.main.api.MainComponent
@@ -14,12 +15,10 @@ import com.justparokq.homeftp.shared.main.domain.FeatureParamsModel
 import com.justparokq.homeftp.shared.main.domain.FeatureParamsModelMapper
 import com.justparokq.homeftp.shared.main.domain.FeatureToggleRepository
 import com.justparokq.homeftp.shared.navigation.feature.FeatureNavigator
-import com.justparokq.homeftp.shared.utils.MainMultiplatform
 import com.justparokq.homeftp.shared.utils.componentCoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 internal class DefaultMainComponent(
     componentContext: ComponentContext,
@@ -34,25 +33,31 @@ internal class DefaultMainComponent(
     override val state: Value<MainComponentState> = _state
 
     init {
-        onInitialize()
+        loadFeatures()
+        lifecycle.subscribe(object : Callbacks {
+            override fun onResume() {
+                super.onResume()
+                loadFeatures()
+            }
+        })
     }
 
     override fun processIntent(intent: MainComponentIntent) {
         when (intent) {
-            Init -> onInitialize()
+            Init -> loadFeatures()
             is OnFeatureClicked -> onFeatureClicked(intent.feature)
         }
     }
 
-    private fun onInitialize() {
+    private fun loadFeatures() {
         coroutineScope.launch(Dispatchers.IO) {
             featureToggleRepository.getAll().collect { list ->
                 val features = list.filter { it.isEnabled }
                     .map { featureParamsModelMapper.map(it) }
 
-                    _state.update {
-                        it.copy(features = features)
-                    }
+                _state.update {
+                    it.copy(features = features)
+                }
             }
         }
     }
