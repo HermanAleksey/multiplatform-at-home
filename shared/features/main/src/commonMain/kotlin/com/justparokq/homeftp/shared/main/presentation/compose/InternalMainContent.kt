@@ -146,7 +146,7 @@ private fun FeatureContent(featureItem: FeatureParamsModel) {
     Column(modifier = Modifier.padding(16.dp)) {
         Spacer(modifier = Modifier.height(8.dp))
         Text(
-            text = featureItem.name,
+            text = featureItem.key.key,
             style = MaterialTheme.typography.titleLarge,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )

@@ -3,17 +3,18 @@ package com.justpoarokq.shared.core.base_database.database
 import androidx.sqlite.SQLiteConnection
 import com.justpoarokq.shared.core.base_database.entity.BooleanSettingEntity
 import com.justpoarokq.shared.core.base_database.entity.SettingCategory
+import com.justparokq.homeftp.shared.core.feature_key.FeatureKey
 
 internal fun doInitialSettingsSetup(connection: SQLiteConnection) {
     val settings = listOf(
         BooleanSettingEntity(
-            name = "ftp",
+            name = FeatureKey.Ftp.key,
             description = "Connect with home server",
             category = SettingCategory.Feature,
             value = true
         ),
         BooleanSettingEntity(
-            name = "settings",
+            name = FeatureKey.Settings.key,
             description = "Represents all settings and features in app",
             category = SettingCategory.Feature,
             value = true

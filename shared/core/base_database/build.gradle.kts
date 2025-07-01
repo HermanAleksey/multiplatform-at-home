@@ -17,6 +17,7 @@ kotlin {
                 implementation(Dependencies.Koin.Core)
 
                 implementation(project(Modules.Shared.Core.Utils))
+                implementation(project(Modules.Shared.Core.FeatureKey))
             }
         }
     }

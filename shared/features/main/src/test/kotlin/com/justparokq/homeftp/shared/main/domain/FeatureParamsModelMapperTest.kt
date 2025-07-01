@@ -2,6 +2,7 @@ import com.justparokq.homeftp.shared.main.domain.FeatureParamsModel
 import com.justparokq.homeftp.shared.main.domain.FeatureParamsModelMapper
 import com.justparokq.homeftp.shared.main.domain.FeatureToggle
 import com.justparokq.homeftp.shared.navigation.feature.ProjectFeature
+import com.justparokq.homeftp.shared.core.feature_key.FeatureKey
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -11,9 +12,9 @@ class FeatureParamsModelMapperTest {
 
     @Test
     fun `maps ftp feature correctly`() {
-        val toggle = FeatureToggle(name = "ftp", isEnabled = true)
+        val toggle = FeatureToggle(key = FeatureKey.Ftp, isEnabled = true)
         val expected = FeatureParamsModel(
-            name = "ftp",
+            key = FeatureKey.Ftp,
             feature = ProjectFeature.FTP,
             isEnabled = true,
             imageUrl = null
@@ -24,9 +25,9 @@ class FeatureParamsModelMapperTest {
 
     @Test
     fun `maps settings feature correctly`() {
-        val toggle = FeatureToggle(name = "settings", isEnabled = false)
+        val toggle = FeatureToggle(key = FeatureKey.Settings, isEnabled = false)
         val expected = FeatureParamsModel(
-            name = "settings",
+            key = FeatureKey.Settings,
             feature = ProjectFeature.SETTINGS,
             isEnabled = false,
             imageUrl = null
@@ -34,12 +35,4 @@ class FeatureParamsModelMapperTest {
         val model = mapper.map(toggle)
         assertEquals(expected, model)
     }
-
-    @Test
-    fun `throws on unknown feature`() {
-        val toggle = FeatureToggle(name = "unknown", isEnabled = true)
-        assertFailsWith<IllegalStateException> {
-            mapper.map(toggle)
-        }
-    }
-}
+} 
