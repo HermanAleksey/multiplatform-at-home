@@ -16,8 +16,11 @@ import com.justparokq.homeftp.shared.login.api.OnUsernameFieldUpdated
 import com.justparokq.homeftp.shared.login.network.LoginNetworkComponent
 import com.justparokq.homeftp.shared.navigation.feature.FeatureNavigator
 import com.justparokq.homeftp.shared.navigation.feature.ProjectFeature
+import com.justparokq.homeftp.shared.utils.MainMultiplatform
 import com.justparokq.homeftp.shared.utils.componentCoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 internal class DefaultLoginComponent(
     private val componentContext: ComponentContext,
@@ -68,8 +71,10 @@ internal class DefaultLoginComponent(
                         }
 
                         is Result.Success -> {
-                            // navigate to next screen
-                            featureNavigator.navigate(ProjectFeature.MAIN)
+                            withContext(Dispatchers.MainMultiplatform()) {
+                                // navigate to next screen
+                                featureNavigator.navigate(ProjectFeature.MAIN)
+                            }
                         }
                     }
                 }

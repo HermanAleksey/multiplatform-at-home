@@ -10,8 +10,21 @@ import com.justparokq.homeftp.shared.root.presentation.RootContent
 import com.justparokq.homeftp.shared.root.presentation.component.DefaultRootComponent
 import com.justparokq.homeftp.shared.utils.ContextFactory
 import com.justparokq.homeftp.theme.AppTheme
+import java.io.File
+
+fun deleteSettingsDb() {
+    val dbFile = File(System.getProperty("java.io.tmpdir"), "setting_new.db")
+    println("DB path: ${dbFile.absolutePath}")
+    if (dbFile.exists()) {
+        val deleted = dbFile.delete()
+        println("DB deleted: $deleted")
+    } else {
+        println("DB file does not exist")
+    }
+}
 
 fun main() {
+//    deleteSettingsDb()
 
     val lifecycle = LifecycleRegistry()
 

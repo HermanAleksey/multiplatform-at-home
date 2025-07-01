@@ -47,6 +47,15 @@ interface SettingsRepository {
     suspend fun observeSettings(): Flow<List<SettingModel>>
 
     /**
+     * Observes only feature settings (settings with Feature category) as a reactive stream.
+     * The flow will emit the current list of feature settings immediately upon subscription
+     * and then emit updates whenever any feature setting is modified.
+     * 
+     * @return A Flow that emits the list of feature settings only
+     */
+    suspend fun observeFeatures(): Flow<List<SettingModel>>
+
+    /**
      * Deletes a specific setting from the database.
      * 
      * @param name The unique identifier of the setting to delete

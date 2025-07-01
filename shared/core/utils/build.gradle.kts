@@ -11,6 +11,10 @@ kotlin {
                 androidMain.dependencies {
                     implementation(Dependencies.AndroidX.ActivityCompose)
                 }
+
+                jvmMain.dependencies {
+                    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.7.3")
+                }
             }
         }
         val commonTest by getting {

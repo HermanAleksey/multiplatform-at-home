@@ -4,20 +4,22 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.value.MutableValue
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.decompose.value.update
-import com.justparokq.homeftp.shared.navigation.feature.FeatureNavigator
 import com.justparokq.homeftp.shared.main.api.Default
-import com.justparokq.homeftp.shared.main.api.OnFeatureClicked
 import com.justparokq.homeftp.shared.main.api.Init
 import com.justparokq.homeftp.shared.main.api.MainComponent
 import com.justparokq.homeftp.shared.main.api.MainComponentIntent
 import com.justparokq.homeftp.shared.main.api.MainComponentState
+import com.justparokq.homeftp.shared.main.api.OnFeatureClicked
 import com.justparokq.homeftp.shared.main.domain.FeatureParamsModel
 import com.justparokq.homeftp.shared.main.domain.FeatureParamsModelMapper
 import com.justparokq.homeftp.shared.main.domain.FeatureToggleRepository
+import com.justparokq.homeftp.shared.navigation.feature.FeatureNavigator
+import com.justparokq.homeftp.shared.utils.MainMultiplatform
 import com.justparokq.homeftp.shared.utils.componentCoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 internal class DefaultMainComponent(
     componentContext: ComponentContext,
@@ -44,11 +46,13 @@ internal class DefaultMainComponent(
 
     private fun onInitialize() {
         coroutineScope.launch(Dispatchers.IO) {
-            val features = featureToggleRepository.getAll()
-                .filter { it.isEnabled }
-                .map { featureParamsModelMapper.map(it) }
-            _state.update {
-                it.copy(features = features)
+            featureToggleRepository.getAll().collect { list ->
+                val features = list.filter { it.isEnabled }
+                    .map { featureParamsModelMapper.map(it) }
+
+                    _state.update {
+                        it.copy(features = features)
+                    }
             }
         }
     }

@@ -25,6 +25,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
+import com.arkivanov.decompose.extensions.compose.subscribeAsState
 import com.justparokq.homeftp.shared.main.api.Default
 import com.justparokq.homeftp.shared.main.api.MainComponent
 import com.justparokq.homeftp.shared.main.api.OnFeatureClicked
@@ -36,19 +37,20 @@ import com.skydoves.landscapist.coil3.CoilImage
 internal fun InternalMainContent(
     component: MainComponent,
 ) {
-    val stateValue = if (component.state.value is Default)
-        component.state.value as Default
-    else return
+    val subscribedState = component.state.subscribeAsState()
+    require(subscribedState.value is Default)
 
-    LazyColumn(
-        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
-    ) {
-        items(stateValue.features) { featureItem ->
-            if (featureItem.isEnabled) {
-                FeatureCard(
-                    featureItem = featureItem,
-                    onFeatureClicked = { component.processIntent(OnFeatureClicked(featureItem)) }
-                )
+    when (val value = subscribedState.value) {
+        is Default -> LazyColumn(
+            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
+        ) {
+            items(value.features) { featureItem ->
+                if (featureItem.isEnabled) {
+                    FeatureCard(
+                        featureItem = featureItem,
+                        onFeatureClicked = { component.processIntent(OnFeatureClicked(featureItem)) }
+                    )
+                }
             }
         }
     }

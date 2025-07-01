@@ -9,6 +9,7 @@ kotlin {
                 implementation(project(Modules.Model.Common))
                 implementation(project(Modules.Shared.Core.Utils))
                 implementation(project(Modules.Shared.Core.Navigation))
+                implementation(project(Modules.Shared.Core.BaseDatabase))
                 implementation(Dependencies.Koin.Core)
                 implementation(Dependencies.Coil.Coil3)
             }

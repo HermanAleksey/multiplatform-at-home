@@ -4,5 +4,5 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 
 actual fun getMultiplatformMainThread(): CoroutineDispatcher {
-    return Dispatchers.Default
+    return Dispatchers.Main
 }

@@ -7,11 +7,17 @@ import com.justpoarokq.shared.core.base_database.entity.SettingCategory
 internal fun doInitialSettingsSetup(connection: SQLiteConnection) {
     val settings = listOf(
         BooleanSettingEntity(
-            name = "Easy log in",
-            description = "Allows to log in without login and password",
+            name = "ftp",
+            description = "Connect with home server",
             category = SettingCategory.Feature,
             value = true
-        )
+        ),
+        BooleanSettingEntity(
+            name = "settings",
+            description = "Represents all settings and features in app",
+            category = SettingCategory.Feature,
+            value = true
+        ),
     )
 
     // Use prepared statement with proper parameter binding

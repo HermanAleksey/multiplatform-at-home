@@ -6,12 +6,12 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(project(Modules.Model.Common))
+                // No dependencies except stdlib
             }
         }
     }
 }
 
 android {
-    namespace = "com.justparokq.homefpt.shared.core.navigation"
+    namespace = "com.justparokq.homefpt.shared.core.feature_key"
 }

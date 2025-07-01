@@ -8,9 +8,9 @@ import com.justpoarokq.shared.core.base_database.mapper.SettingMapper
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
-import kotlinx.coroutines.flow.map
 
 /**
  * Implementation of [SettingsRepository] that manages settings using Room database.
@@ -55,10 +55,12 @@ internal class SettingsRepositoryImpl(
     }
 
     override suspend fun observeSettings(): Flow<List<SettingModel>> = mutex.withLock {
+        settingsFlow.emit(getCombinedData())
         return settingsFlow.asSharedFlow()
     }
 
-    suspend fun observeFeatures(): Flow<List<SettingModel>> = mutex.withLock {
+    override suspend fun observeFeatures(): Flow<List<SettingModel>> = mutex.withLock {
+        settingsFlow.emit(getCombinedData())
         return settingsFlow.asSharedFlow().map { allSettings ->
             allSettings.filter { it.category == SettingModel.Category.Feature }
         }
