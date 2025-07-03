@@ -1,6 +1,8 @@
 package com.justparokq.homeftp.shared.login.api
 
+import com.justparokq.homeftp.shared.login.network.FakeLoginRepository
 import com.justparokq.homeftp.shared.login.network.LoginNetworkComponent
+import com.justparokq.homeftp.shared.login.network.LoginRepository
 import com.justparokq.homeftp.shared.login.presentation.component.DefaultLoginComponent
 import networkCoreModule
 import org.koin.dsl.bind
@@ -9,10 +11,13 @@ import org.koin.dsl.module
 val loginModule = module {
     includes(networkCoreModule)
     factory<LoginNetworkComponent> { LoginNetworkComponent(get()) }
+    factory<LoginRepository> {
+        LoginNetworkComponent(get())
+    }
     factory<LoginComponent> {
         DefaultLoginComponent(
             componentContext = get(),
-            loginNetworkComponent = get(),
+            loginRepository = get(),
             featureNavigator = get(),
         )
     } bind LoginComponent::class

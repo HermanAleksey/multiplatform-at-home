@@ -13,7 +13,7 @@ import com.justparokq.homeftp.shared.login.api.LoginComponentState
 import com.justparokq.homeftp.shared.login.api.OnLoginButtonClick
 import com.justparokq.homeftp.shared.login.api.OnPasswordFieldUpdated
 import com.justparokq.homeftp.shared.login.api.OnUsernameFieldUpdated
-import com.justparokq.homeftp.shared.login.network.LoginNetworkComponent
+import com.justparokq.homeftp.shared.login.network.LoginRepository
 import com.justparokq.homeftp.shared.navigation.feature.FeatureNavigator
 import com.justparokq.homeftp.shared.navigation.feature.ProjectFeature
 import com.justparokq.homeftp.shared.utils.MainMultiplatform
@@ -24,7 +24,7 @@ import kotlinx.coroutines.withContext
 
 internal class DefaultLoginComponent(
     private val componentContext: ComponentContext,
-    private val loginNetworkComponent: LoginNetworkComponent,
+    private val loginRepository: LoginRepository,
     private val featureNavigator: FeatureNavigator,
 ) : LoginComponent, ComponentContext by componentContext {
 
@@ -54,7 +54,7 @@ internal class DefaultLoginComponent(
                 username = _state.value.usernameTextField,
                 password = _state.value.passwordTextField,
             )
-            loginNetworkComponent.sendLoginRequest(request)
+            loginRepository.sendLoginRequest(request)
                 .collect { response ->
                     when (response) {
                         is Result.Error -> {

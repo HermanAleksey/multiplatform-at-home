@@ -16,22 +16,19 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
+interface LoginRepository {
+    fun sendLoginRequest(loginRequest: LoginRequest): Flow<Result<LoginResponse>>
+}
+
 internal class LoginNetworkComponent(
     private val httpClient: HttpClient,
-) {
+) : LoginRepository {
 
-    fun sendLoginRequest(
+    override fun sendLoginRequest(
         loginRequest: LoginRequest,
     ): Flow<Result<LoginResponse>> {
         return flow {
             emit(Result.Loading(true))
-            // todo remove; delay for real server emulation purposes
-            delay(1000)
-            if (true /*isDebug*/) {
-                emit(Result.Success(LoginResponse("tokeee")))
-                emit(Result.Loading(false))
-                return@flow
-            }
             try {
                 val result = httpClient.request("http://$localhostUrl:8080/login") {
                     method = HttpMethod.Post
@@ -50,5 +47,14 @@ internal class LoginNetworkComponent(
                 emit(Result.Error(errorMessage = e.message ?: "Unknown error"))
             }
         }
+    }
+}
+
+internal class FakeLoginRepository : LoginRepository {
+    override fun sendLoginRequest(loginRequest: LoginRequest) = flow {
+        emit(Result.Loading(true))
+        delay(500)
+        emit(Result.Success(LoginResponse("fake_token")))
+        emit(Result.Loading(false))
     }
 }
