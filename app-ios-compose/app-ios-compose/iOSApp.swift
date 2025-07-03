@@ -1,6 +1,7 @@
 import SwiftUI
 import shared
 
+// Android Equivalent: Application class + MainActivity entry point
 @main
 struct iOSApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self)
@@ -15,7 +16,21 @@ struct iOSApp: App {
 }
 
 class AppDelegate: NSObject, UIApplicationDelegate {
-    let root: RootComponent = DefaultRootComponent(
-        componentContext: DefaultComponentContext(lifecycle: ApplicationLifecycle())
-    )
+    // Lazy initialization of RootComponent (after Koin is set up)
+    lazy var root: RootComponent = {
+        DefaultRootComponent(
+            componentContext: DefaultComponentContext(
+                lifecycle: ApplicationLifecycle()
+            )
+        )
+    }()
+
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        // Initialize Koin first
+        let contextFactory = UtilsContextFactory()
+        KoinStarterKt.startKoinImpl(contextFactory: contextFactory)
+
+        // Now RootComponent can safely use Koin dependencies
+        return true
+    }
 }

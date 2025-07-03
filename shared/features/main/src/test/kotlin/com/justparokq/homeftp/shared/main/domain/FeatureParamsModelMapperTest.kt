@@ -1,8 +1,8 @@
+import com.justparokq.homeftp.shared.core.setting_key.Setting
 import com.justparokq.homeftp.shared.main.domain.FeatureParamsModel
 import com.justparokq.homeftp.shared.main.domain.FeatureParamsModelMapper
 import com.justparokq.homeftp.shared.main.domain.FeatureToggle
 import com.justparokq.homeftp.shared.navigation.feature.ProjectFeature
-import com.justparokq.homeftp.shared.core.setting_key.SettingKey
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -11,9 +11,9 @@ class FeatureParamsModelMapperTest {
 
     @Test
     fun `maps ftp feature correctly`() {
-        val toggle = FeatureToggle(key = SettingKey.Ftp, isEnabled = true)
+        val toggle = FeatureToggle(key = Setting.FeatureKey.Ftp, isEnabled = true)
         val expected = FeatureParamsModel(
-            key = SettingKey.Ftp,
+            key = Setting.FeatureKey.Ftp,
             feature = ProjectFeature.FTP,
             isEnabled = true,
             imageUrl = null
@@ -24,9 +24,9 @@ class FeatureParamsModelMapperTest {
 
     @Test
     fun `maps settings feature correctly`() {
-        val toggle = FeatureToggle(key = SettingKey.Settings, isEnabled = false)
+        val toggle = FeatureToggle(key = Setting.FeatureKey.Settings, isEnabled = false)
         val expected = FeatureParamsModel(
-            key = SettingKey.Settings,
+            key = Setting.FeatureKey.Settings,
             feature = ProjectFeature.SETTINGS,
             isEnabled = false,
             imageUrl = null

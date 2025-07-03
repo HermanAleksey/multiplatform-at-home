@@ -3,7 +3,7 @@ import shared
 
 struct RootView: UIViewControllerRepresentable {
     let root: RootComponent
-    
+
     func makeUIViewController(context: Context) -> UIViewController {
         let controller = RootViewControllerKt.rootViewController(rootComponent: root)
 //         controller.overrideUserInterfaceStyle = .light

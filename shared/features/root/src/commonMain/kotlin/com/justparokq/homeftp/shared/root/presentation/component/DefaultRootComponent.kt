@@ -13,7 +13,6 @@ import com.justparokq.homeftp.shared.login.api.LoginComponent
 import com.justparokq.homeftp.shared.main.api.MainComponent
 import com.justparokq.homeftp.shared.navigation.feature.FeatureNavigator
 import com.justparokq.homeftp.shared.root.presentation.component.RootComponent.Child
-import com.justparokq.homeftp.shared.root.presentation.startKoin
 import com.justparokq.homeftp.shared.root.presentation.navigation.Config
 import com.justparokq.homeftp.shared.root.presentation.navigation.FeatureNavigatorImpl
 import org.koin.core.component.KoinComponent
@@ -26,10 +25,6 @@ class DefaultRootComponent(
 
     private val navigation = StackNavigation<Config>()
     private val featureNavigator: FeatureNavigator = FeatureNavigatorImpl(navigation)
-
-    init {
-        startKoin
-    }
 
     override val stack: Value<ChildStack<*, Child>> =
         childStack(

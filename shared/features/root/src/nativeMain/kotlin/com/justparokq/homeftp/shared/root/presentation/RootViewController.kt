@@ -8,8 +8,8 @@ import com.justparokq.homeftp.shared.utils.ContextFactory
 import com.justparokq.homeftp.theme.AppTheme
 import platform.UIKit.UIViewController
 
-fun rootViewController(rootComponent: RootComponent): UIViewController =
-    ComposeUIViewController {
+fun rootViewController(rootComponent: RootComponent): UIViewController {
+    return ComposeUIViewController {
         AppTheme {
             RootContent(
                 component = rootComponent,
@@ -18,3 +18,4 @@ fun rootViewController(rootComponent: RootComponent): UIViewController =
             )
         }
     }
+}

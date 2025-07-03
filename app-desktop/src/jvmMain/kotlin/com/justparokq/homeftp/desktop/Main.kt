@@ -12,6 +12,7 @@ import com.arkivanov.decompose.extensions.compose.lifecycle.LifecycleController
 import com.arkivanov.essenty.lifecycle.LifecycleRegistry
 import com.justparokq.homeftp.shared.root.presentation.RootContent
 import com.justparokq.homeftp.shared.root.presentation.component.DefaultRootComponent
+import com.justparokq.homeftp.shared.root.presentation.startKoinImpl
 import com.justparokq.homeftp.shared.utils.ContextFactory
 import com.justparokq.homeftp.theme.AppTheme
 import java.io.File
@@ -29,9 +30,11 @@ fun deleteSettingsDb() {
 }
 
 fun main() {
-     deleteSettingsDb()
+//     deleteSettingsDb()
 
     val lifecycle = LifecycleRegistry()
+    val contextFactory = ContextFactory()
+    startKoinImpl(contextFactory)
 
     val rootComponent = runOnUiThread {
         DefaultRootComponent(
@@ -68,7 +71,7 @@ fun main() {
             AppTheme {
                 RootContent(
                     component = rootComponent,
-                    contextFactory = ContextFactory(),
+                    contextFactory = contextFactory,
                 )
             }
         }

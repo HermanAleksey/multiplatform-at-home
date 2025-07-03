@@ -24,7 +24,7 @@ internal class FeatureNavigatorImpl(
         return featureToConfig[feature] ?: error("Feature $feature not implemented in navigator")
     }
 
-    private val featureToConfig = hashMapOf(
+    private val featureToConfig: Map<ProjectFeature, Config> = hashMapOf(
         ProjectFeature.LOGIN to Config.Login,
         ProjectFeature.MAIN to Config.Main,
         ProjectFeature.FTP to Config.Ftp,
