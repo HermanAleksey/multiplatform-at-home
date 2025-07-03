@@ -72,8 +72,7 @@ internal class DefaultLoginComponent(
 
                         is Result.Success -> {
                             withContext(Dispatchers.MainMultiplatform()) {
-                                // navigate to next screen
-                                featureNavigator.navigate(ProjectFeature.MAIN)
+                                featureNavigator.replaceCurrentWith(ProjectFeature.MAIN)
                             }
                         }
                     }

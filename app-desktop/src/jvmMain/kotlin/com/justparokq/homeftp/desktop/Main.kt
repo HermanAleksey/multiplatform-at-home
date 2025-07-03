@@ -1,5 +1,7 @@
 package com.justparokq.homeftp.desktop
 
+import androidx.compose.ui.input.key.Key
+import androidx.compose.ui.input.key.KeyEventType
 import androidx.compose.ui.input.key.key
 import androidx.compose.ui.input.key.type
 import androidx.compose.ui.window.Window
@@ -50,9 +52,7 @@ fun main() {
             title = "My Application",
             resizable = false,
             onKeyEvent = { keyEvent ->
-                if (keyEvent.type == androidx.compose.ui.input.key.KeyEventType.KeyDown &&
-                    keyEvent.key == androidx.compose.ui.input.key.Key.Escape
-                ) {
+                if (keyEvent.type == KeyEventType.KeyDown && keyEvent.key == Key.Escape) {
                     onEscPressed()
                     true
                 } else {
