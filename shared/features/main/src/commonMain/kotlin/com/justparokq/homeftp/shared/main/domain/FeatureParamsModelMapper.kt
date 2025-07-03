@@ -1,13 +1,13 @@
 package com.justparokq.homeftp.shared.main.domain
 
+import com.justparokq.homeftp.shared.core.setting_key.Setting
 import com.justparokq.homeftp.shared.navigation.feature.ProjectFeature
-import com.justparokq.homeftp.shared.core.feature_key.FeatureKey
 
 internal class FeatureParamsModelMapper {
 
     private val featureToProjectFeature = mapOf(
-        FeatureKey.Ftp to ProjectFeature.FTP,
-        FeatureKey.Settings to ProjectFeature.SETTINGS
+        Setting.FeatureKey.Ftp to ProjectFeature.FTP,
+        Setting.FeatureKey.Settings to ProjectFeature.SETTINGS
         // Add more features here as needed
     )
 

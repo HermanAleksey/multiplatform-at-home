@@ -1,12 +1,12 @@
 package com.justparokq.homeftp.shared.main.data
 
+import com.justparokq.homeftp.shared.core.setting_key.Setting
 import com.justparokq.homeftp.shared.main.domain.FeatureToggle
 import com.justparokq.homeftp.shared.main.domain.FeatureToggleRepository
-import com.justpoarokq.shared.core.base_database.api.SettingsRepository
 import com.justpoarokq.shared.core.base_database.api.SettingModel
+import com.justpoarokq.shared.core.base_database.api.SettingsRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import com.justparokq.homeftp.shared.core.feature_key.FeatureKey
 
 internal class FeatureToggleRepositoryImpl(
     private val settingsRepository: SettingsRepository
@@ -15,7 +15,7 @@ internal class FeatureToggleRepositoryImpl(
     override suspend fun getAll(): Flow<List<FeatureToggle>> {
         return settingsRepository.observeFeatures().map { featureSettings ->
             featureSettings.mapNotNull { setting ->
-                val key = FeatureKey.fromKey(setting.name)
+                val key = Setting.fromKey(setting.name)
                 if (key != null) {
                     FeatureToggle(
                         key = key,

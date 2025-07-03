@@ -1,9 +1,8 @@
 package com.justparokq.homeftp.shared.main.domain
 
-import com.justparokq.homeftp.shared.core.feature_key.FeatureKey
+import com.justparokq.homeftp.shared.core.setting_key.Setting
 
-// todo implement in separate module
-internal data class FeatureToggle (
-    val key: FeatureKey,
+internal data class FeatureToggle(
+    val key: Setting,
     val isEnabled: Boolean
 )

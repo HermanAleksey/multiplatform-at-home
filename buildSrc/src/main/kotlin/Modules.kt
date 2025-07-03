@@ -10,7 +10,7 @@ object Modules {
 
         object Core {
 
-            const val FeatureKey = ":shared:core:feature_key"
+            const val SettingKey = ":shared:core:setting_key"
             const val UiKit = ":shared:core:ui_kit"
             const val BaseDatabase = ":shared:core:base_database"
             const val Navigation = ":shared:core:navigation"

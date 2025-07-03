@@ -29,7 +29,7 @@ fun deleteSettingsDb() {
 }
 
 fun main() {
-    // deleteSettingsDb()
+     deleteSettingsDb()
 
     val lifecycle = LifecycleRegistry()
 

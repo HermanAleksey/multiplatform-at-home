@@ -31,7 +31,7 @@ include(":shared:core:navigation")
 include(":shared:core:ui_kit")
 include(":shared:core:base_database")
 include(":shared:core:network")
-include(":shared:core:feature_key")
+include(":shared:core:setting_key")
 
 include(":shared:features:settings")
 include(":shared:features:ftp")

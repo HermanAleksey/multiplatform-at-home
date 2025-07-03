@@ -12,6 +12,8 @@ kotlin {
                 implementation(project(Modules.Shared.Core.Navigation))
                 implementation(project(Modules.Shared.Core.Network))
                 implementation(project(Modules.Shared.Core.Utils))
+                implementation(project(Modules.Shared.Core.BaseDatabase))
+                implementation(project(Modules.Shared.Core.SettingKey))
                 implementation(Dependencies.Koin.Core)
 
                 implementation(project(":shared:core:network"))

@@ -12,7 +12,7 @@ kotlin {
                 implementation(project(Modules.Shared.Core.BaseDatabase))
                 implementation(Dependencies.Koin.Core)
                 implementation(Dependencies.Coil.Coil3)
-                implementation(project(Modules.Shared.Core.FeatureKey))
+                implementation(project(Modules.Shared.Core.SettingKey))
             }
         }
 

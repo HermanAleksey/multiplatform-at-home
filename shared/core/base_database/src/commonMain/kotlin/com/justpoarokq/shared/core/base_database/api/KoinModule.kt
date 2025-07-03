@@ -7,6 +7,7 @@ import com.justpoarokq.shared.core.base_database.database.SettingDatabase
 import com.justpoarokq.shared.core.base_database.database.getSettingsDatabase
 import com.justpoarokq.shared.core.base_database.database.getSettingsDatabaseBuilder
 import com.justpoarokq.shared.core.base_database.mapper.SettingMapper
+import com.justpoarokq.shared.core.base_database.repository.NetworkSettingsInteractorImpl
 import com.justpoarokq.shared.core.base_database.repository.SettingsRepositoryImpl
 import org.koin.core.module.dsl.factoryOf
 import org.koin.core.qualifier.named
@@ -29,4 +30,7 @@ val baseDatabaseModule = module {
             boolDao = get(), strDao = get(), mapper = get()
         )
     } bind SettingsRepository::class
+    factory {
+        NetworkSettingsInteractorImpl(settingsRepository = get())
+    } bind NetworkSettingsInteractor::class
 }
