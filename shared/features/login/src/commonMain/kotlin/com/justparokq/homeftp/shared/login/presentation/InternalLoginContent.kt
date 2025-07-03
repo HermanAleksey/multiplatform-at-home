@@ -40,6 +40,7 @@ internal fun InternalLoginContent(component: LoginComponent) {
             updatePassword = { component.processIntent(OnPasswordFieldUpdated(it)) },
             isLoading = activeState.isLoading,
             onLoginButtonClicked = { component.processIntent(OnLoginButtonClick) },
+            errorMessage = activeState.errorMessage,
             modifier = Modifier
                 .fillMaxWidth(0.8f)
                 .shadow(20.dp)

@@ -19,4 +19,5 @@ internal data class Active(
     val usernameTextField: String = "",
     val passwordTextField: String = "",
     val isLoading: Boolean = false,
+    val errorMessage: String? = null,
 ) : LoginComponentState

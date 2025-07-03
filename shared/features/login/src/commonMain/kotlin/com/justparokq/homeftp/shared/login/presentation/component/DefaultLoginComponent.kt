@@ -41,11 +41,11 @@ internal class DefaultLoginComponent(
     }
 
     private fun onUsernameFieldUpdated(newValue: String) {
-        _state.update { it.copy(usernameTextField = newValue) }
+        _state.update { it.copy(usernameTextField = newValue, errorMessage = null) }
     }
 
     private fun onPasswordFieldUpdated(newValue: String) {
-        _state.update { it.copy(passwordTextField = newValue) }
+        _state.update { it.copy(passwordTextField = newValue, errorMessage = null) }
     }
 
     private fun onLoginButtonClick() {
@@ -58,10 +58,8 @@ internal class DefaultLoginComponent(
                 .collect { response ->
                     when (response) {
                         is Result.Error -> {
-                            // show error
-                            println("onLoginButtonClick: error $response")
+                            _state.update { it.copy(errorMessage = response.errorMessage) }
                         }
-
                         is Result.Loading -> {
                             _state.update {
                                 it.copy(
@@ -69,7 +67,6 @@ internal class DefaultLoginComponent(
                                 )
                             }
                         }
-
                         is Result.Success -> {
                             withContext(Dispatchers.MainMultiplatform()) {
                                 featureNavigator.replaceCurrentWith(ProjectFeature.MAIN)

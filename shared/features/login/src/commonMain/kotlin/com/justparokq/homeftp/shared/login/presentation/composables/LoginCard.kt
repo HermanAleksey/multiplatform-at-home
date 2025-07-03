@@ -28,6 +28,7 @@ internal fun LoginCard(
     updatePassword: (String) -> Unit,
     isLoading: Boolean,
     onLoginButtonClicked: () -> Unit,
+    errorMessage: String? = null,
     modifier: Modifier = Modifier,
 ) {
     val focusManager = LocalFocusManager.current
@@ -69,6 +70,24 @@ internal fun LoginCard(
                 testTag = "password text field",
                 onKeyboardActions = { focusManager.clearFocus() },
             )
+            if (errorMessage != null) {
+                Spacer(modifier = Modifier.height(8.dp))
+                androidx.compose.foundation.layout.Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(
+                            color = MaterialTheme.colorScheme.error.copy(alpha = 0.1f),
+                            shape = androidx.compose.foundation.shape.RoundedCornerShape(6.dp)
+                        )
+                        .padding(vertical = 10.dp, horizontal = 12.dp)
+                ) {
+                    androidx.compose.material3.Text(
+                        text = errorMessage,
+                        color = MaterialTheme.colorScheme.error,
+                        style = MaterialTheme.typography.bodyMedium,
+                    )
+                }
+            }
             Spacer(modifier = Modifier.height(24.dp))
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -78,7 +97,7 @@ internal fun LoginCard(
                     text = "Sign in",
                     onClick = { onLoginButtonClicked() },
                     isLoading = isLoading,
-                    isClickable = !isLoading,
+                    isClickable = !isLoading && errorMessage == null,
                     modifier = Modifier.animateContentSize()
                 )
             }
