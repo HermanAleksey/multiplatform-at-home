@@ -19,6 +19,7 @@ val loginModule = module {
             componentContext = get(),
             loginRepository = get(),
             featureNavigator = get(),
+            settingsInteractor = get(),
         )
     } bind LoginComponent::class
 }

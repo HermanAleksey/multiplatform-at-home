@@ -16,10 +16,12 @@ import com.arkivanov.decompose.extensions.compose.subscribeAsState
 import com.justparokq.homeftp.shared.login.api.Active
 import com.justparokq.homeftp.shared.login.api.LoginComponent
 import com.justparokq.homeftp.shared.login.api.OnLoginButtonClick
+import com.justparokq.homeftp.shared.login.api.OnNetworkSettingsChanged
 import com.justparokq.homeftp.shared.login.api.OnPasswordFieldUpdated
 import com.justparokq.homeftp.shared.login.api.OnUsernameFieldUpdated
 import com.justparokq.homeftp.shared.login.presentation.component.PreviewLoginComponent
 import com.justparokq.homeftp.shared.login.presentation.composables.LoginCard
+import com.justparokq.homeftp.shared.login.presentation.composables.OptionsPopupLabel
 import com.justparokq.homeftp.theme.AppTheme
 import com.justparokq.homeftp.tooling.Preview
 
@@ -46,6 +48,15 @@ internal fun InternalLoginContent(component: LoginComponent) {
                 .shadow(20.dp)
                 .defaultMinSize(minWidth = 300.dp, minHeight = 260.dp)
         )
+        Spacer(modifier = Modifier.weight(1f))
+
+        activeState.networkOptionState?.let {
+            OptionsPopupLabel(
+                networkOptionState = activeState.networkOptionState,
+                onOptionSelected = { component.processIntent(OnNetworkSettingsChanged(it)) },
+                modifier = Modifier,
+            )
+        }
     }
 }
 
