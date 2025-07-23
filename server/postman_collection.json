@@ -1,0 +1,123 @@
+{
+  "info": {
+    "name": "KMP Home FTP API",
+    "_postman_id": "b1e1e1e1-1111-2222-3333-444455556666",
+    "description": "API collection for KMP Home FTP server (Prod and Test environments)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Login (Prod)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"user\",\n  \"password\": \"pass\"\n}"
+        },
+        "url": { "raw": "{{baseUrl}}/login", "host": ["{{baseUrl}}"], "path": ["login"] }
+      }
+    },
+    {
+      "name": "Login (Test)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"test\",\n  \"password\": \"qwerty\"\n}"
+        },
+        "url": { "raw": "{{baseUrl}}/test/login", "host": ["{{baseUrl}}"], "path": ["test", "login"] }
+      }
+    },
+    {
+      "name": "Refresh Token (Prod)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/x-www-form-urlencoded" }
+        ],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            { "key": "refreshToken", "value": "", "type": "text" }
+          ]
+        },
+        "url": { "raw": "{{baseUrl}}/refresh", "host": ["{{baseUrl}}"], "path": ["refresh"] }
+      }
+    },
+    {
+      "name": "Refresh Token (Test)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/x-www-form-urlencoded" }
+        ],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            { "key": "refreshToken", "value": "", "type": "text" }
+          ]
+        },
+        "url": { "raw": "{{baseUrl}}/test/refresh", "host": ["{{baseUrl}}"], "path": ["test", "refresh"] }
+      }
+    },
+    {
+      "name": "Get Directory (Prod)",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{jwtToken}}" }
+        ],
+        "url": { "raw": "{{baseUrl}}/directory?path=", "host": ["{{baseUrl}}"], "path": ["directory"], "query": [ { "key": "path", "value": "" } ] }
+      }
+    },
+    {
+      "name": "Get Directory (Test)",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{jwtToken}}" }
+        ],
+        "url": { "raw": "{{baseUrl}}/test/directory?path=", "host": ["{{baseUrl}}"], "path": ["test", "directory"], "query": [ { "key": "path", "value": "" } ] }
+      }
+    },
+    {
+      "name": "Get Image (Prod)",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{jwtToken}}" }
+        ],
+        "url": { "raw": "{{baseUrl}}/image?path=&preview=false", "host": ["{{baseUrl}}"], "path": ["image"], "query": [ { "key": "path", "value": "" }, { "key": "preview", "value": "false" } ] }
+      }
+    },
+    {
+      "name": "Get Image (Test)",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{jwtToken}}" }
+        ],
+        "url": { "raw": "{{baseUrl}}/test/image?path=&preview=false", "host": ["{{baseUrl}}"], "path": ["test", "image"], "query": [ { "key": "path", "value": "" }, { "key": "preview", "value": "false" } ] }
+      }
+    },
+    {
+      "name": "JWKS (Prod)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": { "raw": "{{baseUrl}}/.well-known/jwks.json", "host": ["{{baseUrl}}"], "path": [".well-known", "jwks.json"] }
+      }
+    }
+  ],
+  "event": [],
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080" },
+    { "key": "jwtToken", "value": "" }
+  ]
+} 

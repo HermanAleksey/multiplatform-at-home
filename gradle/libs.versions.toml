@@ -1,0 +1,20 @@
+[versions]
+gradlePluginVersion = "1.7.3"
+gradleVersion = "8.11.0"
+kotlinGradlePluginVersion = "2.1.20"
+kotlinVersion = "2.1.20"
+ktorGradlePluginVersion = "3.1.1"
+
+[plugins]
+
+
+[libraries]
+compose-gradle-plugin = { module = "org.jetbrains.compose:compose-gradle-plugin", version.ref = "gradlePluginVersion" }
+gradle = { module = "com.android.tools.build:gradle", version.ref = "gradleVersion" }
+io-ktor-plugin-gradle-plugin = { module = "io.ktor.plugin:io.ktor.plugin.gradle.plugin", version.ref = "ktorGradlePluginVersion" }
+kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlinGradlePluginVersion" }
+kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlinVersion" }
+kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlinVersion" }
+org-jetbrains-kotlin-android-gradle-plugin = { module = "org.jetbrains.kotlin.android:org.jetbrains.kotlin.android.gradle.plugin", version.ref = "kotlinGradlePluginVersion" }
+org-jetbrains-kotlin-plugin-compose-gradle-plugin = { module = "org.jetbrains.kotlin.plugin.compose:org.jetbrains.kotlin.plugin.compose.gradle.plugin", version.ref = "kotlinGradlePluginVersion" }
+org-jetbrains-kotlin-plugin-serialization-gradle-plugin = { module = "org.jetbrains.kotlin.plugin.serialization:org.jetbrains.kotlin.plugin.serialization.gradle.plugin", version.ref = "kotlinGradlePluginVersion" }
