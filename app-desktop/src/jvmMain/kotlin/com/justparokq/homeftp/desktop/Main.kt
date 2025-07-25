@@ -52,12 +52,13 @@ fun main() {
         Window(
             onCloseRequest = ::exitApplication,
             state = windowState,
-            title = "My Application",
+            title = "KMPet",
             resizable = false,
             onKeyEvent = processKeyEvent(
                 inputActionDelegate = rootComponent as IInputActionDelegate,
                 exitApplication = ::exitApplication
-            )
+            ),
+            icon = getIconBitmapPainter("app_icon.png")
         ) {
             AppTheme {
                 RootContent(

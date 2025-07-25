@@ -38,14 +38,35 @@ kotlin {
     }
 }
 
+
+// ./gradlew :app-desktop:createDistributable
+// By default, it creates .app (on macOS), .exe (on Windows), .deb (on Linux) -
+// but only those formats that are actually available on the current platform.
 compose.desktop {
     application {
         mainClass = "com.justparokq.homeftp.desktop.MainKt"
 
         nativeDistributions {
-            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "KotlinMultiplatformComposeDesktopApplication"
+            targetFormats(
+                TargetFormat.Dmg,
+                TargetFormat.Pkg,
+                TargetFormat.Msi,
+                TargetFormat.Deb,
+                TargetFormat.Exe
+            )
+            packageName = "KMPet"
             packageVersion = "1.0.0"
+            description = "Simple desktop client"
+
+            windows {
+                iconFile.set(project.file("src/jvmMain/resources/app_icon.ico"))
+            }
+            macOS {
+                iconFile.set(project.file("src/jvmMain/resources/app_icon.icns"))
+            }
+            linux {
+                iconFile.set(project.file("src/jvmMain/resources/app_icon.png"))
+            }
         }
     }
 }
