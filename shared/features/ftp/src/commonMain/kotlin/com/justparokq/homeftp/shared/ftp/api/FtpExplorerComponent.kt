@@ -1,6 +1,9 @@
 package com.justparokq.homeftp.shared.ftp.api
 
 import com.justparokq.homeftp.shared.ftp.model.FileSystemObject
+import com.justparokq.homeftp.shared.ftp.model.LocalFile
+import com.justparokq.homeftp.shared.ftp.model.PaginationState
+import com.justparokq.homeftp.shared.ftp.model.Path
 import com.justparokq.homeftp.shared.navigation.acrhitecture.BaseComponent
 import com.justparokq.homeftp.shared.navigation.acrhitecture.BaseComponentIntent
 import com.justparokq.homeftp.shared.navigation.acrhitecture.BaseComponentState
@@ -13,23 +16,21 @@ interface FtpExplorerComponent :
 sealed interface FtpExplorerComponentState : BaseComponentState
 
 internal data class FtpExplorerScreenModel(
-    val currentPath: List<String> = emptyList(),
-    val fsObjects: List<FileSystemObject> = emptyList(),
     val isLoading: Boolean = true,
-) : FtpExplorerComponentState {
-
-    fun getCurrentPathAsString(): String {
-        return currentPath.joinToString("/")
-    }
-}
-
+    val currentPath: Path = Path.Root,
+    val fsObjects: List<FileSystemObject> = emptyList(),
+    val pagination: PaginationState = PaginationState(),
+    val error: String? = null,
+) : FtpExplorerComponentState
 
 sealed interface FtpExplorerComponentIntent : BaseComponentIntent
+
+internal data object OnScreenOpened : FtpExplorerComponentIntent
 
 /**
  * Navigates to directory by path
  */
-internal data class OnDirectoryClicked(val dirPath: List<String>) : FtpExplorerComponentIntent
+internal data class OnDirectoryClicked(val dirPath: Path) : FtpExplorerComponentIntent
 
 /**
  * Open fsObject
@@ -50,7 +51,9 @@ internal data object OnSortingApplyClicked : FtpExplorerComponentIntent
  * Floating button meant to open file picker
  * Selected file(s) are uploaded to server to the current folder
  * */
-internal data object OnFloatingButtonClicked : FtpExplorerComponentIntent
+internal data class OnFloatingButtonClicked(
+    val files: List<LocalFile>
+) : FtpExplorerComponentIntent
 
 /**
  * Invoke when user selected one of few files from gallery
@@ -58,3 +61,5 @@ internal data object OnFloatingButtonClicked : FtpExplorerComponentIntent
 internal data class OnFilesPicked(val files: List<PlatformFile>) : FtpExplorerComponentIntent
 
 internal data object OnNavigateBackClicked : FtpExplorerComponentIntent
+
+internal data object OnRefreshPulled : FtpExplorerComponentIntent

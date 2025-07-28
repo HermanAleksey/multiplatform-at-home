@@ -11,7 +11,7 @@ kotlin {
                 implementation(project(Modules.Shared.Core.Navigation))
                 implementation(project(Modules.Shared.Core.BaseDatabase))
                 implementation(Dependencies.Koin.Core)
-                implementation(Dependencies.Coil.Coil3)
+                implementation(Dependencies.Coil.Compose)
                 implementation(project(Modules.Shared.Core.SettingKey))
             }
         }

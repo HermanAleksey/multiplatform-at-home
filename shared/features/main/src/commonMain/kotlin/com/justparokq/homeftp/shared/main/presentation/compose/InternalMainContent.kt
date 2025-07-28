@@ -24,14 +24,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import coil3.compose.AsyncImage
+import coil3.compose.LocalPlatformContext
+import coil3.request.ImageRequest
+import coil3.request.crossfade
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
 import com.justparokq.homeftp.shared.main.api.Default
 import com.justparokq.homeftp.shared.main.api.MainComponent
 import com.justparokq.homeftp.shared.main.api.OnFeatureClicked
 import com.justparokq.homeftp.shared.main.domain.FeatureParamsModel
-import com.skydoves.landscapist.ImageOptions
-import com.skydoves.landscapist.coil3.CoilImage
 
 @Composable
 internal fun InternalMainContent(
@@ -84,23 +87,20 @@ private fun FeatureCard(
 @Composable
 private fun FeatureImage(imageUrl: String?) {
     if (imageUrl != null) {
-        CoilImage(
-            imageModel = { imageUrl },
-            imageOptions = ImageOptions(
-                contentScale = androidx.compose.ui.layout.ContentScale.Crop,
-                alignment = Alignment.Center
-            ),
+        AsyncImage(
+            model = ImageRequest.Builder(LocalPlatformContext.current)
+                .data(imageUrl)
+                .crossfade(true)
+                .build(),
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            alignment = Alignment.Center,
             modifier = Modifier
                 .fillMaxWidth()
                 .height(120.dp)
-                .clip(
-                    RoundedCornerShape(
-                        topStartPercent = 16,
-                        topEndPercent = 16,
-                        bottomStartPercent = 0,
-                        bottomEndPercent = 0
-                    )
-                )
+                .clip(RoundedCornerShape(topStartPercent = 16, topEndPercent = 16)),
+            placeholder = null,
+            error = null
         )
     } else {
         FeatureImagePlaceholder()

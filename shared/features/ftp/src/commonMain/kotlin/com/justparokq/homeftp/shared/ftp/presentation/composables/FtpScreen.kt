@@ -16,7 +16,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.BrokenImage
 import androidx.compose.material.icons.filled.Folder
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -27,19 +29,20 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import coil3.compose.LocalPlatformContext
+import coil3.compose.SubcomposeAsyncImage
+import coil3.request.ImageRequest
+import coil3.request.crossfade
 import com.justparokq.homeftp.shared.ftp.model.FileSystemObject
-import com.justparokq.homeftp.theme.AppTheme
-import com.justparokq.homeftp.tooling.Preview
-import com.skydoves.landscapist.ImageOptions
-import com.skydoves.landscapist.coil3.CoilImage
+import com.justparokq.homeftp.shared.ftp.model.Path
 
 private const val FILES_IN_LINE_DEFAULT_NUMBER = 3
 
 @Composable
 internal fun FtpScreen(
-    path: List<String>,
+    path: Path,
     fsObjects: List<FileSystemObject>,
-    onPathPartClicked: (List<String>) -> Unit,
+    onPathPartClicked: (Path) -> Unit,
     onFSObjectClicked: (FileSystemObject) -> Unit,
     onNavigateBackClicked: () -> Unit,
     modifier: Modifier = Modifier,
@@ -128,13 +131,27 @@ internal fun FileElement(
         }
 
         is FileSystemObject.File.Image -> {
-            CoilImage(
-                imageModel = { file.getFullUrl() },
-                imageOptions = ImageOptions(
-                    contentScale = ContentScale.Crop,
-                    alignment = Alignment.Center
-                ),
-                modifier = Modifier.fillMaxSize()
+            println("image link: ${file.serverLink}")
+            SubcomposeAsyncImage(
+                model = ImageRequest.Builder(LocalPlatformContext.current)
+                    .data(file.getPreviewUrl())
+                    .crossfade(true)
+                    .build(),
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
+                alignment = Alignment.Center,
+                modifier = Modifier.fillMaxSize(),
+                loading = {
+                    CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+                },
+                error = {
+                    // todo if 401 retry
+                    Icon(
+                        Icons.Default.BrokenImage,
+                        contentDescription = null,
+                        modifier = Modifier.align(Alignment.Center)
+                    )
+                }
             )
         }
 
@@ -143,29 +160,29 @@ internal fun FileElement(
     }
 }
 
-@Preview
-@Composable
-private fun FtpScreenPreview() {
-    val currentPath = listOf("LOL", "hi", "yo_gay", "root", "documents", "images")
-    val files = listOf(
-        FileSystemObject.File.Image(name = "Image 1", remotePath = "23123"),
-        FileSystemObject.File.Image(name = "Video 2", remotePath = "23123"),
-        FileSystemObject.Directory(name = "fldr", content = emptyList()),
-        FileSystemObject.File.Unknown,
-        FileSystemObject.File.Image(name = "Image 4", remotePath = "23123"),
-        FileSystemObject.Directory(name = "Folder 2", content = emptyList()),
-        FileSystemObject.File.Image(name = "Image 5!", remotePath = "23123"),
-        FileSystemObject.Directory(name = "Folder 3", content = emptyList()),
-    )
-
-    AppTheme {
-        FtpScreen(
-            path = currentPath,
-            fsObjects = files,
-            onPathPartClicked = {},
-            onFSObjectClicked = {},
-            onNavigateBackClicked = {},
-            modifier = Modifier
-        )
-    }
-}
+//@Preview
+//@Composable
+//private fun FtpScreenPreview() {
+//    val currentPath = listOf("LOL", "hi", "yo_gay", "root", "documents", "images")
+//    val files = listOf(
+//        FileSystemObject.File.Image(name = "Image 1", remotePath = "23123"),
+//        FileSystemObject.File.Image(name = "Video 2", remotePath = "23123"),
+//        FileSystemObject.Directory(name = "fldr", content = emptyList()),
+//        FileSystemObject.File.Unknown,
+//        FileSystemObject.File.Image(name = "Image 4", remotePath = "23123"),
+//        FileSystemObject.Directory(name = "Folder 2", content = emptyList()),
+//        FileSystemObject.File.Image(name = "Image 5!", remotePath = "23123"),
+//        FileSystemObject.Directory(name = "Folder 3", content = emptyList()),
+//    )
+//
+//    AppTheme {
+//        FtpScreen(
+//            path = currentPath,
+//            fsObjects = files,
+//            onPathPartClicked = {},
+//            onFSObjectClicked = {},
+//            onNavigateBackClicked = {},
+//            modifier = Modifier
+//        )
+//    }
+//}

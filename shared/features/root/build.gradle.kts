@@ -20,6 +20,8 @@ kotlin {
                 implementation(project(Modules.Shared.Features.Settings))
 
                 implementation(Dependencies.Koin.Core)
+                implementation(Dependencies.Coil.Compose)
+                implementation(Dependencies.Coil.NetworkKtor)
             }
         }
     }

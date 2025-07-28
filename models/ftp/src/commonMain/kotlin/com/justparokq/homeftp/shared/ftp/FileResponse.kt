@@ -8,7 +8,7 @@ data class FileResponse(
     @SerialName("uri")
     val uri: String,
     @SerialName("name")
-    val name: String,
+    val fileName: String,
     @SerialName("isFolder")
     val isDirectory: Boolean,
 )

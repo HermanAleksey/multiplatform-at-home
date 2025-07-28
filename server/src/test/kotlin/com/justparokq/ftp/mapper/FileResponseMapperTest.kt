@@ -33,27 +33,27 @@ internal class FileResponseMapperTest {
         val expectedResult = listOf(
             FileResponse(
                 uri = "inner_directory",
-                name = "inner_directory",
+                fileName = "inner_directory",
                 isDirectory = true
             ),
             FileResponse(
                 uri = "photo.png",
-                name = "photo.png",
+                fileName = "photo.png",
                 isDirectory = false
             ),
             FileResponse(
                 uri = "photoJpg_2.jpg",
-                name = "photoJpg_2.jpg",
+                fileName = "photoJpg_2.jpg",
                 isDirectory = false
             ),
             FileResponse(
                 uri = "textFile.txt",
-                name = "textFile.txt",
+                fileName = "textFile.txt",
                 isDirectory = false
             ),
             FileResponse(
                 uri = "inner_directory/innerPhoto.jpg",
-                name = "innerPhoto.jpg",
+                fileName = "innerPhoto.jpg",
                 isDirectory = false
             ),
         )

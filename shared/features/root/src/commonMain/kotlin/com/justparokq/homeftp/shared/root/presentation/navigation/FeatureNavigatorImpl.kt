@@ -1,6 +1,8 @@
 package com.justparokq.homeftp.shared.root.presentation.navigation
 
 import com.arkivanov.decompose.router.stack.StackNavigation
+import com.arkivanov.decompose.router.stack.pop
+import com.arkivanov.decompose.router.stack.popTo
 import com.arkivanov.decompose.router.stack.push
 import com.arkivanov.decompose.router.stack.replaceCurrent
 import com.justparokq.homeftp.shared.navigation.feature.FeatureNavigator
@@ -18,6 +20,18 @@ internal class FeatureNavigatorImpl(
     override fun replaceCurrentWith(feature: ProjectFeature) {
         val config = getConfigByFeature(feature)
         stackNavigation.replaceCurrent(config)
+    }
+
+    override fun popBackStack(): Boolean {
+        var result = false
+        stackNavigation.pop { isSuccess ->
+            result = isSuccess
+        }
+        return result
+    }
+
+    override fun navigateToTheRoot() {
+        stackNavigation.popTo(0)
     }
 
     private fun getConfigByFeature(feature: ProjectFeature): Config {

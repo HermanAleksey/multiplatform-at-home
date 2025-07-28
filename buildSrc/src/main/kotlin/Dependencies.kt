@@ -120,8 +120,9 @@ object Dependencies {
 
     object Coil {
 
-        private const val coilVersion = "2.3.8"
-        val Coil3 = "com.github.skydoves:landscapist-coil3:$coilVersion"
+        private const val coilVersion = "3.0.0"
+        val Compose = "io.coil-kt.coil3:coil-compose:$coilVersion"
+        val NetworkKtor = "io.coil-kt.coil3:coil-network-ktor3:$coilVersion"
     }
 
     object Koin {

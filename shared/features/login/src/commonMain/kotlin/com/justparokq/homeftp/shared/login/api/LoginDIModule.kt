@@ -11,7 +11,6 @@ import org.koin.dsl.bind
 import org.koin.dsl.module
 
 val loginModule = module {
-    includes(networkCoreModule)
     factory<LoginNetworkComponent> { LoginNetworkComponent(get()) }
     factory<LoginRepository> {
         LoginRepositoryImpl(

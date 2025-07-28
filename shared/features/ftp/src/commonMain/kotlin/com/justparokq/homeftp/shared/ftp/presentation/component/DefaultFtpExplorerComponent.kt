@@ -13,54 +13,61 @@ import com.justparokq.homeftp.shared.ftp.api.OnFileSystemObjectClicked
 import com.justparokq.homeftp.shared.ftp.api.OnFilesPicked
 import com.justparokq.homeftp.shared.ftp.api.OnFloatingButtonClicked
 import com.justparokq.homeftp.shared.ftp.api.OnNavigateBackClicked
+import com.justparokq.homeftp.shared.ftp.api.OnRefreshPulled
+import com.justparokq.homeftp.shared.ftp.api.OnScreenOpened
 import com.justparokq.homeftp.shared.ftp.api.OnSortingApplyClicked
 import com.justparokq.homeftp.shared.ftp.data.mapper.FileSystemObjectMapper
 import com.justparokq.homeftp.shared.ftp.data.network.FtpCommunicationHttpClient
 import com.justparokq.homeftp.shared.ftp.model.FileSystemObject
+import com.justparokq.homeftp.shared.ftp.model.Path
+import com.justparokq.homeftp.shared.navigation.acrhitecture.InitHelper
+import com.justparokq.homeftp.shared.navigation.feature.FeatureNavigator
 import com.justparokq.homeftp.shared.utils.componentCoroutineScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 internal class DefaultFtpExplorerComponent(
     componentContext: ComponentContext,
     private val ftpHttpClient: FtpCommunicationHttpClient,
     private val fileSystemObjectMapper: FileSystemObjectMapper,
+    private val featureNavigator: FeatureNavigator,
+    initHelper: InitHelper,
 ) : FtpExplorerComponent, ComponentContext by componentContext {
 
     private val coroutineScope = componentCoroutineScope()
+    private var loadDataJob: Job? = null
 
     private val _state = MutableValue(FtpExplorerScreenModel())
     override val state: Value<FtpExplorerScreenModel> = _state
 
     init {
-        val serverFtpRootUri = ""
-        load(serverFtpRootUri)
+        initHelper(intentProcessor = ::processIntent, intent = OnScreenOpened)
     }
 
     override fun processIntent(intent: FtpExplorerComponentIntent) {
         when (intent) {
+            OnScreenOpened -> loadDataFromPath(state.value.currentPath)
             is OnDirectoryClicked -> onDirectoryClicked(intent.dirPath)
             is OnFileSystemObjectClicked -> onFileSystemObjectClicked(intent.fsObject)
             is OnFilesPicked -> Unit // TODO()
-            OnFloatingButtonClicked -> Unit // TODO()
-            OnNavigateBackClicked -> onNavigateBackClicked()
             OnSortingApplyClicked -> Unit // TODO()
+            is OnFloatingButtonClicked -> Unit // TODO()
+            OnRefreshPulled -> Unit // TODO()
+            OnNavigateBackClicked -> onNavigateBackClicked()
         }
     }
 
-    private fun onDirectoryClicked(dirPath: List<String>) {
+    private fun onDirectoryClicked(dirPath: Path) {
         _state.update {
-            it.copy(
-                currentPath = dirPath
-            )
+            it.copy(currentPath = dirPath)
         }
-        load(state.value.getCurrentPathAsString())
+        loadDataFromPath(state.value.currentPath)
     }
 
     private fun onFileSystemObjectClicked(fsObject: FileSystemObject) {
         when (fsObject) {
             is FileSystemObject.Directory -> {
-                val newPath = _state.value.currentPath + fsObject.name
-                onDirectoryClicked(newPath)
+                onDirectoryClicked(fsObject.fullPath)
             }
 
             is FileSystemObject.File.Image -> {
@@ -78,16 +85,21 @@ internal class DefaultFtpExplorerComponent(
     }
 
     private fun onNavigateBackClicked() {
-        val newPath = _state.value.currentPath
-            .takeIf { it.isNotEmpty() }
-            ?.dropLast(1)
-            ?: _state.value.currentPath
-        onDirectoryClicked(newPath)
+        val parentDirectory = _state.value.currentPath.parent()
+        if (parentDirectory == null) {
+            // we are at the root, leave screen
+            featureNavigator.popBackStack()
+        } else {
+            onDirectoryClicked(parentDirectory)
+        }
     }
 
-    private fun load(uriToLoad: String) {
-        coroutineScope.launch {
-            ftpHttpClient.getDirectoryContent(uriToLoad)
+
+    private fun loadDataFromPath(uriToLoad: Path) {
+        loadDataJob?.cancel()
+
+        loadDataJob = coroutineScope.launch {
+            ftpHttpClient.getDirectoryContent(uriToLoad.raw)
                 .collect { result ->
                     when (result) {
                         is Result.Loading -> {
@@ -117,5 +129,10 @@ internal class DefaultFtpExplorerComponent(
                     }
                 }
         }
+    }
+
+    override fun processBackInput(): Boolean {
+        onNavigateBackClicked()
+        return true
     }
 }

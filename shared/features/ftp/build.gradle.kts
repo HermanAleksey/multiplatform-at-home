@@ -13,7 +13,7 @@ kotlin {
                 implementation(project(Modules.Shared.Core.UiKit))
                 implementation(project(Modules.Shared.Core.Navigation))
 
-                implementation(Dependencies.Coil.Coil3)
+                implementation(Dependencies.Coil.Compose)
                 implementation(Dependencies.Koin.Core)
                 // filePicker
                 implementation(Dependencies.FilePicker.Core)

@@ -1,6 +1,6 @@
 package com.justparokq.homeftp.shared.login.network
 
-import com.justparokq.homefpt.shared.core.network.UrlResolver
+import com.justparokq.homefpt.shared.core.network.url.UrlResolver
 import com.justparokq.homeftp.shared.common.Result
 import com.justparokq.homeftp.shared.core.setting_key.Setting
 import com.justparokq.homeftp.shared.login.LoginRequest

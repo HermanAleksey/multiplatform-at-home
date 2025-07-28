@@ -12,7 +12,7 @@ internal class FileResponseMapper(
         return files.map { file ->
             FileResponse(
                 uri = file.path.removePrefix(pathProcessor.getRootDirectoryPath()),
-                name = file.name,
+                fileName = file.name,
                 isDirectory = file.isDirectory,
             )
         }

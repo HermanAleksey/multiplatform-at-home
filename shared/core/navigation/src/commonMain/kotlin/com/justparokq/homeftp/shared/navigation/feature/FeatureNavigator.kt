@@ -5,4 +5,8 @@ interface FeatureNavigator {
     fun navigate(feature: ProjectFeature)
 
     fun replaceCurrentWith(feature: ProjectFeature)
+
+    fun popBackStack(): Boolean
+
+    fun navigateToTheRoot()
 }

@@ -7,6 +7,8 @@ import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.pop
 import com.arkivanov.decompose.router.stack.popTo
 import com.arkivanov.decompose.value.Value
+import com.justparokq.homefpt.shared.core.network.coil.RequestHeaderInterceptor
+import com.justparokq.homefpt.shared.core.network.navigation.UnauthNavigator
 import com.justparokq.homeftp.shared.features.settings.api.SettingsComponent
 import com.justparokq.homeftp.shared.ftp.api.FtpExplorerComponent
 import com.justparokq.homeftp.shared.login.api.LoginComponent
@@ -18,14 +20,31 @@ import com.justparokq.homeftp.shared.root.presentation.navigation.Config
 import com.justparokq.homeftp.shared.root.presentation.navigation.FeatureNavigatorImpl
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import org.koin.core.context.loadKoinModules
 import org.koin.core.parameter.parametersOf
+import org.koin.dsl.module
 
 class DefaultRootComponent(
     componentContext: ComponentContext,
 ) : RootComponent, ComponentContext by componentContext, KoinComponent, IInputActionDelegate {
 
+    override val imageRequestInterceptor: RequestHeaderInterceptor by inject()
+
     private val navigation = StackNavigation<Config>()
-    private val featureNavigator: FeatureNavigator = FeatureNavigatorImpl(navigation)
+    private val featureNavigator: FeatureNavigator =
+        FeatureNavigatorImpl(navigation).also { featureNavigator ->
+            // loading navigation to the unauth zone
+            val navigationModule = module {
+                single<UnauthNavigator> {
+                    object : UnauthNavigator {
+                        override fun navigateToUnauthZone() {
+                            featureNavigator.navigateToTheRoot()
+                        }
+                    }
+                }
+            }
+            loadKoinModules(navigationModule)
+        }
 
     override val stack: Value<ChildStack<*, Child>> =
         childStack(

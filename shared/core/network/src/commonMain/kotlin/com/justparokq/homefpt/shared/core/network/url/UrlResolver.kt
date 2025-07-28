@@ -1,10 +1,10 @@
-package com.justparokq.homefpt.shared.core.network
+package com.justparokq.homefpt.shared.core.network.url
 
 import com.justparokq.homeftp.shared.core.setting_key.Setting
 import com.justpoarokq.shared.core.base_database.api.NetworkSettingsInteractor
 
-private val BASE_DEV_URL = "http://$localhostUrl:8080/test"
-private val BASE_PROD_URL = "http://$localhostUrl:8080"
+private val BASE_DEV_URL = "http://${localhostUrl}:8080/test"
+private val BASE_PROD_URL = "http://${localhostUrl}:8080"
 
 /**
  * Resolves the base URL for network requests depending on the environment.

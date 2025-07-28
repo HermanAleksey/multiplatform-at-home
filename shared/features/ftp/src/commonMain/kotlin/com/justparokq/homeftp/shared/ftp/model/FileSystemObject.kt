@@ -1,38 +1,49 @@
 package com.justparokq.homeftp.shared.ftp.model
 
-import com.justparokq.homefpt.shared.core.network.localhostUrl
-
 
 sealed interface FileSystemObject {
 
+    // path in file system to this file
+    val fullPath: Path
+
+    // file name with extension
+    val name: String
+
     data class Directory(
-        val name: String,
+        override val name: String,
+        override val fullPath: Path,
         val content: List<FileSystemObject>,
     ) : FileSystemObject
 
     sealed interface File {
 
         data class Image(
-            val name: String,
-            val remotePath: String,
+            override val name: String,
+            override val fullPath: Path,
+            // link for file to receive from server
+            val serverLink: String,
         ) : FileSystemObject, File, Previewable {
 
-            fun getFullUrl(): String {
-                // todo move url from local strings
-                return "http://$localhostUrl:8080/image?path=${remotePath}"
+            fun getPreviewUrl(): String {
+                return super.getPreviewUrl(serverLink)
             }
         }
 
         data class Video(
-            val name: String,
-            val url: String,
+            override val name: String,
+            override val fullPath: Path,
         ) : FileSystemObject, File
 
-        data object Unknown : FileSystemObject, File
+        data object Unknown : FileSystemObject, File {
+            override val fullPath: Path
+                get() = Path("")
+            override val name: String
+                get() = ""
+        }
     }
 }
 
-sealed interface Previewable {
+private interface Previewable {
 
     fun getPreviewUrl(url: String): String {
         return "$url&preview=true"

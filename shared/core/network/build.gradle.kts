@@ -7,6 +7,8 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(Dependencies.Koin.Core)
+                implementation(Dependencies.Coil.NetworkKtor)
+
                 implementation(project(Modules.Shared.Core.DataStore))
                 implementation(project(Modules.Shared.Core.BaseDatabase))
                 implementation(project(Modules.Shared.Core.SettingKey))

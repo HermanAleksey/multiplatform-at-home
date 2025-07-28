@@ -1,5 +1,6 @@
 package com.justparokq.homeftp.shared.root.presentation
 
+import com.justparokq.homefpt.shared.core.network.di.networkCoreModule
 import com.justparokq.homeftp.shared.core.setting_store.dataStoreModule
 import com.justparokq.homeftp.shared.core.setting_store.settingStoreModule
 import com.justparokq.homeftp.shared.features.settings.api.settingsModule
@@ -16,7 +17,7 @@ import org.koin.core.logger.MESSAGE
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
-public fun startKoinImpl(contextFactory: ContextFactory) {
+fun startKoinImpl(contextFactory: ContextFactory) {
     startKoin {
         val logger = object : Logger() {
             override fun log(level: Level, msg: MESSAGE) {
@@ -33,8 +34,9 @@ public fun startKoinImpl(contextFactory: ContextFactory) {
         }
         loadKoinModules(utilityModule)
 
+        // todo load modules for specific features and unload when needed unloadKoinModules(...)
         // core modules
-        modules(baseDatabaseModule, dataStoreModule, settingStoreModule)
+        modules(baseDatabaseModule, dataStoreModule, settingStoreModule, networkCoreModule)
         // feature modules
         modules(loginModule, mainModule, ftpModule, settingsModule)
     }

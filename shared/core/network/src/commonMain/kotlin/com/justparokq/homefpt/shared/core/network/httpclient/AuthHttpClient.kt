@@ -1,26 +1,17 @@
 package com.justparokq.homefpt.shared.core.network.httpclient
 
-import com.justparokq.homefpt.shared.core.network.UrlResolver
+import com.justparokq.homefpt.shared.core.network.Const.AUTH_HEADER
 import com.justparokq.homefpt.shared.core.network.expection.NotAuthorizedException
+import com.justparokq.homefpt.shared.core.network.navigation.UnauthNavigator
+import com.justparokq.homefpt.shared.core.network.url.UrlResolver
 import com.justparokq.homeftp.shared.core.setting_store.NetworkStore
-import com.justparokq.homeftp.shared.login.RefreshRequest
-import com.justparokq.homeftp.shared.login.RefreshResponse
 import io.ktor.client.HttpClient
-import io.ktor.client.call.body
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.header
-import io.ktor.client.request.post
 import io.ktor.client.request.request
-import io.ktor.client.request.setBody
-import io.ktor.client.request.url
 import io.ktor.client.statement.HttpResponse
-import io.ktor.http.ContentType
-import io.ktor.http.HttpMessageBuilder
 import io.ktor.http.HttpStatusCode
-import io.ktor.http.contentType
 import io.ktor.http.headers
-
-private const val AUTH_HEADER = "Authorization"
 
 interface AuthHttpClient {
 
@@ -40,7 +31,8 @@ internal class AuthHttpClientImpl(
     private val networkStore: NetworkStore,
     val httpClient: HttpClient,
     val urlResolver: UrlResolver,
-    // todo add logic if Login fail and Refresh fail - navigate to login screen
+    val refreshTokenRetrier: RefreshTokenRetrier,
+    val unauthNavigator: UnauthNavigator,
 ) : AuthHttpClient {
 
     override suspend fun authorizedRequest(
@@ -62,53 +54,36 @@ internal class AuthHttpClientImpl(
     ): HttpResponse {
         val accessToken = networkStore.getAccessToken() ?: throw NotAuthorizedException()
 
-        val result = httpClient.request(urlString = "$baseUrl$endpoint") {
-            // headers first because new values does not override existing
-            headers {
-                addAuthHeader(accessToken)
-            }
-            block()
-        }
-        if (result.status == HttpStatusCode.Unauthorized) {
-            val refreshResponse = refreshAccessToken() ?: return result
-
-            // Save new values
-            networkStore.setRefreshToken(refreshResponse.refreshToken)
-            networkStore.setAccessToken(refreshResponse.token)
-
-            // Retry the original request with the new access token
-            return httpClient.request {
-                url(endpoint)
-                block()
+        suspend fun makeRequestWithAuthHeader(): HttpResponse {
+            return httpClient.request(urlString = "$baseUrl$endpoint") {
+                // headers first because new values does not override existing
                 headers {
-                    addAuthHeader(refreshResponse.token)
+                    header(AUTH_HEADER, "Bearer $accessToken")
                 }
+                block()
             }
+        }
 
+        val result = makeRequestWithAuthHeader()
+        return if (result.status == HttpStatusCode.Unauthorized) {
+            refreshTokenAndRetry(retry = { makeRequestWithAuthHeader() }) ?: result
         } else return result
     }
 
-    private fun HttpMessageBuilder.addAuthHeader(token: String) {
-        this.header(AUTH_HEADER, "Bearer $token")
-    }
-
-    suspend fun refreshAccessToken(): RefreshResponse? {
-        val refreshToken = networkStore.getRefreshToken() ?: return null
-
-        return try {
-            val response = httpClient.post("${urlResolver.getBaseUrl()}/refresh") {
-                setBody(RefreshRequest(refreshToken = refreshToken))
-                headers {
-                    contentType(ContentType.Application.Json)
-                }
-            }
-            if (response.status == HttpStatusCode.OK) {
-                response.body<RefreshResponse>()
+    private suspend fun refreshTokenAndRetry(retry: suspend () -> HttpResponse): HttpResponse? {
+        val isTokenRefreshed = refreshTokenRetrier.tryToRefreshAccessToken()
+        if (isTokenRefreshed) {
+            // retry request 1 more time
+            val newResult = retry()
+            if (newResult.status == HttpStatusCode.Unauthorized) {
+                unauthNavigator.navigateToUnauthZone()
+                return newResult
             } else {
-                null
+                return newResult
             }
-        } catch (_: Exception) {
-            null
+        } else {
+            unauthNavigator.navigateToUnauthZone()
+            return null
         }
     }
 }
